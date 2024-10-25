@@ -22,8 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={bitter.className} suppressHydrationWarning>
-      <body
-      >
+      <body className="bg-white dark:bg-black">
         <Providers>
         {children}
         </Providers>
