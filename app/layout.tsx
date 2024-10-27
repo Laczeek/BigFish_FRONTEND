@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { Bitter } from 'next/font/google';
 
 import Providers from './providers';
-import MainNav from '@/components/navigation/MainNav';
+import MainNav from '@/components/layout-related/MainNav';
+import Footer from '@/components/layout-related/Footer';
 import './globals.css';
 
 const bitter = Bitter({
@@ -22,12 +23,15 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en' className={bitter.className} suppressHydrationWarning>
-			<body className='flex bg-gradient-to-r from-indigo-400 to-cyan-400 dark:from-blue-800 dark:to-violet-700'>
+			<body className='flex bg-light-background dark:bg-dark-background text-light-textPrimary dark:text-dark-textPrimary min-h-screen'>
 				<Providers>
 					<MainNav />
-					<main className='container mx-auto min-h-screen grow'>
-						{children}
-					</main>
+					<div className='grow'>
+						<main className='container mx-auto px-2  py-4 h-[calc(100%-48px)]'>
+							{children}
+						</main>
+						<Footer />
+					</div>
 				</Providers>
 			</body>
 		</html>
