@@ -1,10 +1,14 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
+import { useDispatch } from 'react-redux';
 
 import FormInput from '@/components/form-related/FormInput';
 import CustomLink from '@/components/layout-related/CustomLink';
 import useForm from '@/hooks/useForm';
+import CustomButton from '@/components/layout-related/CustomButton';
 import { FormEvent } from 'react';
+import { AppDispatch } from '@/store/store';
+import { authActions } from '@/store/auth-slice';
 
 export default function LoginPage() {
 	const { inputsState, onInputChangeHandler } = useForm({
@@ -13,6 +17,8 @@ export default function LoginPage() {
 		password: '',
 		confirmPassword: '',
 	});
+
+	const dispatch: AppDispatch = useDispatch();
 
 	let action = useSearchParams().get('action');
 
@@ -39,6 +45,16 @@ export default function LoginPage() {
 			// make request to create the user
 		} else {
 			// make request to login user
+			dispatch(
+				authActions.login({
+					token: '123456',
+					user: {
+						nickname: 'Patryk',
+						_id: 'dsadasdas',
+						role: 'user',
+					},
+				})
+			);
 		}
 	};
 
@@ -86,13 +102,14 @@ export default function LoginPage() {
 					/>
 				)}
 
-				<button
+				<CustomButton
+					styleType='primary'
 					type='submit'
+					additionalClasses='mx-auto block'
 					disabled={isButtonDisabled}
-					className='w-full bg-light-primary dark:bg-dark-primary text-white font-bold py-3 rounded-md hover:bg-light-accent dark:hover:bg-dark-secondaryAccent transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none'
 				>
 					{action === 'signup' ? 'Create Account' : 'Login'}
-				</button>
+				</CustomButton>
 			</form>
 
 			<p className='mt-4 text-center text-light-textSecondary dark:text-dark-textSecondary'>

@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import { ReactNode } from 'react';
 
 interface CustomLinkProps {
 	href: string;
 	styleType: 'primary' | 'secondary';
-	children: string;
+	children: ReactNode;
 }
 
 export default function CustomLink({

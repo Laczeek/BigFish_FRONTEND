@@ -111,10 +111,10 @@ export default function LandingPage() {
 
 			<section className='p-6 my-10 bg-light-accent dark:bg-dark-accent text-center rounded-lg'>
 				<h2 className='text-3xl text-light-textPrimary dark:text-white'>
-				Do you already have an account?
+					Do you already have an account?
 				</h2>
 				<p className='text-light-textSecondary dark:text-dark-textSecondary mb-4'>
-				Log in and have fun!
+					Log in and have fun!
 				</p>
 				<CustomLink href='/login?action=login' styleType='secondary'>
 					Login

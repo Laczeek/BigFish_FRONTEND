@@ -7,6 +7,7 @@ interface FormInputProps<T extends string | number | readonly string[]> {
 	label: string;
 	id: string;
 	placeholder: string;
+	withoutLabel?: true;
 	onChange: (
 		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => void;
@@ -20,6 +21,7 @@ export default function FormInput<
 	label,
 	id,
 	placeholder,
+	withoutLabel,
 	onChange,
 	value,
 }: FormInputProps<T>) {
@@ -29,12 +31,14 @@ export default function FormInput<
 
 	return (
 		<div className='mb-4'>
-			<label
-				htmlFor={id}
-				className='block mb-2 text-light-textPrimary dark:text-dark-textPrimary'
-			>
-				{label}
-			</label>
+			{!withoutLabel && (
+				<label
+					htmlFor={id}
+					className='block mb-2 text-light-textPrimary dark:text-dark-textPrimary'
+				>
+					{label}
+				</label>
+			)}
 			<input
 				type={type}
 				name={id}
@@ -44,7 +48,6 @@ export default function FormInput<
 				className='w-full p-3 border border-light-primary dark:border-dark-primary rounded-md focus:outline-none focus:ring focus:ring-light-primary dark:focus:ring-dark-primary'
 				onChange={onChange}
 			/>
-			
 		</div>
 	);
 }
