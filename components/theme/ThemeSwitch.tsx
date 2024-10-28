@@ -17,7 +17,7 @@ export default function ThemeSwitch() {
 	if (resolvedTheme === 'dark')
 		return (
 			<button
-				className='block p-4 rounded-2xl hover:bg-blue-400 transition-colors duration-200 '
+				className='block p-4 rounded-2xl hover:bg-light-linkAccent dark:hover:bg-dark-linkAccent transition-colors duration-200 '
 				onClick={() => setTheme('light')}
 			>
 				<FaSun className='mx-auto' />
@@ -26,7 +26,7 @@ export default function ThemeSwitch() {
 
 	return (
 		<button
-			className='block p-4 rounded-2xl hover:bg-blue-400 transition-colors duration-200'
+			className='block p-4 rounded-2xl hover:bg-light-linkAccent dark:hover:bg-dark-linkAccent transition-colors duration-200'
 			onClick={() => setTheme('dark')}
 		>
 			<FaMoon className='mx-auto' />

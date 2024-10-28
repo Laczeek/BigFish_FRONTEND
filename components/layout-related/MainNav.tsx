@@ -13,7 +13,6 @@ import SearchModal from '../modals/SearchModal';
 import Modal from '../modals/Modal';
 import { RootState } from '@/store/store';
 
-
 export default function MainNav() {
 	const { user } = useSelector((state: RootState) => state.auth);
 	const modalRef = useRef<{ showModal: () => void; closeModal: () => void }>(
@@ -23,10 +22,10 @@ export default function MainNav() {
 	return (
 		<aside
 			aria-label='Sidebar'
-			className='sticky top-0 h-screen py-2 bg-light-bgSidenav dark:bg-dark-bgSidenav text-md sm:text-lg flex flex-col  gap-y-4 '
+			className='sticky top-0 h-screen py-2 bg-light-bgSidenav dark:bg-dark-bgSidenav  text-md sm:text-lg flex flex-col  gap-y-4 '
 		>
 			<Modal ref={modalRef}>
-				<SearchModal/>
+				<SearchModal />
 			</Modal>
 			<nav aria-label='Main Navigation' className='w-full'>
 				<ul className=' flex flex-col  gap-y-4'>
@@ -45,7 +44,7 @@ export default function MainNav() {
 						<li>
 							<Link
 								href='/login?action=login'
-								className='block p-4 rounded-2xl hover:bg-blue-400 transition-colors duration-200'
+								className='block p-4 rounded-2xl hover:bg-light-linkAccent dark:hover:bg-dark-linkAccent transition-colors duration-200'
 							>
 								<FiLogIn className='mx-auto' />
 							</Link>
@@ -55,7 +54,7 @@ export default function MainNav() {
 						<li>
 							<Link
 								href='/me'
-								className='block p-4 rounded-2xl hover:bg-blue-400 transition-colors duration-200'
+								className='block p-4 rounded-2xl hover:bg-light-linkAccent dark:hover:bg-dark-linkAccent transition-colors duration-200'
 							>
 								<FiUser className='mx-auto' />
 							</Link>
@@ -64,7 +63,10 @@ export default function MainNav() {
 				</ul>
 			</nav>
 			{user && (
-				<button className='block p-4 rounded-2xl hover:bg-blue-400 transition-colors duration-200' onClick={modalRef.current?.showModal}>
+				<button
+					className='block p-4 rounded-2xl hover:bg-light-linkAccent dark:hover:bg-dark-linkAccent transition-colors duration-200'
+					onClick={modalRef.current?.showModal}
+				>
 					<TbUserSearch className='mx-auto' />
 				</button>
 			)}
@@ -74,7 +76,7 @@ export default function MainNav() {
 			<ThemeSwitch />
 
 			{user && (
-				<button className='block p-4 rounded-2xl hover:bg-blue-400 transition-colors duration-200'>
+				<button className='block p-4 rounded-2xl hover:bg-light-linkAccent dark:hover:bg-dark-linkAccent transition-colors duration-200'>
 					<FiLogOut className='mx-auto' />
 				</button>
 			)}

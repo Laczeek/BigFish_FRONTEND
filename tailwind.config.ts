@@ -20,6 +20,7 @@ const config: Config = {
 				textPrimary: '#1B3A4B',
 				textSecondary: '#6A6A6A',
 				bgSidenav: '#C5E2E9',
+				linkAccent: '#A7C2C7',
 			},
 			dark: {
 				background: '#121A22',
@@ -29,6 +30,7 @@ const config: Config = {
 				textPrimary: '#D4E4E8',
 				textSecondary: '#d0d5d9',
 				bgSidenav: '#18323B',
+				linkAccent: '#2c8578',
 			},
 		},
 	},

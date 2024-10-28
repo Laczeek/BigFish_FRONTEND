@@ -16,7 +16,7 @@ export default function LandingPage() {
 				<div className='w-full h-[400px] lg:h-[600px]  md:w-2/3 lg:w-1/2'>
 					<Image
 						src={artImage}
-						alt='.'
+						alt='An angler on a beautiful lake illuminated by a huge moon.'
 						width={500}
 						height={800}
 						className='w-full h-full object-cover rounded-lg '
