@@ -12,6 +12,10 @@ const config: Config = {
 			current: 'currentColor',
 			white: '#ffffff',
 			black: '#000000',
+			successGreen: '#4BB543',
+			warningYellow: '#ffcc00',
+			errorRed: '#ff3333',
+
 			light: {
 				background: '#E4F2F7',
 				primary: '#2B6777',

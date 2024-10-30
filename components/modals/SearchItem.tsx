@@ -3,15 +3,25 @@ import { TbSwords } from 'react-icons/tb';
 import CustomLink from '../layout-related/CustomLink';
 import CustomButton from '../layout-related/CustomButton';
 
+import { setAlertWithTimeout } from '@/store/alert-slice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/store/store';
+
 // import Image from 'next/image';
 // TODO - change img to Image component in future
 interface SearchItemProps {
 	nickname: string;
-    slug: string;
+	slug: string;
 	imageURL: string;
 }
 
-export default function SearchItem({ nickname,slug, imageURL }: SearchItemProps) {
+export default function SearchItem({
+	nickname,
+	slug,
+	imageURL,
+}: SearchItemProps) {
+	const dispatch: AppDispatch = useDispatch();
+
 	return (
 		<div className='p-2 flex items-center gap-x-6 bg-light-accent dark:bg-dark-accent rounded-lg'>
 			<img
@@ -26,9 +36,19 @@ export default function SearchItem({ nickname,slug, imageURL }: SearchItemProps)
 				<CustomLink href={`/user/${slug}`} styleType='secondary'>
 					<MdPersonSearch />
 				</CustomLink>
-				<CustomButton styleType='secondary'>
-                    <TbSwords/>
-                </CustomButton>
+				<CustomButton
+					styleType='secondary'
+					onClick={() =>
+						dispatch(
+							setAlertWithTimeout({
+								type: 'error',
+								message: 'Wtf is going on bro! What a error sheeeeees!',
+							})
+						)
+					}
+				>
+					<TbSwords />
+				</CustomButton>
 			</div>
 		</div>
 	);

@@ -1,32 +1,30 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import { FiUser, FiLogIn, FiLogOut } from 'react-icons/fi';
 import { TbUserSearch } from 'react-icons/tb';
 
+import SearchModal from '../modals/SearchModal';
+import useModal from '@/hooks/useModal';
 import logoImage from '@/public/images/logo.png';
 import ThemeSwitch from '../theme/ThemeSwitch';
-import SearchModal from '../modals/SearchModal';
-import Modal from '../modals/Modal';
+
 import { RootState } from '@/store/store';
 
 export default function MainNav() {
 	const { user } = useSelector((state: RootState) => state.auth);
-	const modalRef = useRef<{ showModal: () => void; closeModal: () => void }>(
-		null
-	);
+
+	const { isModalOpened, showModal, hideModal } = useModal();
 
 	return (
 		<aside
 			aria-label='Sidebar'
 			className='sticky top-0 h-screen py-2 bg-light-bgSidenav dark:bg-dark-bgSidenav  text-md sm:text-lg flex flex-col  gap-y-4 '
 		>
-			<Modal ref={modalRef}>
-				<SearchModal />
-			</Modal>
+			{isModalOpened && <SearchModal onClose={hideModal} />}
+
 			<nav aria-label='Main Navigation' className='w-full'>
 				<ul className=' flex flex-col  gap-y-4'>
 					<li>
@@ -65,7 +63,7 @@ export default function MainNav() {
 			{user && (
 				<button
 					className='block p-4 rounded-2xl hover:bg-light-linkAccent dark:hover:bg-dark-linkAccent transition-colors duration-200'
-					onClick={modalRef.current?.showModal}
+					onClick={showModal}
 				>
 					<TbUserSearch className='mx-auto' />
 				</button>

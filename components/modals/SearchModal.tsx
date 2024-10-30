@@ -1,6 +1,7 @@
 'use client';
 
 import { ChangeEvent, useEffect, useState } from 'react';
+import Modal from './Modal';
 import SearchItem from './SearchItem';
 
 const DUMMY_USERS = [
@@ -20,7 +21,11 @@ const DUMMY_USERS = [
 	},
 ];
 
-export default function SearchModal() {
+interface ISearchModalProps {
+	onClose: () => void;
+}
+
+export default function SearchModal({ onClose }: ISearchModalProps) {
 	const [searchValue, setSearchValue] = useState('');
 	const [users, setUsers] = useState<typeof DUMMY_USERS | []>([]);
 
@@ -41,16 +46,20 @@ export default function SearchModal() {
 	}, [searchValue]);
 
 	return (
-		<>
-			<input
-				type='text'
-				value={searchValue}
-				placeholder='Search your friend...'
-				className='w-full p-5 border-4 text-xl border-light-primary dark:border-dark-primary rounded-md focus:outline-none focus:ring focus:ring-light-primary dark:focus:ring-dark-primary'
-				onChange={onInputChangeHandler}
-				autoFocus
-			/>
-
+		<Modal
+			onClose={onClose}
+			label='Search Modal'
+			header={
+				<input
+					type='text'
+					value={searchValue}
+					placeholder='Search your friend...'
+					className='w-full p-5 border-4 text-xl border-light-primary dark:border-dark-primary rounded-md focus:outline-none focus:ring focus:ring-light-primary dark:focus:ring-dark-primary'
+					onChange={onInputChangeHandler}
+					autoFocus
+				/>
+			}
+		>
 			{searchValue && (
 				<ul className='mx-auto max-w-[400px] mt-10'>
 					{users.map((user) => (
@@ -60,6 +69,6 @@ export default function SearchModal() {
 					))}
 				</ul>
 			)}
-		</>
+		</Modal>
 	);
 }
