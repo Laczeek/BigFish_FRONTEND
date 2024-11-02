@@ -37,7 +37,7 @@ export const setAlertWithTimeout = (alertPayload: IAlert) => {
 		timeout = setTimeout(() => {
 			dispatch(alertActions.clearAlert());
 			timeout = null;
-		}, 3000);
+		}, 4000);
 	};
 };
 
