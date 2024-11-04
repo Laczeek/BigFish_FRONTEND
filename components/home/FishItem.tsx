@@ -15,19 +15,21 @@ export default function FishItem() {
 				<Modal
 					label='Image preview.'
 					header={
-						<p className='text-2xl font-bold mb-2'>
+						<p className='text-2xl font-bold mb-6'>
 							Preview of fish image
 						</p>
 					}
 					onClose={hideModal}
 				>
-					<img
-						src='https://dynamitebaits.com/wp-content/uploads/2018/07/16..jpg'
-						alt='Some alt'
-						width={150}
-						height={150}
-						className='w-full h-[80%] object-contain '
-					/>
+					<div>
+						<img
+							src='https://dynamitebaits.com/wp-content/uploads/2018/07/16..jpg'
+							alt='Some alt'
+							width={150}
+							height={150}
+							className='w-full h-[80%] object-contain rounded-lg'
+						/>
+					</div>
 				</Modal>
 			)}
 			<motion.div
@@ -52,6 +54,7 @@ export default function FishItem() {
 				<time dateTime='2024-11-15' className='block mb-2'>
 					2024-11-15
 				</time>
+
 				<CustomLink href='#' styleType='primary'>
 					Check Angler
 				</CustomLink>

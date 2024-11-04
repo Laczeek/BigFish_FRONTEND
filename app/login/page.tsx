@@ -113,7 +113,7 @@ export default function LoginPage() {
 			</form>
 
 			<p className='mt-4 text-center text-light-textSecondary dark:text-dark-textSecondary'>
-				<span className='mr-2'>
+				<span className='mr-2 '>
 					{action === 'signup'
 						? 'Already have an account?'
 						: "Don't have an account yet?"}

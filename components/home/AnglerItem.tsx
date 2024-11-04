@@ -7,7 +7,7 @@ export default function AnglerItem() {
 	return (
 		<Link href={'#'}>
 			<motion.article
-				className='bg-light-bgSidenav dark:bg-black bg-opacity-50 p-4 rounded-lg opacity-80'
+				className='bg-light-bgSidenav dark:bg-dark-primary  p-4 rounded-lg opacity-80'
 				whileHover={{ scale: 1.05, opacity: 1 }}
 			>
 				<img

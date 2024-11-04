@@ -7,7 +7,7 @@ import CompetitionItem from './CompetitionItem';
 export default function CompetitionTable() {
 	return (
 		<>
-			<div className='mx-auto mb-4  text-center bg-light-secondaryAccent dark:bg-dark-secondaryAccent p-4 rounded-lg flex items-center justify-evenly text-lg'>
+			<div className='mx-auto mb-4  text-center bg-light-secondaryAccent dark:bg-dark-primary p-4 rounded-lg flex items-center justify-evenly text-lg'>
 				<div>
 					<IoTime className='inline text-2xl' />
 					<p>

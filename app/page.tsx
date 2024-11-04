@@ -23,11 +23,11 @@ export default function LandingPage() {
 					/>
 				</div>
 
-				<div className='px-4 py-10 rounded-lg relative bottom-14 md:bottom-0 md:-left-40  text-center bg-light-background dark:bg-dark-background  bg-opacity-70 border-b-4 border-r-4 border-light-primary dark:border-dark-primary'>
+				<div className='p-10 rounded-lg relative bottom-14 md:bottom-0 md:-left-40  text-center bg-light-background dark:bg-dark-background  bg-opacity-70 border-b-4 border-r-4 border-light-primary dark:border-dark-primary'>
 					<h1 className='text-4xl lg:text-6xl font-bold tracking-wider'>
 						Big Fish
 					</h1>
-					<p className='text-2xl lg:text-4xl mt-2 mb-4'>
+					<p className='text-xl lg:text-2xl mt-2 mb-4'>
 						Perfect web portal for anglers!
 					</p>
 					<CustomLink href='/login?action=signup' styleType='primary'>
@@ -36,7 +36,7 @@ export default function LandingPage() {
 				</div>
 			</header>
 
-			<section className='p-6 mt-2 md:mt-10 bg-light-accent dark:bg-dark-accent text-center rounded-lg'>
+			<section className='p-6 mt-2 md:mt-10 bg-light-bgSidenav dark:bg-dark-accent text-center rounded-lg'>
 				<h2 className='text-3xl dark:text-white'>
 					Explore the Features
 				</h2>
@@ -97,7 +97,7 @@ export default function LandingPage() {
 				</div>
 			</section>
 
-			<section className='p-6 my-10 bg-light-accent dark:bg-dark-accent text-center rounded-lg'>
+			<section className='p-6 my-10 bg-light-bgSidenav dark:bg-dark-accent text-center rounded-lg'>
 				<h2 className='text-3xl text-light-textPrimary dark:text-white'>
 					Join Our Community Today!
 				</h2>
@@ -109,7 +109,7 @@ export default function LandingPage() {
 				</CustomLink>
 			</section>
 
-			<section className='p-6 my-10 bg-light-accent dark:bg-dark-accent text-center rounded-lg'>
+			<section className='p-6 my-10 bg-light-bgSidenav dark:bg-dark-accent text-center rounded-lg'>
 				<h2 className='text-3xl text-light-textPrimary dark:text-white'>
 					Do you already have an account?
 				</h2>
