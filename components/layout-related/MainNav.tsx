@@ -8,7 +8,7 @@ import { TbUserSearch } from 'react-icons/tb';
 
 import SearchModal from '../modals/SearchModal';
 import useModal from '@/hooks/useModal';
-import logoImage from '@/public/images/logo.png';
+import logoImage from '@/public/images/logo.jpeg';
 import ThemeSwitch from '../theme/ThemeSwitch';
 
 import { RootState } from '@/store/store';
@@ -27,17 +27,19 @@ export default function MainNav() {
 
 			<nav aria-label='Main Navigation' className='w-full'>
 				<ul className=' flex flex-col  gap-y-4'>
-					<li>
-						<Link href='/'>
-							<Image
-								src={logoImage}
-								width={35}
-								height={35}
-								alt='Logo image.'
-								className='rounded-lg w-full px-1'
-							/>
-						</Link>
-					</li>
+					{user && (
+						<li>
+							<Link href='/home'>
+								<Image
+									src={logoImage}
+									width={45}
+									height={45}
+									alt='Logo image.'
+									className='rounded-full w-[40px] h-[40px] mx-auto'
+								/>
+							</Link>
+						</li>
+					)}
 					{!user && (
 						<li>
 							<Link
@@ -51,7 +53,7 @@ export default function MainNav() {
 					{user && (
 						<li>
 							<Link
-								href='/me'
+								href='/angler/me'
 								className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 							>
 								<FiUser className='mx-auto' />
