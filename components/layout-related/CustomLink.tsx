@@ -12,10 +12,10 @@ export default function CustomLink({
 	styleType,
 	children,
 }: CustomLinkProps) {
-	const styles = `inline-block px-6 py-2 rounded-lg transition-colors duration-200 ${
+	const styles = `inline-block px-6 py-2 rounded-lg transition-transform duration-200 hover:scale-105  transition-transform ${
 		styleType === 'primary'
-			? 'bg-light-primary text-white hover:bg-light-secondaryAccent dark:bg-dark-primary dark:text-dark-textPrimary dark:hover:bg-dark-secondaryAccent'
-			: 'bg-transparent text-light-primary border border-light-primary hover:bg-light-secondaryAccent hover:text-white dark:text-dark-primary dark:border-dark-primary dark:hover:bg-dark-secondaryAccent dark:hover:text-white'
+			? 'bg-light-accentSecondary border-2 border-transparent text-white dark:bg-dark-accentSecondary  duration-200'
+			: 'bg-transparent border-2 border-light-accentPrimary dark:border-dark-accentPrimary  duration-200'
 	} `;
 
 	return (

@@ -1,10 +1,10 @@
+import { useDispatch } from 'react-redux';
 import { MdPersonSearch } from 'react-icons/md';
 import { TbSwords } from 'react-icons/tb';
+
 import CustomLink from '../layout-related/CustomLink';
 import CustomButton from '../layout-related/CustomButton';
-
 import { setAlertWithTimeout } from '@/store/alert-slice';
-import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store/store';
 
 // import Image from 'next/image';
@@ -23,17 +23,17 @@ export default function SearchItem({
 	const dispatch: AppDispatch = useDispatch();
 
 	return (
-		<div className='p-2 flex items-center gap-x-6 bg-light-accent dark:bg-dark-accent rounded-lg'>
+		<div className='p-2 flex items-center gap-x-6 bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg shadow-md shadow-light-border dark:shadow-dark-border'>
 			<img
 				src={imageURL}
 				width={60}
 				height={60}
 				alt={`${nickname} avatar image.`}
-				className='border-4 rounded-full border-light-primary dark:border-dark-primary w-[60px] h-[60px] object-cover'
+				className='border-2 rounded-full border-light-accentPrimary  dark:border-dark-accentPrimary w-[60px] h-[60px] object-cover'
 			/>
 			<p className='text-2xl grow'>{nickname}</p>
 			<div className='flex flex-col gap-y-2'>
-				<CustomLink href={`/user/${slug}`} styleType='secondary'>
+				<CustomLink href={`/angler/${slug}`} styleType='secondary'>
 					<MdPersonSearch />
 				</CustomLink>
 				<CustomButton
@@ -41,8 +41,9 @@ export default function SearchItem({
 					onClick={() =>
 						dispatch(
 							setAlertWithTimeout({
-								type: 'error',
-								message: 'Wtf is going on bro! What a error sheeeeees!',
+								type: 'success',
+								message:
+									'Wtf is going on bro! What a error sheeeeees!',
 							})
 						)
 					}

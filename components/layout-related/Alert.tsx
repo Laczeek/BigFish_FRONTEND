@@ -11,10 +11,10 @@ export default function Alert() {
 
 	const color =
 		alert?.type === 'success'
-			? 'bg-successGreen'
+			? 'successGreen'
 			: alert?.type === 'warning'
-			? 'bg-warningYellow'
-			: 'bg-errorRed';
+			? 'warningYellow'
+			: 'errorRed';
 
 	return (
 		<AnimatePresence>
@@ -25,16 +25,22 @@ export default function Alert() {
 					exit={{ opacity: 0, translateY: 200 }}
 					transition={{ duration: 0.5, type: 'spring' }}
 					aria-label='Alert'
-					className='fixed bottom-24 right-16 z-50 w-full max-w-72 text-center  rounded-lg overflow-hidden'
+					className={`fixed bottom-24 right-16 z-50 w-full max-w-72 text-center rounded-lg  border-2 ${
+						color === 'successGreen'
+							? 'border-successGreen'
+							: color === 'warningYellow'
+							? 'border-warningYellow'
+							: 'border-errorRed'
+					}`}
 				>
 					<div
-						className={`${color} text-4xl p-4 flex justify-center text-white`}
+						className={`bg-${color} text-4xl p-4 flex justify-center text-white`}
 					>
 						{alert.type === 'success' && <FaCheck />}
 						{alert.type === 'warning' && <FaExclamationTriangle />}
 						{alert.type === 'error' && <FaTimesCircle />}
 					</div>
-					<div className='dark:bg-dark-bgSidenav bg-light-bgSidenav p-4'>
+					<div className='p-4'>
 						<strong className='text-2xl'>
 							{alert.type === 'success' && 'Success!'}
 							{alert.type === 'warning' && 'Warning!'}

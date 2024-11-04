@@ -1,4 +1,5 @@
 'use client';
+import { FormEvent } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
@@ -6,11 +7,10 @@ import FormInput from '@/components/form-related/FormInput';
 import CustomLink from '@/components/layout-related/CustomLink';
 import useForm from '@/hooks/useForm';
 import CustomButton from '@/components/layout-related/CustomButton';
-import { FormEvent } from 'react';
 import { AppDispatch } from '@/store/store';
 import { authActions } from '@/store/auth-slice';
 
-export default function LoginPage() {
+export default function AuthPage() {
 	const { inputsState, onInputChangeHandler } = useForm({
 		nickname: '',
 		email: '',
@@ -59,8 +59,8 @@ export default function LoginPage() {
 	};
 
 	return (
-		<section className='bg-white dark:bg-dark-accent rounded-lg shadow-lg p-8 max-w-2xl w-full mx-auto'>
-			<h1 className='text-2xl lg:text-4xl font-bold mb-6 text-light-primary dark:text-dark-primary'>
+		<section className='border-2 border-light-border dark:border-dark-border rounded-lg  p-8 max-w-2xl w-full mx-auto'>
+			<h1 className='text-3xl font-bold mb-6'>
 				{action === 'signup' ? 'Create Account' : 'Login'}
 			</h1>
 
@@ -112,14 +112,14 @@ export default function LoginPage() {
 				</CustomButton>
 			</form>
 
-			<p className='mt-4 text-center text-light-textSecondary dark:text-dark-textSecondary'>
-				<span className='mr-2 '>
+			<p className='mt-6 text-center'>
+				<span className='mb-2 text-light-textSecondary dark:text-dark-textSecondary block'>
 					{action === 'signup'
 						? 'Already have an account?'
 						: "Don't have an account yet?"}
 				</span>
 				<CustomLink
-					href={`/login?action=${
+					href={`/auth?action=${
 						action === 'signup' ? 'login' : 'signup'
 					}`}
 					styleType='secondary'

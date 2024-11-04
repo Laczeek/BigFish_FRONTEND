@@ -1,3 +1,5 @@
+import { TbFishHook } from 'react-icons/tb';
+
 import CustomButton from '../layout-related/CustomButton';
 
 interface IAnglerHeadingProps {
@@ -10,11 +12,11 @@ export default function AnglerHeading({
 	anglerId,
 }: IAnglerHeadingProps) {
 	return (
-		<div className='flex justify-between items-center'>
-			<h1 className='text-2xl lg:text-4xl font-bold'>
-				{nickname} Profile
-			</h1>
-			<CustomButton styleType='primary'>Observe</CustomButton>
+		<div className='flex justify-between items-center mt-6'>
+			<h1 className='text-3xl font-bold'>{nickname} Profile</h1>
+			<CustomButton styleType='primary'>
+				<TbFishHook className='text-lg' />
+			</CustomButton>
 		</div>
 	);
 }

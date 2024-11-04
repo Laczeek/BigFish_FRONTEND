@@ -10,6 +10,7 @@ export default async function AnglerPage({
 }) {
 	const { slug } = await params;
 	console.log(slug);
+
 	return (
 		<>
 			<AnglerHeading anglerId='123' nickname='John Smith' />

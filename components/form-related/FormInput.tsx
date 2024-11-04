@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, FocusEvent } from 'react';
+import { ChangeEvent } from 'react';
 
 interface FormInputProps<T extends string | number | readonly string[]> {
 	type: 'text' | 'email' | 'password' | 'textarea' | 'number';
@@ -32,10 +32,7 @@ export default function FormInput<
 	return (
 		<div className='mb-4'>
 			{!withoutLabel && (
-				<label
-					htmlFor={id}
-					className='block mb-2 text-light-textPrimary dark:text-dark-textPrimary'
-				>
+				<label htmlFor={id} className='block mb-2'>
 					{label}
 				</label>
 			)}
@@ -45,7 +42,7 @@ export default function FormInput<
 				id={id}
 				value={value}
 				placeholder={placeholder}
-				className='w-full p-3 border border-light-primary dark:border-dark-primary rounded-md focus:outline-none focus:ring focus:ring-light-primary dark:focus:ring-dark-primary'
+				className='w-full p-3 border border-light-border dark:border-dark-bgSecondary rounded-md focus:outline-none focus:ring focus:ring-light-accentSecondary dark:focus:ring-dark-accentSecondary'
 				onChange={onChange}
 			/>
 		</div>

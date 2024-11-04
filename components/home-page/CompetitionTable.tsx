@@ -1,4 +1,3 @@
-import { IoTime } from 'react-icons/io5';
 import { GiWeight } from 'react-icons/gi';
 import { TbRulerMeasure } from 'react-icons/tb';
 
@@ -7,16 +6,13 @@ import CompetitionItem from './CompetitionItem';
 export default function CompetitionTable() {
 	return (
 		<>
-			<div className='mx-auto mb-4  text-center bg-light-secondaryAccent dark:bg-dark-primary p-4 rounded-lg flex items-center justify-evenly text-lg'>
+			<div className='mx-auto max-w-[800px] p-4 mb-4 text-center bg-light-accentPrimary dark:bg-dark-accentPrimary text-white dark:text-black rounded-lg flex items-center justify-evenly'>
+				<p className='font-bold text-lg'>
+					<time dateTime='2023-11-13'>2024-11-13</time> -{' '}
+					<time dateTime='2024-11-13'>2024-11-13</time>
+				</p>
 				<div>
-					<IoTime className='inline text-2xl' />
-					<p>
-						<time dateTime='2023-11-13'>2024-11-13</time> -{' '}
-						<time dateTime='2024-11-13'>2024-11-13</time>
-					</p>
-				</div>
-				<div>
-					<GiWeight className='inline text-4xl' />
+					<GiWeight className='inline text-3xl' aria-label='Type of measure'/>
 				</div>
 			</div>
 			<table className='w-full text-left text-sm font-medium max-w-[800px] mx-auto'>

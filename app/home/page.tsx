@@ -1,33 +1,50 @@
-import CompetitionTable from '@/components/home/CompetitionTable';
-import AnglersList from '@/components/home/AnglersList';
-import FishList from '@/components/home/FishList';
+import AnglersList from '@/components/home-page/AnglersList';
+import FishList from '@/components/home-page/FishList';
 
 export default function HomePage() {
 	return (
 		<>
-			<h1 className='text-2xl lg:text-4xl mb-6 font-bold'>Home</h1>
-
-			<section className='bg-white dark:bg-dark-accent rounded-lg  py-8 px-4'>
-				<h2 className='text-xl mb-4 font-bold tracking-wider'>
-					Competition
+			<h1 className='text-3xl mb-6 font-bold'>Home</h1>
+			<section>
+				<h2 className='text-2xl font-bold text-center tracking-wider m-0'>
+					From your country
 				</h2>
 
-				<CompetitionTable />
+				<section className='p-2'>
+					<h3 className='text-xl mb-4 text-center'>
+						The most hooked up anglers
+					</h3>
+					<AnglersList />
+				</section>
+
+				<section className='p-2 mt-2 '>
+					<h3 className='text-xl mb-4 text-center'>
+						Interesting fish captured
+					</h3>
+
+					<FishList />
+				</section>
 			</section>
 
-			<section className='bg-white dark:bg-dark-accent rounded-lg  py-8 px-4 mt-6 '>
-				<h2 className='text-xl mb-4 font-bold tracking-wider'>
-					The most observed anglers
-				</h2>
-				<AnglersList />
-			</section>
-
-			<section className='bg-white dark:bg-dark-accent rounded-lg  py-8 px-4 mt-6 '>
-				<h2 className='text-xl mb-4 font-bold tracking-wider'>
-					Interesting fish captured
+			<section className='mt-20'>
+				<h2 className='text-2xl font-bold text-center tracking-wider'>
+					From around the world
 				</h2>
 
-				<FishList />
+				<section className='p-2'>
+					<h3 className='text-xl mb-4 text-center'>
+						The most hooked up anglers
+					</h3>
+					<AnglersList />
+				</section>
+
+				<section className='p-2 mt-2 '>
+					<h3 className='text-xl mb-4 text-center'>
+						Interesting fish captured
+					</h3>
+
+					<FishList />
+				</section>
 			</section>
 		</>
 	);

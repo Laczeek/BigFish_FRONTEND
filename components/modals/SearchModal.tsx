@@ -1,6 +1,7 @@
 'use client';
 
 import { ChangeEvent, useEffect, useState } from 'react';
+
 import Modal from './Modal';
 import SearchItem from './SearchItem';
 
@@ -54,7 +55,7 @@ export default function SearchModal({ onClose }: ISearchModalProps) {
 					type='text'
 					value={searchValue}
 					placeholder='Search your friend...'
-					className='w-full p-5 border-4 text-xl border-light-primary dark:border-dark-primary rounded-md focus:outline-none focus:ring focus:ring-light-primary dark:focus:ring-dark-primary'
+					className='w-full p-5 border-2 text-xl border-light-border dark:border-dark-bgSecondary rounded-md focus:outline-none focus:ring focus:ring-light-accentSecondary	 dark:focus:ring-dark-accentSecondary'
 					onChange={onInputChangeHandler}
 					autoFocus
 				/>

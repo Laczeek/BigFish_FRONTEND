@@ -21,7 +21,7 @@ export default function MainNav() {
 	return (
 		<aside
 			aria-label='Sidebar'
-			className='sticky top-0 h-screen py-2 bg-light-bgSidenav dark:bg-dark-bgSidenav  text-md sm:text-lg flex flex-col  gap-y-4 '
+			className='sticky top-0 h-screen py-2 bg-light-accentPrimary dark:bg-dark-bgSecondary text-white text-md sm:text-lg flex flex-col  gap-y-4 '
 		>
 			{isModalOpened && <SearchModal onClose={hideModal} />}
 
@@ -41,8 +41,8 @@ export default function MainNav() {
 					{!user && (
 						<li>
 							<Link
-								href='/login?action=login'
-								className='block p-4 rounded-2xl hover:bg-light-linkAccent dark:hover:bg-dark-linkAccent transition-colors duration-200'
+								href='/auth?action=login'
+								className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 							>
 								<FiLogIn className='mx-auto' />
 							</Link>
@@ -52,7 +52,7 @@ export default function MainNav() {
 						<li>
 							<Link
 								href='/me'
-								className='block p-4 rounded-2xl hover:bg-light-linkAccent dark:hover:bg-dark-linkAccent transition-colors duration-200'
+								className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 							>
 								<FiUser className='mx-auto' />
 							</Link>
@@ -62,7 +62,7 @@ export default function MainNav() {
 			</nav>
 			{user && (
 				<button
-					className='block p-4 rounded-2xl hover:bg-light-linkAccent dark:hover:bg-dark-linkAccent transition-colors duration-200'
+					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 					onClick={showModal}
 				>
 					<TbUserSearch className='mx-auto' />
@@ -74,7 +74,7 @@ export default function MainNav() {
 			<ThemeSwitch />
 
 			{user && (
-				<button className='block p-4 rounded-2xl hover:bg-light-linkAccent dark:hover:bg-dark-linkAccent transition-colors duration-200'>
+				<button className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'>
 					<FiLogOut className='mx-auto' />
 				</button>
 			)}

@@ -24,7 +24,7 @@ export default function GalleryItem() {
 							className='w-full h-full rounded-lg'
 						/>
 					</div>
-					<div className='text-center mt-4 bg-white dark:bg-black p-4 rounded-lg dark:bg-opacity-60 bg-opacity-60'>
+					<div className='text-center mt-4 bg-light-bgSecondary dark:bg-dark-bgSecondary p-2 rounded-lg shadow shadow-light-border dark:shadow-dark-border'>
 						<p className='text-xl font-bold'>Carp</p>
 						<p>10kg</p>
 						<p className='my-2 '>
@@ -46,7 +46,7 @@ export default function GalleryItem() {
 				<img
 					src='https://static.vecteezy.com/system/resources/thumbnails/025/381/613/small_2x/sea-life-exotic-tropical-coral-reef-copperband-butterfly-fish-neural-network-ai-generated-photo.jpg'
 					alt='Some alt'
-					className='rounded-lg shadow-md shadow-light-primary'
+					className='rounded-lg shadow-md shadow-light-border dark:shadow-dark-border'
 				/>
 			</motion.div>
 		</>

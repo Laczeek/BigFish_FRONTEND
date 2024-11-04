@@ -45,7 +45,7 @@ export default function Modal({
 				<header>{header}</header>
 				{children}
 				<footer className='absolute bottom-10 right-10'>
-					<CustomButton styleType='secondary' onClick={onClose}>
+					<CustomButton styleType='primary' onClick={onClose}>
 						Close
 					</CustomButton>
 				</footer>

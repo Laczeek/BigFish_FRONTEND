@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en' className={bitter.className} suppressHydrationWarning>
-			<body className='flex bg-light-background dark:bg-dark-background text-light-textPrimary dark:text-dark-textPrimary min-h-screen '>
+			<body className='flex bg-light-bgPrimary dark:bg-dark-bgPrimary text-light-textPrimary dark:text-dark-textPrimary min-h-screen '>
 				<Providers>
 					<div id='modals'></div>
 					<Alert />
