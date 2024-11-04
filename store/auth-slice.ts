@@ -5,6 +5,7 @@ interface IAuthState {
     user: null | {
         _id: string;
         nickname: string;
+        avatar: string;
         role: 'admin' | 'moderator' | 'user';
     }
 }

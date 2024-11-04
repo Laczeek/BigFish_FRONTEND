@@ -8,9 +8,7 @@ interface FormInputProps<T extends string | number | readonly string[]> {
 	id: string;
 	placeholder: string;
 	withoutLabel?: true;
-	onChange: (
-		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => void;
+	onChange: (fieldName: string, value: any) => void;
 	value: T;
 }
 
@@ -25,10 +23,6 @@ export default function FormInput<
 	onChange,
 	value,
 }: FormInputProps<T>) {
-	if (type === 'textarea') {
-		return <textarea></textarea>;
-	}
-
 	return (
 		<div className='mb-4'>
 			{!withoutLabel && (
@@ -36,15 +30,25 @@ export default function FormInput<
 					{label}
 				</label>
 			)}
-			<input
-				type={type}
-				name={id}
-				id={id}
-				value={value}
-				placeholder={placeholder}
-				className='w-full p-3 border border-light-border dark:border-dark-bgSecondary rounded-md focus:outline-none focus:ring focus:ring-light-accentSecondary dark:focus:ring-dark-accentSecondary'
-				onChange={onChange}
-			/>
+			{type !== 'textarea' ? (
+				<input
+					type={type}
+					name={id}
+					id={id}
+					value={value}
+					placeholder={placeholder}
+					className='w-full p-3 border border-light-border dark:border-dark-bgSecondary rounded-md focus:outline-none focus:ring focus:ring-light-accentSecondary dark:focus:ring-dark-accentSecondary'
+					onChange={event => onChange(event.target.name, event.target.value)}
+				/>
+			) : (
+				<textarea
+					name={id}
+					id={id}
+					value={value}
+					className='w-full p-3 border border-light-border dark:border-dark-bgSecondary rounded-md focus:outline-none focus:ring focus:ring-light-accentSecondary dark:focus:ring-dark-accentSecondary'
+					onChange={event => onChange(event.target.name, event.target.value)}
+				></textarea>
+			)}
 		</div>
 	);
 }

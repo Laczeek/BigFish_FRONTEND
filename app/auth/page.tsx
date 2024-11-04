@@ -52,6 +52,7 @@ export default function AuthPage() {
 						nickname: 'Patryk',
 						_id: 'dsadasdas',
 						role: 'user',
+						avatar: 'xd'
 					},
 				})
 			);
