@@ -12,11 +12,11 @@ export default function AnglerHeading({
 	anglerId,
 }: IAnglerHeadingProps) {
 	return (
-		<div className='flex justify-between items-center'>
+		<header className='flex justify-between items-center'>
 			<h1 className='text-3xl font-bold'>{nickname} Profile</h1>
 			<CustomButton styleType='primary'>
 				<TbFishHook className='text-lg' />
 			</CustomButton>
-		</div>
+		</header>
 	);
 }

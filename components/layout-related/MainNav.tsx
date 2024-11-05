@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { FiUser, FiLogIn, FiLogOut } from 'react-icons/fi';
 import { TbUserSearch } from 'react-icons/tb';
 import { GiLuckyFisherman } from 'react-icons/gi';
+import { TbFishHook } from "react-icons/tb";
 
 import { modalActions } from '@/store/modal-slice';
 import { AppDispatch } from '@/store/store';
@@ -35,7 +36,7 @@ export default function MainNav() {
 
 	return (
 		<aside
-			aria-label='Sidebar'
+			aria-label='Sidebar Navigation'
 			className='sticky top-0 h-screen py-2 bg-light-accentPrimary dark:bg-dark-bgSecondary text-white text-md sm:text-lg flex flex-col  gap-y-4 '
 		>
 			<nav aria-label='Main Navigation' className='w-full'>
@@ -70,6 +71,16 @@ export default function MainNav() {
 								className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 							>
 								<FiUser />
+							</Link>
+						</li>
+					)}
+					{user && (
+						<li>
+							<Link
+								href='/hooks'
+								className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
+							>
+								<TbFishHook/>
 							</Link>
 						</li>
 					)}

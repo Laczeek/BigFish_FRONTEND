@@ -15,12 +15,16 @@ export default async function AnglerPage({
 		<>
 			<AnglerHeading anglerId='123' nickname='John Smith' />
 			<AnglerDetails />
-			<FishGallery>
-				<GalleryItem />
-				<GalleryItem />
-				<GalleryItem />
-				<GalleryItem />
-			</FishGallery>
+
+			<section className='mt-8'>
+				<h2 className='text-xl mb-4 text-center font-bold'>Fishes</h2>
+				<FishGallery>
+					<GalleryItem />
+					<GalleryItem />
+					<GalleryItem />
+					<GalleryItem />
+				</FishGallery>
+			</section>
 
 			<section className='mt-4'>
 				<h2>THERE SHOULD BE A GOOGLE MAP </h2>

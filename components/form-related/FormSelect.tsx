@@ -35,7 +35,7 @@ export default function FormSelect({
 					onChange(event.target.name, event.target.value)
 				}
 			>
-				<option value=''>Choose an option</option>
+				<option value='' >Choose an option</option>
 				{children}
 			</select>
 		</div>

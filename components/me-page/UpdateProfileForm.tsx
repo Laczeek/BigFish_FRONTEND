@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import useForm from '@/hooks/useForm';
 import FormInput from '../form-related/FormInput';
+import FormSelect from '../form-related/FormSelect';
 import FormImage from '../form-related/FormImage';
 import CustomButton from '../layout-related/CustomButton';
 import { modalActions } from '@/store/modal-slice';
@@ -11,6 +12,7 @@ import { AppDispatch } from '@/store/store';
 
 interface IInputsState {
 	nickname: string;
+	favFishingMethod: string;
 	description: string;
 	image: null | File;
 }
@@ -18,6 +20,7 @@ interface IInputsState {
 export default function UpdateProfileForm() {
 	const { inputsState, onInputChangeHandler } = useForm<IInputsState>({
 		nickname: 'Patrick',
+		favFishingMethod: 'not specified',
 		description: 'This is my not valid description.',
 		image: null,
 	});
@@ -37,44 +40,54 @@ export default function UpdateProfileForm() {
 	};
 
 	return (
-		<section
-			aria-label='There you can change your profile data'
-			className='py-4 px-6 max-w-[500px] mx-auto mt-4 bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg shadow shadow-light-border dark:shadow-dark-border'
-		>
-			<h2 className='hidden'>Update your profile</h2>
-			<form onSubmit={submitHandler}>
-				<FormImage
-					label='Image'
-					onChange={onInputChangeHandler}
-					initialImgURL={initialImgURL}
-					value={inputsState.image}
-				/>
-				<FormInput
-					label='Nickname'
-					id='nickname'
-					placeholder=''
-					type='text'
-					onChange={onInputChangeHandler}
-					value={inputsState.nickname}
-				/>
+		<form onSubmit={submitHandler}>
+			<FormImage
+				label='Image'
+				onChange={onInputChangeHandler}
+				initialImgURL={initialImgURL}
+				value={inputsState.image}
+			/>
+			<FormInput
+				label='Nickname'
+				id='nickname'
+				placeholder=''
+				type='text'
+				onChange={onInputChangeHandler}
+				value={inputsState.nickname}
+			/>
 
-				<FormInput
-					label='Description'
-					id='description'
-					placeholder=''
-					type='textarea'
-					onChange={onInputChangeHandler}
-					value={inputsState.description}
-				/>
+			<FormSelect
+				id='favFishingMethod'
+				label='Favorite fishing method'
+				onChange={onInputChangeHandler}
+				value={inputsState.favFishingMethod}
+			>
+				<option value="spinning">Spinning</option>
+				<option value="bottom">Bottom Fishing</option>
+				<option value="casting">Casting</option>
+				<option value="jigging">Jigging</option>
+				<option value="popping">Popping</option>
+				<option value="trolling">Trolling</option>
+				<option value="fly fishing">Fly Fishing</option>
+				<option value="ice fishing">Ice Fishing</option>
+			</FormSelect>
 
-				<CustomButton
-					styleType='primary'
-					type='submit'
-					additionalClasses='mx-auto block'
-				>
-					Save
-				</CustomButton>
-			</form>
-		</section>
+			<FormInput
+				label='Description'
+				id='description'
+				placeholder=''
+				type='textarea'
+				onChange={onInputChangeHandler}
+				value={inputsState.description}
+			/>
+
+			<CustomButton
+				styleType='primary'
+				type='submit'
+				additionalClasses='mx-auto block'
+			>
+				Save
+			</CustomButton>
+		</form>
 	);
 }

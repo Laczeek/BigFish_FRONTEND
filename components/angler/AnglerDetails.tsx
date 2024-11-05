@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { FaTrophy } from 'react-icons/fa';
+import { FaHeart, FaTrophy } from 'react-icons/fa';
 import { FaFishFins } from 'react-icons/fa6';
 import { TbFishHook } from 'react-icons/tb';
 
@@ -29,6 +29,13 @@ export default function AnglerDetails() {
 
 			<div className='text-center mt-4 '>
 				<p className='text-lg mb-2 font-bold'>Poland</p>
+				<p className='text-light-textSecondary dark:text-dark-textSecondary my-2'>
+					<FaHeart
+						className='inline-block mr-2 text-lg text-red '
+						aria-label='Favorite fishing method'
+					/>
+					Spinning
+				</p>
 				<p className='text-light-textSecondary dark:text-dark-textSecondary'>
 					Account created:{' '}
 					<time dateTime='2012-02-15'>2012-02-15</time>

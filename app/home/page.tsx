@@ -6,7 +6,9 @@ import artImage from '@/public/images/art.jpg';
 export default function HomePage() {
 	return (
 		<>
-			<h1 className='text-3xl mb-6 font-bold'>Home</h1>
+			<header>
+				<h1 className='text-3xl mb-6 font-bold'>Home</h1>
+			</header>
 			<p className='text-xs bg-warningYellow w-fit p-2 text-black rounded-md'>
 				The result will be different every day
 			</p>
