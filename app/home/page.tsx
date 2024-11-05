@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import AnglersList from '@/components/home-page/AnglersList';
 import FishList from '@/components/home-page/FishList';
 
@@ -35,7 +33,7 @@ export default function HomePage() {
 
 			<section className='mt-20'>
 				<div
-					className='flex justify-center items-center z-0 relative h-[250px] after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:bg-black after:-z-10 after:bg-opacity-80 rounded-lg overflow-hidden bg-fixed bg-cover bg-bottom mb-1'
+					className='flex justify-center items-center z-0 relative h-[250px] after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:bg-black after:-z-10 after:bg-opacity-80 rounded-lg overflow-hidden bg-fixed bg-cover bg-bottom mb-4 text-white'
 					style={{ backgroundImage: `url(${artImage.src})` }}
 				>
 					<h2 className='text-2xl font-bold text-center tracking-wider z-10'>

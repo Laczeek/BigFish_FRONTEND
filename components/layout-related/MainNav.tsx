@@ -1,15 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Image from 'next/image';
 import { FiUser, FiLogIn, FiLogOut } from 'react-icons/fi';
 import { TbUserSearch } from 'react-icons/tb';
 import { GiLuckyFisherman } from 'react-icons/gi';
 
-import SearchModal from '../modals/SearchModal';
-import AddFishModal from '../modals/AddFishModal';
-import useModal from '@/hooks/useModal';
+import { modalActions } from '@/store/modal-slice';
+import { AppDispatch } from '@/store/store';
 import logoImage from '@/public/images/logo.jpeg';
 import ThemeSwitch from '../theme/ThemeSwitch';
 
@@ -17,22 +16,28 @@ import { RootState } from '@/store/store';
 
 export default function MainNav() {
 	const { user } = useSelector((state: RootState) => state.auth);
+	const dispatch: AppDispatch = useDispatch();
 
-	const { isModalOpened, showModal, hideModal } = useModal();
-	const {
-		isModalOpened: isFishModalOpened,
-		showModal: showFishModal,
-		hideModal: hideFishModal,
-	} = useModal();
+	const showAddFishModal = () => {
+		dispatch(
+			modalActions.showModal({ modalType: 'ADD_FISH', modalProps: {} })
+		);
+	};
+
+	const showSearchModal = () => {
+		dispatch(
+			modalActions.showModal({
+				modalType: 'SEARCH_ANGLERS',
+				modalProps: {},
+			})
+		);
+	};
 
 	return (
 		<aside
 			aria-label='Sidebar'
 			className='sticky top-0 h-screen py-2 bg-light-accentPrimary dark:bg-dark-bgSecondary text-white text-md sm:text-lg flex flex-col  gap-y-4 '
 		>
-			{isModalOpened && <SearchModal onClose={hideModal} />}
-			{isFishModalOpened && <AddFishModal onClose={hideFishModal} />}
-
 			<nav aria-label='Main Navigation' className='w-full'>
 				<ul className=' flex flex-col  gap-y-4'>
 					{user && (
@@ -73,7 +78,7 @@ export default function MainNav() {
 			{user && (
 				<button
 					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
-					onClick={showModal}
+					onClick={showSearchModal}
 					aria-label='Find other anglers'
 				>
 					<TbUserSearch />
@@ -84,7 +89,7 @@ export default function MainNav() {
 				<button
 					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 					aria-label='Add fish'
-					onClick={showFishModal}
+					onClick={showAddFishModal}
 				>
 					<GiLuckyFisherman />
 				</button>

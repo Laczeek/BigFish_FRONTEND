@@ -1,15 +1,11 @@
 'use client';
 
-import Modal from './Modal';
-import FormInput from '../form-related/FormInput';
-import FormImage from '../form-related/FormImage';
-import FormSelect from '../form-related/FormSelect';
+import Modal from '../Modal';
+import FormInput from '../../form-related/FormInput';
+import FormImage from '../../form-related/FormImage';
+import FormSelect from '../../form-related/FormSelect';
 import useForm from '@/hooks/useForm';
-import CustomButton from '../layout-related/CustomButton';
-
-interface IAddFishModalProps {
-	onClose: () => void;
-}
+import CustomButton from '../../layout-related/CustomButton';
 
 interface IInputsState {
 	name: string;
@@ -19,7 +15,7 @@ interface IInputsState {
 	image: null | File;
 }
 
-export default function AddFishModal({ onClose }: IAddFishModalProps) {
+export default function AddFishModal() {
 	const { inputsState, onInputChangeHandler } = useForm<IInputsState>({
 		name: '',
 		measurementType: '',
@@ -33,7 +29,6 @@ export default function AddFishModal({ onClose }: IAddFishModalProps) {
 			(key) => !Boolean(inputsState[key as keyof typeof inputsState])
 		).length !== 0;
 
-
 	return (
 		<Modal
 			label='Add fish'
@@ -42,7 +37,6 @@ export default function AddFishModal({ onClose }: IAddFishModalProps) {
 					Add Fish to Your Profile
 				</h2>
 			}
-			onClose={onClose}
 		>
 			<form className='max-w-[600px] mx-auto bg-light-bgSecondary dark:bg-dark-bgSecondary p-4 rounded-lg shadow shadow-light-border dark:shadow-dark-border max-h-[70vh] overflow-y-auto'>
 				<FormInput

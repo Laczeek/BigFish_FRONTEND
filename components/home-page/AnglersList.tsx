@@ -18,21 +18,7 @@ export default function AnglersList() {
 			<li>
 				<AnglerItem />
 			</li>
-			<li>
-				<AnglerItem />
-			</li>
-			<li>
-				<AnglerItem />
-			</li>
-			<li>
-				<AnglerItem />
-			</li>
-			<li>
-				<AnglerItem />
-			</li>
-			<li>
-				<AnglerItem />
-			</li>
+			
 		</ul>
 	);
 }

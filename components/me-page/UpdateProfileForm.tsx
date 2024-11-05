@@ -1,9 +1,13 @@
 'use client';
+import { FormEvent } from 'react';
+import { useDispatch } from 'react-redux';
 
 import useForm from '@/hooks/useForm';
 import FormInput from '../form-related/FormInput';
 import FormImage from '../form-related/FormImage';
 import CustomButton from '../layout-related/CustomButton';
+import { modalActions } from '@/store/modal-slice';
+import { AppDispatch } from '@/store/store';
 
 interface IInputsState {
 	nickname: string;
@@ -17,9 +21,20 @@ export default function UpdateProfileForm() {
 		description: 'This is my not valid description.',
 		image: null,
 	});
+	const dispatch: AppDispatch = useDispatch();
 
 	const initialImgURL =
 		'https://hips.hearstapps.com/hmg-prod/images/how-to-tell-if-someone-likes-you-65b7cbdc8aa23.jpg?crop=1.00xw:0.624xh;0,0.257xh&resize=1120:*';
+
+	const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		dispatch(
+			modalActions.showModal({
+				modalType: 'UPDATE_PROFILE',
+				modalProps: {},
+			})
+		);
+	};
 
 	return (
 		<section
@@ -27,7 +42,7 @@ export default function UpdateProfileForm() {
 			className='py-4 px-6 max-w-[500px] mx-auto mt-4 bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg shadow shadow-light-border dark:shadow-dark-border'
 		>
 			<h2 className='hidden'>Update your profile</h2>
-			<form>
+			<form onSubmit={submitHandler}>
 				<FormImage
 					label='Image'
 					onChange={onInputChangeHandler}
@@ -54,6 +69,7 @@ export default function UpdateProfileForm() {
 
 				<CustomButton
 					styleType='primary'
+					type='submit'
 					additionalClasses='mx-auto block'
 				>
 					Save

@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useEffect, useState } from 'react';
 
-import Modal from './Modal';
+import Modal from '../Modal';
 import SearchItem from './SearchItem';
 
 const DUMMY_USERS = [
@@ -23,10 +23,9 @@ const DUMMY_USERS = [
 ];
 
 interface ISearchModalProps {
-	onClose: () => void;
 }
 
-export default function SearchModal({ onClose }: ISearchModalProps) {
+export default function SearchModal() {
 	const [searchValue, setSearchValue] = useState('');
 	const [users, setUsers] = useState<typeof DUMMY_USERS | []>([]);
 
@@ -48,7 +47,6 @@ export default function SearchModal({ onClose }: ISearchModalProps) {
 
 	return (
 		<Modal
-			onClose={onClose}
 			label='Search Modal'
 			header={
 				<input

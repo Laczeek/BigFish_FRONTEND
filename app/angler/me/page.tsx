@@ -19,6 +19,9 @@ export default function MePage() {
 				<GalleryItem showRemoveButton />
 				<GalleryItem showRemoveButton />
 			</FishGallery>
+			<section>
+				<h2>ADD GOOGLE MAP THERE</h2>
+			</section>
 		</>
 	);
 }

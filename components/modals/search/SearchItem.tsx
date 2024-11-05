@@ -2,8 +2,8 @@ import { useDispatch } from 'react-redux';
 import { MdPersonSearch } from 'react-icons/md';
 import { TbSwords } from 'react-icons/tb';
 
-import CustomLink from '../layout-related/CustomLink';
-import CustomButton from '../layout-related/CustomButton';
+import CustomLink from '@/components/layout-related/CustomLink';
+import CustomButton from '@/components/layout-related/CustomButton';
 import { setAlertWithTimeout } from '@/store/alert-slice';
 import { AppDispatch } from '@/store/store';
 
