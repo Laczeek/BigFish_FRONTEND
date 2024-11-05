@@ -24,10 +24,10 @@ export default function UpdateProfileForm() {
 	return (
 		<section
 			aria-label='There you can change your profile data'
-			className='mt-4'
+			className='py-4 px-6 max-w-[500px] mx-auto mt-4 bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg shadow shadow-light-border dark:shadow-dark-border'
 		>
 			<h2 className='hidden'>Update your profile</h2>
-			<form className='max-w-[400px] mx-auto'>
+			<form>
 				<FormImage
 					label='Image'
 					value={inputsState.image}

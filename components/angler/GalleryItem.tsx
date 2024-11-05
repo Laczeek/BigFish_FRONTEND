@@ -1,11 +1,19 @@
 'use client';
 import { motion } from 'framer-motion';
+import { FaTrashAlt } from 'react-icons/fa';
 
 import Modal from '../modals/Modal';
 import useModal from '@/hooks/useModal';
+import CustomButton from '../layout-related/CustomButton';
+import { MouseEvent } from 'react';
 
 export default function GalleryItem() {
 	const { showModal, hideModal, isModalOpened } = useModal();
+
+	const removeFishHandler = (event: MouseEvent<HTMLButtonElement>) => {
+		event.stopPropagation();
+		console.log('REMOVE IMAGE');
+	};
 
 	return (
 		<>
@@ -21,6 +29,8 @@ export default function GalleryItem() {
 						<img
 							src='https://static.vecteezy.com/system/resources/thumbnails/025/381/613/small_2x/sea-life-exotic-tropical-coral-reef-copperband-butterfly-fish-neural-network-ai-generated-photo.jpg'
 							alt='Some alt'
+							width={600}
+							height={400}
 							className='w-full h-full rounded-lg'
 						/>
 					</div>
@@ -39,8 +49,8 @@ export default function GalleryItem() {
 			)}
 			<motion.div
 				onClick={showModal}
-				className='cursor-pointer'
-				whileHover={{ scale: 1.05 }}
+				className='relative cursor-pointer'
+				whileHover={{ scale: 1.025 }}
 				transition={{ type: 'spring' }}
 			>
 				<img
@@ -48,6 +58,14 @@ export default function GalleryItem() {
 					alt='Some alt'
 					className='rounded-lg shadow-md shadow-light-border dark:shadow-dark-border'
 				/>
+				<CustomButton
+					styleType='primary'
+					type='button'
+					additionalClasses='absolute top-0 right-0'
+					onClick={removeFishHandler}
+				>
+					<FaTrashAlt />
+				</CustomButton>
 			</motion.div>
 		</>
 	);

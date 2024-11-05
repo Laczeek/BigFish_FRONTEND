@@ -5,14 +5,20 @@ import CompetitionItem from './CompetitionItem';
 
 export default function CompetitionTable() {
 	return (
-		<>
+		<section className='mt-4 mb-10'>
+			<h2 className='text-2xl font-bold  mb-4 text-center'>
+				Your Competition
+			</h2>
 			<div className='mx-auto max-w-[800px] p-4 mb-4 text-center bg-light-accentPrimary dark:bg-dark-accentPrimary text-white dark:text-black rounded-lg flex items-center justify-evenly'>
 				<p className='font-bold text-lg'>
 					<time dateTime='2023-11-13'>2024-11-13</time> -{' '}
 					<time dateTime='2024-11-13'>2024-11-13</time>
 				</p>
 				<div>
-					<GiWeight className='inline text-3xl' aria-label='Type of measure'/>
+					<GiWeight
+						className='inline text-3xl'
+						aria-label='Type of measure'
+					/>
 				</div>
 			</div>
 			<table className='w-full text-left text-sm font-medium max-w-[800px] mx-auto'>
@@ -43,7 +49,7 @@ export default function CompetitionTable() {
 					<CompetitionItem />
 				</tbody>
 			</table>
-		</>
+		</section>
 	);
 }
 
