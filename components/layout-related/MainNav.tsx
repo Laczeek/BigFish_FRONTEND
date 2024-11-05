@@ -5,8 +5,10 @@ import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import { FiUser, FiLogIn, FiLogOut } from 'react-icons/fi';
 import { TbUserSearch } from 'react-icons/tb';
+import { GiLuckyFisherman } from 'react-icons/gi';
 
 import SearchModal from '../modals/SearchModal';
+import AddFishModal from '../modals/AddFishModal';
 import useModal from '@/hooks/useModal';
 import logoImage from '@/public/images/logo.jpeg';
 import ThemeSwitch from '../theme/ThemeSwitch';
@@ -17,6 +19,11 @@ export default function MainNav() {
 	const { user } = useSelector((state: RootState) => state.auth);
 
 	const { isModalOpened, showModal, hideModal } = useModal();
+	const {
+		isModalOpened: isFishModalOpened,
+		showModal: showFishModal,
+		hideModal: hideFishModal,
+	} = useModal();
 
 	return (
 		<aside
@@ -24,6 +31,7 @@ export default function MainNav() {
 			className='sticky top-0 h-screen py-2 bg-light-accentPrimary dark:bg-dark-bgSecondary text-white text-md sm:text-lg flex flex-col  gap-y-4 '
 		>
 			{isModalOpened && <SearchModal onClose={hideModal} />}
+			{isFishModalOpened && <AddFishModal onClose={hideFishModal} />}
 
 			<nav aria-label='Main Navigation' className='w-full'>
 				<ul className=' flex flex-col  gap-y-4'>
@@ -34,7 +42,7 @@ export default function MainNav() {
 									src={logoImage}
 									width={45}
 									height={45}
-									alt='Logo image.'
+									alt='Big fish logo.'
 									className='rounded-full w-[40px] h-[40px] mx-auto'
 								/>
 							</Link>
@@ -56,7 +64,7 @@ export default function MainNav() {
 								href='/angler/me'
 								className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 							>
-								<FiUser className='mx-auto' />
+								<FiUser />
 							</Link>
 						</li>
 					)}
@@ -66,8 +74,19 @@ export default function MainNav() {
 				<button
 					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 					onClick={showModal}
+					aria-label='Find other anglers'
 				>
-					<TbUserSearch className='mx-auto' />
+					<TbUserSearch />
+				</button>
+			)}
+
+			{user && (
+				<button
+					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
+					aria-label='Add fish'
+					onClick={showFishModal}
+				>
+					<GiLuckyFisherman />
 				</button>
 			)}
 
@@ -76,8 +95,11 @@ export default function MainNav() {
 			<ThemeSwitch />
 
 			{user && (
-				<button className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'>
-					<FiLogOut className='mx-auto' />
+				<button
+					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
+					aria-label='Logout'
+				>
+					<FiLogOut />
 				</button>
 			)}
 		</aside>

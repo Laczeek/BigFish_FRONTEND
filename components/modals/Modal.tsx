@@ -40,12 +40,20 @@ export default function Modal({
 	}, [onClose]);
 
 	const modal = (
-		<div className='fixed z-40 top-0 bottom-0 left-0 right-0 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 p-6 backdrop-blur-sm'>
+		<div
+			className='fixed z-40 top-0 bottom-0 left-0 right-0 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 p-6 backdrop-blur-sm'
+			aria-modal='true'
+			role='dialog'
+		>
 			<div aria-label={label} className=' max-w-[800px] h-full mx-auto'>
 				<header>{header}</header>
 				{children}
 				<footer className='absolute bottom-10 right-10'>
-					<CustomButton styleType='primary' onClick={onClose}>
+					<CustomButton
+						styleType='primary'
+						onClick={onClose}
+						aria-label='Close modal'
+					>
 						Close
 					</CustomButton>
 				</footer>

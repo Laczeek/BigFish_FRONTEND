@@ -30,9 +30,9 @@ export default function UpdateProfileForm() {
 			<form>
 				<FormImage
 					label='Image'
-					value={inputsState.image}
 					onChange={onInputChangeHandler}
 					initialImgURL={initialImgURL}
+					value={inputsState.image}
 				/>
 				<FormInput
 					label='Nickname'

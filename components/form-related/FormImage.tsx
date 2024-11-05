@@ -7,17 +7,17 @@ import { FaTrashAlt } from 'react-icons/fa';
 import CustomButton from '../layout-related/CustomButton';
 
 interface IFormImageProps {
-	initialImgURL: string;
+	initialImgURL: string | null;
 	label: string;
-	onChange: (fieldName: string, value: any) => void;
-	value: null | File;
+	value: File | null;
+	onChange: (fieldName: string, value: File | null) => void;
 }
 
 export default function FormImage({
 	label,
 	initialImgURL,
-	onChange,
 	value,
+	onChange,
 }: IFormImageProps) {
 	const [previewURL, setPreviewURL] = useState(initialImgURL);
 	const imageInputRef = useRef<null | HTMLInputElement>(null);
@@ -52,13 +52,15 @@ export default function FormImage({
 
 	return (
 		<div className='mb-6'>
-			<div className='h-[200px] w-[200px] md:h-[300px] md:w-[300px] mx-auto'>
-				<img
-					src={previewURL}
-					alt='Your new image preview.'
-					className='block w-full h-full object-cover rounded-full'
-				/>
-			</div>
+			{previewURL && (
+				<div className='h-[200px] w-[200px] md:h-[300px] md:w-[300px] mx-auto '>
+					<img
+						src={previewURL}
+						alt='Your new image preview.'
+						className='block w-full h-full object-cover rounded-full'
+					/>
+				</div>
+			)}
 
 			<label htmlFor='image' className='hidden'>
 				{label}
@@ -73,13 +75,15 @@ export default function FormImage({
 			/>
 
 			<div className='flex justify-center gap-x-2 mt-1'>
-				<CustomButton
-					type='button'
-					styleType='primary'
-					onClick={openFilePicker}
-				>
-					<RiImageAddFill className='text-lg' />
-				</CustomButton>
+				{!value && (
+					<CustomButton
+						type='button'
+						styleType='primary'
+						onClick={openFilePicker}
+					>
+						<RiImageAddFill className='text-lg' />
+					</CustomButton>
+				)}
 				{previewURL !== initialImgURL && (
 					<CustomButton
 						styleType='secondary'
