@@ -34,7 +34,7 @@ export default function LandingPage() {
 
 			<Features />
 
-			<div className='flex flex-col md:flex-row justify-between items-center text-center max-w-[1000px] mx-auto my-14 p-6'>
+			<div className='flex flex-col items-center gap-y-10  md:flex-row md:justify-between md:items-start text-center max-w-[1000px] mx-auto my-14 p-6'>
 				<section>
 					<h2 className='text-3xl '>Join Our Community Today!</h2>
 					<p className='text-light-textSecondary dark:text-dark-textSecondary my-4'>

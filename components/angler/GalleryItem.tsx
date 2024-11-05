@@ -1,13 +1,17 @@
 'use client';
 import { motion } from 'framer-motion';
 import { FaTrashAlt } from 'react-icons/fa';
+import { MouseEvent } from 'react';
 
 import Modal from '../modals/Modal';
 import useModal from '@/hooks/useModal';
 import CustomButton from '../layout-related/CustomButton';
-import { MouseEvent } from 'react';
 
-export default function GalleryItem() {
+interface IGalleryItemProps {
+	showRemoveButton?: boolean;
+}
+
+export default function GalleryItem({ showRemoveButton }: IGalleryItemProps) {
 	const { showModal, hideModal, isModalOpened } = useModal();
 
 	const removeFishHandler = (event: MouseEvent<HTMLButtonElement>) => {
@@ -58,14 +62,16 @@ export default function GalleryItem() {
 					alt='Some alt'
 					className='rounded-lg shadow-md shadow-light-border dark:shadow-dark-border'
 				/>
-				<CustomButton
-					styleType='primary'
-					type='button'
-					additionalClasses='absolute top-0 right-0'
-					onClick={removeFishHandler}
-				>
-					<FaTrashAlt />
-				</CustomButton>
+				{showRemoveButton && (
+					<CustomButton
+						styleType='primary'
+						type='button'
+						additionalClasses='absolute top-0 right-0'
+						onClick={removeFishHandler}
+					>
+						<FaTrashAlt />
+					</CustomButton>
+				)}
 			</motion.div>
 		</>
 	);
