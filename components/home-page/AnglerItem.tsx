@@ -9,7 +9,7 @@ import { FaHeart } from 'react-icons/fa';
 
 export default function AnglerItem() {
 	return (
-		<Link href={'#'}>
+		<Link href={'/angler/johny'}>
 			<motion.article
 				className='rounded-lg overflow-hidden shadow shadow-light-border dark:shadow-dark-border'
 				whileHover={{ scale: 1.03 }}
@@ -33,7 +33,6 @@ export default function AnglerItem() {
 					</p>
 					<p
 						className='text-light-textSecondary dark:text-dark-textSecondary'
-						aria-label='Country'
 					>
 						Poland
 					</p>

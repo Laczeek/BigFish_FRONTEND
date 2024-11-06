@@ -109,7 +109,7 @@ export default function AuthPage() {
 					<CustomButton
 						styleType='primary'
 						type='submit'
-						additionalClasses='mx-auto block'
+						additionalClasses='mx-auto block mt-6'
 						disabled={isButtonDisabled}
 					>
 						{action === 'signup' ? 'Create Account' : 'Login'}

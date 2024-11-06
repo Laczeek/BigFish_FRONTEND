@@ -1,31 +1,30 @@
 import AnglersList from '@/components/home-page/AnglersList';
 import FishList from '@/components/home-page/FishList';
-
 import artImage from '@/public/images/art.jpg';
 
 export default function HomePage() {
 	return (
 		<>
-			<header>
-				<h1 className='text-3xl mb-6 font-bold'>Home</h1>
+			<header className='mb-2'>
+				<h1 className='text-3xl font-bold'>Home</h1>
 			</header>
-			<p className='text-xs bg-warningYellow w-fit p-2 text-black rounded-md'>
+			<p className='text-xs bg-warningYellow w-fit p-2 text-black rounded-md mb-4'>
 				The result will be different every day
 			</p>
 			<section>
-				<h2 className='text-2xl font-bold text-center tracking-wider m-0'>
+				<h2 className='text-2xl font-bold text-center tracking-wider'>
 					From your country
 				</h2>
 
 				<section className='p-2'>
-					<h3 className='text-xl mb-4 text-center'>
+					<h3 className='text-xl mb-6 text-center'>
 						The most hooked up anglers
 					</h3>
 					<AnglersList />
 				</section>
 
-				<section className='p-2 mt-2 '>
-					<h3 className='text-xl mb-4 text-center'>
+				<section className='p-2 mt-6 '>
+					<h3 className='text-xl mb-6 text-center'>
 						Interesting fish captured
 					</h3>
 
@@ -44,14 +43,14 @@ export default function HomePage() {
 				</div>
 
 				<section className='p-2'>
-					<h3 className='text-xl mb-4 text-center'>
+					<h3 className='text-xl mb-6 text-center'>
 						The most hooked up anglers
 					</h3>
 					<AnglersList />
 				</section>
 
-				<section className='p-2 mt-2 '>
-					<h3 className='text-xl mb-4 text-center'>
+				<section className='p-2 mt-6 '>
+					<h3 className='text-xl mb-6 text-center'>
 						Interesting fish captured
 					</h3>
 

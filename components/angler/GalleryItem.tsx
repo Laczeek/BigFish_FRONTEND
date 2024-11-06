@@ -51,6 +51,8 @@ export default function GalleryItem({ showRemoveButton }: IGalleryItemProps) {
 			<img
 				src='https://static.vecteezy.com/system/resources/thumbnails/025/381/613/small_2x/sea-life-exotic-tropical-coral-reef-copperband-butterfly-fish-neural-network-ai-generated-photo.jpg'
 				alt='Some alt'
+				width={400}
+				height={250}
 				className='rounded-lg shadow-md shadow-light-border dark:shadow-dark-border'
 			/>
 			{showRemoveButton && (

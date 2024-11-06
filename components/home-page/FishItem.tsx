@@ -24,18 +24,19 @@ export default function FishItem() {
 
 	return (
 		<article className='rounded-lg overflow-hidden bg-light-bgSecondary dark:bg-dark-bgSecondary shadow shadow-light-border dark:shadow-dark-border'>
-			<div className='overflow-hidden'>
+			<div
+				className='overflow-hidden'
+				onClick={showPreviewModal}
+				role='button'
+			>
 				<motion.img
 					src='https://upload.wikimedia.org/wikipedia/commons/3/3e/Carpe_miroir_de_17kg.jpg'
 					alt='SOME ALT'
 					className='w-full cursor-pointer'
 					whileHover={{ scale: 1.05 }}
 					transition={{
-						type: 'spring',
-						stiffness: 400,
-						damping: 10,
+						type: 'tween',
 					}}
-					onClick={showPreviewModal}
 				/>
 			</div>
 

@@ -3,11 +3,13 @@ import ProfileDetails from '@/components/me-page/ProfileDetails';
 import CompetitionTable from '@/components/competition/CompetitionTable';
 import FishGallery from '@/components/angler/FishGallery';
 import GalleryItem from '@/components/angler/GalleryItem';
+import GoBackButton from '@/components/layout-related/GoBackButton';
 
 export default function MePage() {
 	return (
 		<>
-			<header className='mb-6'>
+			<header className='mb-6 flex items-center gap-x-4'>
+				<GoBackButton />
 				<h1 className='text-3xl font-bold'>My Profile</h1>
 			</header>
 
@@ -18,17 +20,14 @@ export default function MePage() {
 				<CompetitionTable />
 			</section>
 
-			<section
-				aria-label='There you can change your profile data'
-				className='py-4 px-6 max-w-[500px] mx-auto mt-4 bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg shadow shadow-light-border dark:shadow-dark-border'
-			>
+			<section className='py-4 px-6 max-w-[500px] mx-auto mt-4 bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg shadow shadow-light-border dark:shadow-dark-border'>
 				<h2 className='hidden'>Update your profile</h2>
 				<UpdateProfileForm />
 			</section>
 
 			<ProfileDetails />
 
-			<section className='mt-8'>
+			<section className='mt-10'>
 				<h2 className='text-xl mb-4 text-center font-bold'>Fishes</h2>
 				<FishGallery>
 					<GalleryItem showRemoveButton />

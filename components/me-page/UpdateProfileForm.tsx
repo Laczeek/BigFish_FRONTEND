@@ -62,14 +62,14 @@ export default function UpdateProfileForm() {
 				onChange={onInputChangeHandler}
 				value={inputsState.favFishingMethod}
 			>
-				<option value="spinning">Spinning</option>
-				<option value="bottom">Bottom Fishing</option>
-				<option value="casting">Casting</option>
-				<option value="jigging">Jigging</option>
-				<option value="popping">Popping</option>
-				<option value="trolling">Trolling</option>
-				<option value="fly fishing">Fly Fishing</option>
-				<option value="ice fishing">Ice Fishing</option>
+				<option value='spinning'>Spinning</option>
+				<option value='bottom'>Bottom Fishing</option>
+				<option value='casting'>Casting</option>
+				<option value='jigging'>Jigging</option>
+				<option value='popping'>Popping</option>
+				<option value='trolling'>Trolling</option>
+				<option value='fly fishing'>Fly Fishing</option>
+				<option value='ice fishing'>Ice Fishing</option>
 			</FormSelect>
 
 			<FormInput
@@ -84,7 +84,7 @@ export default function UpdateProfileForm() {
 			<CustomButton
 				styleType='primary'
 				type='submit'
-				additionalClasses='mx-auto block'
+				additionalClasses='mx-auto block mt-2'
 			>
 				Save
 			</CustomButton>

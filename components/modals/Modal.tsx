@@ -1,7 +1,6 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { ReactNode, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { AppDispatch } from '@/store/store';
@@ -15,9 +14,6 @@ interface IModalProps {
 }
 
 export default function Modal({ label, header, children }: IModalProps) {
-	const [modalContainer, setModalContainer] = useState<HTMLElement | null>(
-		null
-	);
 	const dispatch: AppDispatch = useDispatch();
 
 	const hideModal = () => {
@@ -25,8 +21,6 @@ export default function Modal({ label, header, children }: IModalProps) {
 	};
 
 	useEffect(() => {
-		setModalContainer(document.getElementById('modals'));
-
 		const handleKeyup = (event: KeyboardEvent) => {
 			if (event.key === 'Escape') {
 				hideModal();
@@ -42,16 +36,13 @@ export default function Modal({ label, header, children }: IModalProps) {
 		};
 	}, []);
 
-	const modal = (
+	return (
 		<div
 			className=' fixed z-40 top-0 bottom-0 left-0 right-0 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 p-6 backdrop-blur-sm'
 			aria-modal='true'
 			role='dialog'
 		>
-			<div
-				aria-label={label}
-				className='max-w-[800px] h-full mx-auto'
-			>
+			<div aria-label={label} className='max-w-[800px] h-full mx-auto'>
 				<header>{header}</header>
 				{children}
 				<footer className='absolute bottom-10 right-10'>
@@ -66,8 +57,4 @@ export default function Modal({ label, header, children }: IModalProps) {
 			</div>
 		</div>
 	);
-
-	if (!modalContainer) return null;
-
-	return createPortal(modal, modalContainer);
 }

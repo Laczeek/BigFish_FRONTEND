@@ -14,7 +14,7 @@ export default function Features() {
 
 			<div className='mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
 				<div className='mt-4 flex flex-col items-center bg-light-bgSecondary dark:bg-dark-bgSecondary p-6 rounded-lg shadow-md shadow-light-border dark:shadow-dark-border transition-transform duration-300 hover:scale-105'>
-					<MdPeople className=' mb-4 text-4xl ' />
+					<MdPeople className=' mb-4 text-4xl text-light-accentSecondary dark:text-dark-accentSecondary' />
 					<h3 className='text-lg font-semibold'>Find Users</h3>
 					<p className='text-center text-light-textSecondary dark:text-dark-textSecondary'>
 						Connect with fellow anglers and expand your fishing
@@ -22,7 +22,7 @@ export default function Features() {
 					</p>
 				</div>
 				<div className='mt-4 flex flex-col items-center bg-light-bgSecondary dark:bg-dark-bgSecondary p-6 rounded-lg shadow-md shadow-light-border dark:shadow-dark-border transition-transform duration-300 hover:scale-105'>
-					<FaFishFins className=' mb-4 text-4xl ' />
+					<FaFishFins className=' mb-4 text-4xl text-light-accentSecondary dark:text-dark-accentSecondary' />
 					<h3 className='text-lg font-semibold text-light-textPrimary dark:text-dark-textPrimary'>
 						Add Fish
 					</h3>
@@ -32,7 +32,7 @@ export default function Features() {
 					</p>
 				</div>
 				<div className='mt-4 flex flex-col items-center bg-light-bgSecondary dark:bg-dark-bgSecondary p-6 rounded-lg shadow-md shadow-light-border dark:shadow-dark-border transition-transform duration-300 hover:scale-105'>
-					<FaUserEdit className=' mb-4 text-4xl ' />
+					<FaUserEdit className=' mb-4 text-4xl text-light-accentSecondary dark:text-dark-accentSecondary' />
 					<h3 className='text-lg font-semibold text-light-textPrimary dark:text-dark-textPrimary'>
 						Profile Customization
 					</h3>
@@ -42,7 +42,7 @@ export default function Features() {
 					</p>
 				</div>
 				<div className='mt-4 flex flex-col items-center bg-light-bgSecondary dark:bg-dark-bgSecondary p-6 rounded-lg shadow-md shadow-light-border dark:shadow-dark-border transition-transform duration-300 hover:scale-105'>
-					<SlMagnifier className=' mb-4 text-4xl ' />
+					<SlMagnifier className=' mb-4 text-4xl text-light-accentSecondary dark:text-dark-accentSecondary' />
 					<h3 className='text-lg font-semibold text-light-textPrimary dark:text-dark-textPrimary'>
 						Friend Finder
 					</h3>
@@ -51,7 +51,7 @@ export default function Features() {
 					</p>
 				</div>
 				<div className='mt-4 col-span-full flex flex-col items-center bg-light-bgSecondary dark:bg-dark-bgSecondary p-6 rounded-lg shadow-md shadow-light-border dark:shadow-dark-border transition-transform duration-300 hover:scale-[1.02]'>
-					<GiSwordsEmblem className=' mb-4 text-4xl ' />
+					<GiSwordsEmblem className=' mb-4 text-4xl text-light-accentSecondary dark:text-dark-accentSecondary' />
 					<h3 className='text-lg font-semibold text-light-textPrimary dark:text-dark-textPrimary'>
 						Competition
 					</h3>

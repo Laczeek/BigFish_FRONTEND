@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import Features from '@/components/landing-page/Features';
-
 import artImage from '@/public/images/bigfishart.jpg';
 import CustomLink from '@/components/layout-related/CustomLink';
 
@@ -15,12 +14,13 @@ export default function LandingPage() {
 						alt='An angler on a beautiful lake illuminated by a huge moon.'
 						width={500}
 						height={800}
-						className='w-full h-full object-cover rounded-lg '
+						className='w-full h-full object-cover rounded-lg'
+						priority
 					/>
 				</div>
 
-				<div className='p-10 rounded-lg relative bottom-14 md:bottom-0 md:-left-40  text-center bg-light-bgSecondary dark:bg-dark-bgSecondary   border-b-4 border-r-4 border-light-border dark:border-dark-border'>
-					<h1 className='text-4xl lg:text-6xl font-bold tracking-wider'>
+				<div className='py-10 px-20 rounded-lg relative bottom-14 md:bottom-0 md:-left-40  text-center bg-light-bgSecondary dark:bg-dark-bgSecondary   border-b-4 border-r-4 border-light-border dark:border-dark-border'>
+					<h1 className='text-4xl lg:text-5xl font-bold tracking-wider'>
 						Big Fish
 					</h1>
 					<p className='text-lg lg:text-xl my-4 text-light-textSecondary dark:text-dark-textSecondary'>

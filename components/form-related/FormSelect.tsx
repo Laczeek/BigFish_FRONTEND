@@ -20,7 +20,7 @@ export default function FormSelect({
 	children,
 }: IFormSelectProps) {
 	return (
-		<div className='mb-4 '>
+		<div className='mt-4 '>
 			{!withoutLabel && (
 				<label htmlFor={id} className='block mb-2'>
 					{label}
@@ -35,7 +35,7 @@ export default function FormSelect({
 					onChange(event.target.name, event.target.value)
 				}
 			>
-				<option value='' >Choose an option</option>
+				<option value=''>Choose an option</option>
 				{children}
 			</select>
 		</div>
