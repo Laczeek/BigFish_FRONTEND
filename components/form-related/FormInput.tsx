@@ -22,7 +22,7 @@ export default function FormInput<
 	value,
 }: IFormInputProps<T>) {
 	return (
-		<div className='mb-4'>
+		<div className='mt-4'>
 			{!withoutLabel && (
 				<label htmlFor={id} className='block mb-2'>
 					{label}
