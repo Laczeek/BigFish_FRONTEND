@@ -5,7 +5,18 @@ import FishGallery from '@/components/angler/FishGallery';
 import GalleryItem from '@/components/angler/GalleryItem';
 import GoBackButton from '@/components/layout-related/GoBackButton';
 
-export default function MePage() {
+const fakeDataFetch = async () => {
+	return await new Promise((resolve) => {
+		setTimeout(() => {
+			resolve('123');
+		}, 2000);
+	});
+};
+
+export default async function MePage() {
+	const data = await fakeDataFetch();
+	console.log(data);
+
 	return (
 		<>
 			<header className='mb-6 flex items-center gap-x-4'>

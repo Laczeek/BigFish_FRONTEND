@@ -3,6 +3,14 @@ import AnglerDetails from '@/components/angler/AnglerDetails';
 import FishGallery from '@/components/angler/FishGallery';
 import GalleryItem from '@/components/angler/GalleryItem';
 
+const fakeDataFetch = async () => {
+	return await new Promise((resolve) => {
+		setTimeout(() => {
+			resolve('123');
+		}, 2000);
+	});
+};
+
 export default async function AnglerPage({
 	params,
 }: {
@@ -10,6 +18,8 @@ export default async function AnglerPage({
 }) {
 	const { slug } = await params;
 	console.log(slug);
+	const data = await fakeDataFetch();
+	console.log(data);
 
 	return (
 		<>

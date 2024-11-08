@@ -8,7 +8,7 @@ export default function LiveChat() {
 				Live Chat
 			</h2>
 			<div className='px-2 py-4'>
-				<ul className='flex flex-col gap-y-2 h-[650px] overflow-y-auto'>
+				<ul className='flex flex-col gap-y-2 h-[55vh] overflow-y-auto'>
 					<LiveChatMessage />
 					<LiveChatMessage />
 					<LiveChatMessage />

@@ -1,18 +1,6 @@
-import AnglersList from '@/components/home-page/AnglersList';
-import FishList from '@/components/home-page/FishList';
-import artImage from '@/public/images/art.jpg';
+import ShimmerCardList from '@/components/skeletons/ShimmerCardList';
 
-const fakeDataFetch = async () => {
-	return await new Promise((resolve) => {
-		setTimeout(() => {
-			resolve('123');
-		}, 2000);
-	});
-};
-
-export default async function HomePage() {
-	const data = await fakeDataFetch();
-	console.log(data);
+export default function HomeLoadingSkeleton() {
 	return (
 		<>
 			<header className='mb-2'>
@@ -30,7 +18,7 @@ export default async function HomePage() {
 					<h3 className='text-xl mb-6 text-center'>
 						The most hooked up anglers
 					</h3>
-					<AnglersList />
+					<ShimmerCardList length={5} />
 				</section>
 
 				<section className='p-2 mt-6 '>
@@ -38,25 +26,20 @@ export default async function HomePage() {
 						Interesting fish captured
 					</h3>
 
-					<FishList />
+					<ShimmerCardList length={5} />
 				</section>
 			</section>
 
 			<section className='mt-20'>
-				<div
-					className='flex justify-center items-center z-0 relative h-[250px] after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:bg-black after:-z-10 after:bg-opacity-80 rounded-lg overflow-hidden bg-fixed bg-cover bg-bottom mb-4 text-white'
-					style={{ backgroundImage: `url(${artImage.src})` }}
-				>
-					<h2 className='text-2xl font-bold text-center tracking-wider z-10'>
-						From around the world
-					</h2>
-				</div>
+				<h2 className='text-2xl font-bold text-center tracking-wider z-10'>
+					From around the world
+				</h2>
 
 				<section className='p-2'>
 					<h3 className='text-xl mb-6 text-center'>
 						The most hooked up anglers
 					</h3>
-					<AnglersList />
+					<ShimmerCardList length={5} />
 				</section>
 
 				<section className='p-2 mt-6 '>
@@ -64,7 +47,7 @@ export default async function HomePage() {
 						Interesting fish captured
 					</h3>
 
-					<FishList />
+					<ShimmerCardList length={5} />
 				</section>
 			</section>
 		</>

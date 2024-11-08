@@ -14,9 +14,11 @@ export default function AnglerHeading({
 	anglerId,
 }: IAnglerHeadingProps) {
 	return (
-		<header className='flex justify-between items-center'>
+		<header className='flex justify-between gap-x-4 items-center'>
 			<GoBackButton />
-			<h1 className='text-3xl font-bold'>{nickname} Profile</h1>
+			<h1 className='text-xl md:text-2xl lg:text-3xl font-bold'>
+				{nickname} Profile
+			</h1>
 			<CustomButton styleType='primary'>
 				<TbFishHook className='text-lg' />
 			</CustomButton>

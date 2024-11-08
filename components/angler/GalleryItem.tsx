@@ -53,7 +53,7 @@ export default function GalleryItem({ showRemoveButton }: IGalleryItemProps) {
 				alt='Some alt'
 				width={400}
 				height={250}
-				className='rounded-lg shadow-md shadow-light-border dark:shadow-dark-border'
+				className='rounded-lg shadow-md shadow-light-border dark:shadow-dark-border mx-auto'
 			/>
 			{showRemoveButton && (
 				<CustomButton

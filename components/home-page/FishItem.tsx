@@ -32,7 +32,7 @@ export default function FishItem() {
 				<motion.img
 					src='https://upload.wikimedia.org/wikipedia/commons/3/3e/Carpe_miroir_de_17kg.jpg'
 					alt='SOME ALT'
-					className='w-full cursor-pointer'
+					className='w-full cursor-pointer h-[230px] object-cover'
 					whileHover={{ scale: 1.05 }}
 					transition={{
 						type: 'tween',

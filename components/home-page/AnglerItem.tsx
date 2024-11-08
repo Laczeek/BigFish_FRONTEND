@@ -20,7 +20,7 @@ export default function AnglerItem() {
 					alt='Image of someone'
 					width={300}
 					height={300}
-					className='w-full'
+					className='w-full h-[230px] object-cover'
 				/>
 				<div className='bg-light-bgSecondary dark:bg-dark-bgSecondary p-2 text-center'>
 					<h4 className='font-bold mt-2 text-lg'>John Shwarz</h4>
@@ -31,9 +31,7 @@ export default function AnglerItem() {
 						/>
 						Spinning
 					</p>
-					<p
-						className='text-light-textSecondary dark:text-dark-textSecondary'
-					>
+					<p className='text-light-textSecondary dark:text-dark-textSecondary'>
 						Poland
 					</p>
 
