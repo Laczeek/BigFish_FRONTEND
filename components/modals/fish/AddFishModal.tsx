@@ -13,6 +13,7 @@ interface IInputsState {
 	measurement: number;
 	description: string;
 	image: null | File;
+	whenCaught: string;
 }
 
 export default function AddFishModal() {
@@ -22,7 +23,9 @@ export default function AddFishModal() {
 		measurement: 0,
 		description: '',
 		image: null,
+		whenCaught: '',
 	});
+
 
 	const isButtonDisabled =
 		Object.keys(inputsState).filter(
@@ -47,6 +50,18 @@ export default function AddFishModal() {
 					onChange={onInputChangeHandler}
 					value={inputsState.name}
 				/>
+
+				<FormInput
+					label='When caught'
+					type='date'
+					id='whenCaught'
+					placeholder='Enter when fish was caught'
+					onChange={onInputChangeHandler}
+					value={inputsState.whenCaught}
+					max={new Date().toISOString().split('T')[0]}
+					min={'2024-03-01'}
+				/>
+
 				<FormSelect
 					label='Type of measurement'
 					id='measurementType'
