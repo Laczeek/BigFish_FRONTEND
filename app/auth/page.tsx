@@ -1,24 +1,31 @@
 'use client';
 import { FormEvent } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 
 import FormInput from '@/components/form-related/FormInput';
-import CustomLink from '@/components/layout-related/CustomLink';
 import useForm from '@/hooks/useForm';
 import CustomButton from '@/components/layout-related/CustomButton';
-import { AppDispatch } from '@/store/store';
-import { authActions } from '@/store/auth-slice';
+import { AppDispatch, RootState } from '@/store/store';
+import { signup, login } from '@/store/auth-slice';
+import transformToErrorObject from '@/helpers/transformToErrorObject';
+
+const initialInputsState = {
+	nickname: '',
+	email: '',
+	password: '',
+	passwordConfirm: '',
+};
 
 export default function AuthPage() {
-	const { inputsState, onInputChangeHandler } = useForm({
-		nickname: '',
-		email: '',
-		password: '',
-		confirmPassword: '',
-	});
-
+	const { inputsState, onInputChangeHandler, clearInputsState } =
+		useForm(initialInputsState);
+	const { errors, isLoading } = useSelector((state: RootState) => state.auth);
 	const dispatch: AppDispatch = useDispatch();
+	const router = useRouter();
+
+	const errorObj = transformToErrorObject(errors || []);
 
 	let action = useSearchParams().get('action');
 
@@ -38,24 +45,22 @@ export default function AuthPage() {
 			inputsState.email === '' || inputsState.password === '';
 	}
 
-	const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+	const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		if (action === 'signup') {
-			// make request to create the user
+			const result = await dispatch(signup(inputsState));
+			if (result.meta.requestStatus === 'rejected') return;
+			router.push('/home');
 		} else {
-			// make request to login user
-			dispatch(
-				authActions.login({
-					token: '123456',
-					user: {
-						nickname: 'Patryk',
-						_id: 'dsadasdas',
-						role: 'user',
-						avatar: 'xd',
-					},
+			const result = await dispatch(
+				login({
+					email: inputsState.email,
+					password: inputsState.password,
 				})
 			);
+			if (result.meta.requestStatus === 'rejected') return;
+			router.push('/home');
 		}
 	};
 
@@ -77,6 +82,7 @@ export default function AuthPage() {
 							type='text'
 							value={inputsState.nickname}
 							onChange={onInputChangeHandler}
+							error={errorObj.nickname}
 						/>
 					)}
 					<FormInput
@@ -86,6 +92,7 @@ export default function AuthPage() {
 						type='email'
 						value={inputsState.email}
 						onChange={onInputChangeHandler}
+						error={errorObj.email}
 					/>
 					<FormInput
 						id='password'
@@ -94,15 +101,17 @@ export default function AuthPage() {
 						type='password'
 						value={inputsState.password}
 						onChange={onInputChangeHandler}
+						error={errorObj.password}
 					/>
 					{action === 'signup' && (
 						<FormInput
-							id='confirmPassword'
+							id='passwordConfirm'
 							label='Confirm Password:'
 							placeholder='Confirm your password'
 							type='password'
-							value={inputsState.confirmPassword}
+							value={inputsState.passwordConfirm}
 							onChange={onInputChangeHandler}
+							error={errorObj.passwordConfirm}
 						/>
 					)}
 
@@ -110,7 +119,8 @@ export default function AuthPage() {
 						styleType='primary'
 						type='submit'
 						additionalClasses='mx-auto block mt-6'
-						disabled={isButtonDisabled}
+						isLoading={isLoading}
+						isDisabled={isButtonDisabled}
 					>
 						{action === 'signup' ? 'Create Account' : 'Login'}
 					</CustomButton>
@@ -122,14 +132,19 @@ export default function AuthPage() {
 							? 'Already have an account?'
 							: "Don't have an account yet?"}
 					</span>
-					<CustomLink
-						href={`/auth?action=${
-							action === 'signup' ? 'login' : 'signup'
-						}`}
+					<CustomButton
+						onClick={() => {
+							router.push(
+								`/auth?action=${
+									action === 'signup' ? 'login' : 'signup'
+								}`
+							);
+							clearInputsState();
+						}}
 						styleType='secondary'
 					>
 						{action === 'signup' ? 'Login' : 'Create Account'}
-					</CustomLink>
+					</CustomButton>
 				</p>
 			</section>
 		</>

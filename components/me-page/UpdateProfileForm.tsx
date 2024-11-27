@@ -63,7 +63,7 @@ export default function UpdateProfileForm() {
 				value={inputsState.favFishingMethod}
 			>
 				<option value='spinning'>Spinning</option>
-				<option value='bottom'>Bottom Fishing</option>
+				<option value='bottom fishing'>Bottom Fishing</option>
 				<option value='casting'>Casting</option>
 				<option value='jigging'>Jigging</option>
 				<option value='popping'>Popping</option>

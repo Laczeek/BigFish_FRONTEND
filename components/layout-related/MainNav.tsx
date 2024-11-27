@@ -1,22 +1,28 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import Image from 'next/image';
 import { FiUser, FiLogIn, FiLogOut } from 'react-icons/fi';
 import { TbUserSearch } from 'react-icons/tb';
 import { GiLuckyFisherman } from 'react-icons/gi';
-import { TbFishHook } from "react-icons/tb";
+import { TbFishHook } from 'react-icons/tb';
 
 import { modalActions } from '@/store/modal-slice';
 import { AppDispatch } from '@/store/store';
 import logoImage from '@/public/images/logo.jpeg';
 import ThemeSwitch from '../theme/ThemeSwitch';
-
 import { RootState } from '@/store/store';
+import { authActions, restoreSession } from '@/store/auth-slice';
 
 export default function MainNav() {
-	const { user } = useSelector((state: RootState) => state.auth);
+	const { isLoading, credentials } = useSelector(
+		(state: RootState) => state.auth
+	);
+	const router = useRouter();
+	const pathname = usePathname();
 	const dispatch: AppDispatch = useDispatch();
 
 	const showAddFishModal = () => {
@@ -34,6 +40,27 @@ export default function MainNav() {
 		);
 	};
 
+	const logoutUser = async () => {
+		await fetch(`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/logout`, {
+			credentials: 'include',
+		});
+		dispatch(authActions.logout());
+		router.push('/auth?action=login');
+	};
+
+	useEffect(() => {
+		const restoreSessionHandler = async () => {
+			const result = await dispatch(restoreSession());
+			if (result.meta.requestStatus === 'rejected') {
+				return router.push('/auth?action=login');
+			}
+		};
+
+		if (!credentials.accessToken && !['/auth', '/'].includes(pathname)) {
+			restoreSessionHandler();
+		}
+	}, [credentials.accessToken, router, dispatch, pathname]);
+
 	return (
 		<aside
 			aria-label='Sidebar Navigation'
@@ -41,7 +68,7 @@ export default function MainNav() {
 		>
 			<nav aria-label='Main Navigation' className='w-full'>
 				<ul className=' flex flex-col  gap-y-4'>
-					{user && (
+					{credentials.accessToken && !isLoading && (
 						<li>
 							<Link href='/home'>
 								<Image
@@ -54,7 +81,7 @@ export default function MainNav() {
 							</Link>
 						</li>
 					)}
-					{!user && (
+					{!credentials.accessToken && !isLoading && (
 						<li>
 							<Link
 								href='/auth?action=login'
@@ -64,7 +91,7 @@ export default function MainNav() {
 							</Link>
 						</li>
 					)}
-					{user && (
+					{credentials.accessToken && !isLoading && (
 						<li>
 							<Link
 								href='/angler/me'
@@ -74,19 +101,19 @@ export default function MainNav() {
 							</Link>
 						</li>
 					)}
-					{user && (
+					{credentials.accessToken && !isLoading && (
 						<li>
 							<Link
 								href='/hooks'
 								className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 							>
-								<TbFishHook/>
+								<TbFishHook />
 							</Link>
 						</li>
 					)}
 				</ul>
 			</nav>
-			{user && (
+			{credentials.accessToken && !isLoading && (
 				<button
 					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 					onClick={showSearchModal}
@@ -96,7 +123,7 @@ export default function MainNav() {
 				</button>
 			)}
 
-			{user && (
+			{credentials.accessToken && !isLoading && (
 				<button
 					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 					aria-label='Add fish'
@@ -110,10 +137,11 @@ export default function MainNav() {
 
 			<ThemeSwitch />
 
-			{user && (
+			{credentials.accessToken && !isLoading && (
 				<button
 					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 					aria-label='Logout'
+					onClick={logoutUser}
 				>
 					<FiLogOut />
 				</button>

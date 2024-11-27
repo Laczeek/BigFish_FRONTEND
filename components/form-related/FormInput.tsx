@@ -8,6 +8,7 @@ interface IFormInputProps<T extends string | number | readonly string[]> {
 	withoutLabel?: true;
 	onChange: (fieldName: string, value: number | string) => void;
 	value: T;
+	error?: string;
 	max?: string | number;
 	min?: string | number;
 }
@@ -21,6 +22,7 @@ export default function FormInput<
 	placeholder,
 	withoutLabel,
 	onChange,
+	error,
 	value,
 	min,
 	max,
@@ -58,6 +60,7 @@ export default function FormInput<
 					}
 				></textarea>
 			)}
+			<p className="text-sm ml-2 mt-1 text-red">{error}</p>
 		</div>
 	);
 }

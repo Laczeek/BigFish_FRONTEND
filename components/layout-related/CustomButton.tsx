@@ -1,16 +1,21 @@
 'use client';
 
 import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { VscLoading } from 'react-icons/vsc';
 
 interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children: ReactNode;
 	additionalClasses?: string;
+	isLoading?: boolean;
+	isDisabled?: boolean;
 	styleType: 'primary' | 'secondary';
 }
 
 export default function CustomButton({
 	children,
 	styleType,
+	isLoading,
+	isDisabled,
 	additionalClasses,
 	...props
 }: CustomButtonProps) {
@@ -23,8 +28,15 @@ export default function CustomButton({
 	} `;
 
 	return (
-		<button {...props} className={styles}>
-			{children}
+		<button
+			{...props}
+			className={styles}
+			disabled={isLoading || isDisabled}
+		>
+			<span className='flex gap-x-2 items-center'>
+				{children}
+				{isLoading && <VscLoading className='animate-spin' />}
+			</span>
 		</button>
 	);
 }

@@ -8,8 +8,13 @@ export default function useForm<T extends object>(initialState: T) {
 		setInputsState((prevState) => ({ ...prevState, [fieldName]: value }));
 	};
 
+	const clearInputsState = () => {
+		setInputsState(initialState);
+	}
+
 	return {
 		inputsState,
 		onInputChangeHandler,
+		clearInputsState
 	};
 }
