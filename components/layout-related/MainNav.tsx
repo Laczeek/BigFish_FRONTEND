@@ -81,16 +81,18 @@ export default function MainNav() {
 							</Link>
 						</li>
 					)}
-					{!credentials.accessToken && !isLoading && (
-						<li>
-							<Link
-								href='/auth?action=login'
-								className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
-							>
-								<FiLogIn className='mx-auto' />
-							</Link>
-						</li>
-					)}
+					{!credentials.accessToken &&
+						!isLoading &&
+						pathname !== '/auth' && (
+							<li>
+								<Link
+									href='/auth?action=login'
+									className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
+								>
+									<FiLogIn className='mx-auto' />
+								</Link>
+							</li>
+						)}
 					{credentials.accessToken && !isLoading && (
 						<li>
 							<Link
@@ -133,8 +135,7 @@ export default function MainNav() {
 				</button>
 			)}
 
-			<div className='grow'></div>
-
+			<div className='grow min-w-[50px]'></div>
 			<ThemeSwitch />
 
 			{credentials.accessToken && !isLoading && (
