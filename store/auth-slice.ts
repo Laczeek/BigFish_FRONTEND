@@ -43,51 +43,22 @@ const initialState: IAuthState = {
 	isLoading: false,
 };
 
-
-export const restoreSession = createAsyncThunk<
-	IUserCredentials,
-	void,
-	{ rejectValue: { errors: null } }
->('auth/restoreSession', async (_, { rejectWithValue, dispatch }) => {
-	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/refresh-token`,
-		{ credentials: 'include' }
-	);
-
-	const data = await response.json();
-	if (!response.ok) {
-		await fetch(`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/logout`, {
-			credentials: 'include',
-		});
-
-		if (data.error) {
-			dispatch(
-				setAlertWithTimeout({ type: 'error', message: data.error })
-			);
-		}
-
-		return rejectWithValue({ errors: null });
-	}
-
-	return data;
-});
-
-export const signup = createAsyncThunk<
-	IUserCredentials,
-	ISignupPayload,
-	{ rejectValue: { errors: IValidationError[] | null } }
+export const observeUser = createAsyncThunk<
+	{ myHooks: string[] | [] },
+	string,
+	{ rejectValue: null }
 >(
-	'auth/signup',
-	async (userData: ISignupPayload, { rejectWithValue, dispatch }) => {
+	'auth/observeUser',
+	async (userId: string, { getState, rejectWithValue, dispatch }) => {
+		const { auth } = getState() as { auth: IAuthState };
+
 		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/signup`,
+			`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/users/observe/${userId}`,
 			{
-				method: 'POST',
+				method: 'GET',
 				headers: {
-					'Content-type': 'application/json',
+					Authorization: `Bearer ${auth.credentials.accessToken}`,
 				},
-				body: JSON.stringify(userData),
-				credentials: 'include',
 			}
 		);
 
@@ -99,15 +70,112 @@ export const signup = createAsyncThunk<
 					setAlertWithTimeout({ type: 'error', message: data.error })
 				);
 			}
-
-			if (data.errors) {
-				return rejectWithValue(data);
-			}
-
-			return rejectWithValue({ errors: null });
+			return rejectWithValue(null);
 		}
 
 		return data;
+	}
+);
+
+export const restoreSession = createAsyncThunk<
+	IUserCredentials,
+	void,
+	{ rejectValue: null }
+>('auth/restoreSession', async (_, { rejectWithValue, dispatch }) => {
+	try {
+		const response = await fetch(
+			`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/refresh-token`,
+			{ credentials: 'include' }
+		);
+
+		const data = await response.json();
+	
+		if (!response.ok) {
+			// await fetch(
+			// 	`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/logout`,
+			// 	{
+			// 		credentials: 'include',
+			// 	}
+			// );
+
+			if (data.error) {
+				dispatch(
+					setAlertWithTimeout({ type: 'error', message: data.error })
+				);
+			}
+			return rejectWithValue(null);
+		}
+
+		return data;
+	} catch (err: unknown) {
+		if (err instanceof Error) {
+			console.error(err.message);
+		}
+		dispatch(
+			setAlertWithTimeout({
+				type: 'error',
+				message: 'An unexpected error occurred.',
+			})
+		);
+
+		return rejectWithValue(null);
+	}
+});
+
+export const signup = createAsyncThunk<
+	IUserCredentials,
+	ISignupPayload,
+	{ rejectValue: { errors: IValidationError[] | null } }
+>(
+	'auth/signup',
+	async (userData: ISignupPayload, { rejectWithValue, dispatch }) => {
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/signup`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-type': 'application/json',
+					},
+					body: JSON.stringify(userData),
+					credentials: 'include',
+				}
+			);
+
+			const data = await response.json();
+
+			if (!response.ok) {
+				if (data.error) {
+					dispatch(
+						setAlertWithTimeout({
+							type: 'error',
+							message: data.error,
+						})
+					);
+				}
+
+				if (data.errors) {
+					return rejectWithValue(data);
+				}
+
+				return rejectWithValue({ errors: null });
+			}
+
+			return data;
+		} catch (err: unknown) {
+			if (err instanceof Error) {
+				console.error(err.message);
+			}
+
+			dispatch(
+				setAlertWithTimeout({
+					type: 'error',
+					message: 'An unexpected error occurred.',
+				})
+			);
+
+			return rejectWithValue({ errors: null });
+		}
 	}
 );
 
@@ -118,35 +186,52 @@ export const login = createAsyncThunk<
 >(
 	'auth/login',
 	async (userData: ILoginPayload, { rejectWithValue, dispatch }) => {
-		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/login`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-type': 'application/json',
-				},
-				body: JSON.stringify(userData),
-				credentials: 'include',
-			}
-		);
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/login`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-type': 'application/json',
+					},
+					body: JSON.stringify(userData),
+					credentials: 'include',
+				}
+			);
 
-		const data = await response.json();
+			const data = await response.json();
 
-		if (!response.ok) {
-			if (data.error) {
-				dispatch(
-					setAlertWithTimeout({ type: 'error', message: data.error })
-				);
+			if (!response.ok) {
+				if (data.error) {
+					dispatch(
+						setAlertWithTimeout({
+							type: 'error',
+							message: data.error,
+						})
+					);
+				}
+
+				if (data.errors) {
+					return rejectWithValue(data);
+				}
+
+				return rejectWithValue({ errors: null });
 			}
 
-			if (data.errors) {
-				return rejectWithValue(data);
+			return data;
+		} catch (err) {
+			if (err instanceof Error) {
+				console.error(err.message);
 			}
+			dispatch(
+				setAlertWithTimeout({
+					type: 'error',
+					message: 'An unexpected error occurred.',
+				})
+			);
 
 			return rejectWithValue({ errors: null });
 		}
-
-		return data;
 	}
 );
 
@@ -156,7 +241,7 @@ const authSlice = createSlice({
 	reducers: {
 		logout: () => {
 			return initialState;
-		}
+		},
 	},
 	extraReducers(builder) {
 		builder
@@ -195,9 +280,21 @@ const authSlice = createSlice({
 				state.credentials.accessToken = action.payload.accessToken;
 				state.credentials.user = action.payload.user;
 			})
-			.addCase(restoreSession.rejected, (state, action) => {
+			.addCase(restoreSession.rejected, (state) => {
 				state.isLoading = false;
-				state.errors = action.payload?.errors || null;
+			})
+			.addCase(observeUser.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(observeUser.fulfilled, (state, action) => {
+				state.isLoading = false;
+				if (state.credentials.user) {
+					state.credentials.user.myHooks =
+						action.payload.myHooks || [];
+				}
+			})
+			.addCase(observeUser.rejected, (state) => {
+				state.isLoading = false;
 			});
 	},
 });

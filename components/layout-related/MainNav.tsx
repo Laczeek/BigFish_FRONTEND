@@ -18,9 +18,7 @@ import { RootState } from '@/store/store';
 import { authActions, restoreSession } from '@/store/auth-slice';
 
 export default function MainNav() {
-	const { isLoading, credentials } = useSelector(
-		(state: RootState) => state.auth
-	);
+	const { credentials } = useSelector((state: RootState) => state.auth);
 	const router = useRouter();
 	const pathname = usePathname();
 	const dispatch: AppDispatch = useDispatch();
@@ -59,7 +57,7 @@ export default function MainNav() {
 		if (!credentials.accessToken && !['/auth', '/'].includes(pathname)) {
 			restoreSessionHandler();
 		}
-	}, [credentials.accessToken, router, dispatch, pathname]);
+	}, []);
 
 	return (
 		<aside
@@ -68,7 +66,7 @@ export default function MainNav() {
 		>
 			<nav aria-label='Main Navigation' className='w-full'>
 				<ul className=' flex flex-col  gap-y-4'>
-					{credentials.accessToken && !isLoading && (
+					{credentials.accessToken && (
 						<li>
 							<Link href='/home'>
 								<Image
@@ -81,19 +79,17 @@ export default function MainNav() {
 							</Link>
 						</li>
 					)}
-					{!credentials.accessToken &&
-						!isLoading &&
-						pathname !== '/auth' && (
-							<li>
-								<Link
-									href='/auth?action=login'
-									className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
-								>
-									<FiLogIn className='mx-auto' />
-								</Link>
-							</li>
-						)}
-					{credentials.accessToken && !isLoading && (
+					{!credentials.accessToken && pathname !== '/auth' && (
+						<li>
+							<Link
+								href='/auth?action=login'
+								className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
+							>
+								<FiLogIn className='mx-auto' />
+							</Link>
+						</li>
+					)}
+					{credentials.accessToken && (
 						<li>
 							<Link
 								href='/angler/me'
@@ -103,7 +99,7 @@ export default function MainNav() {
 							</Link>
 						</li>
 					)}
-					{credentials.accessToken && !isLoading && (
+					{credentials.accessToken && (
 						<li>
 							<Link
 								href='/hooks'
@@ -115,7 +111,7 @@ export default function MainNav() {
 					)}
 				</ul>
 			</nav>
-			{credentials.accessToken && !isLoading && (
+			{credentials.accessToken && (
 				<button
 					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 					onClick={showSearchModal}
@@ -125,7 +121,7 @@ export default function MainNav() {
 				</button>
 			)}
 
-			{credentials.accessToken && !isLoading && (
+			{credentials.accessToken && (
 				<button
 					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 					aria-label='Add fish'
@@ -138,7 +134,7 @@ export default function MainNav() {
 			<div className='grow min-w-[50px]'></div>
 			<ThemeSwitch />
 
-			{credentials.accessToken && !isLoading && (
+			{credentials.accessToken && (
 				<button
 					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 					aria-label='Logout'
