@@ -5,6 +5,7 @@ import { RiImageAddFill } from 'react-icons/ri';
 import { FaTrashAlt } from 'react-icons/fa';
 
 import CustomButton from '../layout-related/CustomButton';
+import Image from 'next/image';
 
 interface IFormImageProps {
 	initialImgURL: string | null;
@@ -53,11 +54,14 @@ export default function FormImage({
 	return (
 		<div className='mb-6'>
 			{previewURL && (
-				<div className='h-[200px] w-[200px] md:h-[300px] md:w-[300px] mx-auto '>
-					<img
+				<div className='mx-auto w-[200px] h-[200px] md:w-[300px] md:h-[300px]'>
+					<Image
+						width={300}
+						height={300}
 						src={previewURL}
+						priority
 						alt='Your new image preview.'
-						className='block w-full h-full object-cover rounded-full'
+						className='object-cover rounded-full w-full h-full'
 					/>
 				</div>
 			)}

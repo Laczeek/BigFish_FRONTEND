@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { jwtVerify } from 'jose';
 
-export function middleware(request: NextRequest) {
+const SECRET_KEY = new TextEncoder().encode(process.env.SECRET_KEY!);
+
+export async function middleware(request: NextRequest) {
 	const isAssetRequest =
-		request.nextUrl.pathname.startsWith('/_next') || // Next.js internal assets
-		request.nextUrl.pathname.startsWith('/static') || // Static folder assets
-		request.nextUrl.pathname.startsWith('/favicon.ico'); // Favicon
+		request.nextUrl.pathname.startsWith('/_next') ||
+		request.nextUrl.pathname.startsWith('/static') ||
+		request.nextUrl.pathname.startsWith('/favicon.ico');
 
 	if (isAssetRequest) {
 		return NextResponse.next();
@@ -17,6 +20,21 @@ export function middleware(request: NextRequest) {
 		return NextResponse.redirect(
 			new URL('/auth?action=login', request.url)
 		);
+	}
+
+	if (!isPublicPage && refreshToken) {
+		try {
+			await jwtVerify(refreshToken, SECRET_KEY);
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+		} catch (err: unknown) {
+			console.error(err);
+			const response = NextResponse.redirect(
+				new URL('/auth?action=login', request.url)
+			);
+			response.cookies.delete('refreshToken');
+
+			return response;
+		}
 	}
 
 	if (isPublicPage && refreshToken) {

@@ -1,16 +1,26 @@
-import { FaTrophy } from "react-icons/fa";
-import { FaFishFins } from "react-icons/fa6";
-import { TbFishHook } from "react-icons/tb";
+import countryCodeToFlag from '@/helpers/countryCodeToFlag';
+import { IUser } from '@/interfaces/user';
+import { FaTrophy } from 'react-icons/fa';
+import { FaFishFins } from 'react-icons/fa6';
+import { TbFishHook } from 'react-icons/tb';
 
-export default function ProfileDetails() {
+interface IProfileDetailsProps {
+	angler: IUser;
+}
+
+export default function ProfileDetails({ angler }: IProfileDetailsProps) {
+	const localDate = new Date(angler.createdAt).toLocaleDateString('en-GB');
+
+	const flag = countryCodeToFlag(angler.country.name);
+
 	return (
 		<section>
-            <h2 className="hidden">Your details</h2>
+			<h2 className='hidden'>Your details</h2>
 			<div className='text-center mt-6'>
-				<p className='text-lg mb-2 font-bold'>Poland</p>
+				<p className='text-4xl mb-2 font-bold'>{flag}</p>
 				<p className='text-light-textSecondary dark:text-dark-textSecondary'>
 					Account created:{' '}
-					<time dateTime='2012-02-15'>2012-02-15</time>
+					<time dateTime={localDate}>{localDate}</time>
 				</p>
 				<div className='flex justify-evenly items-center my-4 text-light-textSecondary dark:text-dark-textSecondary'>
 					<p>
@@ -18,21 +28,21 @@ export default function ProfileDetails() {
 							className='inline-block text-2xl text-light-accentPrimary dark:text-dark-accentPrimary mr-2'
 							aria-label='Number of fish caught'
 						/>
-						10
+						{angler.fishAmount}
 					</p>
 					<p>
 						<FaTrophy
 							className='inline-block text-2xl text-light-accentPrimary dark:text-dark-accentPrimary mr-2'
 							aria-label='Number of competition wins'
 						/>
-						2
+						{angler.competitionWins}
 					</p>
 					<p>
 						<TbFishHook
 							className='inline-block text-2xl text-light-accentPrimary dark:text-dark-accentPrimary mr-2'
 							aria-label='Number of observations'
 						/>
-						362
+						{angler.hooksAmount}
 					</p>
 				</div>
 			</div>

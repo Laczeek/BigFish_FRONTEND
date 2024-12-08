@@ -2,17 +2,21 @@ import AnglersList from '@/components/home-page/AnglersList';
 import FishList from '@/components/home-page/FishList';
 import artImage from '@/public/images/art.jpg';
 
-const fakeDataFetch = async () => {
-	return await new Promise((resolve) => {
-		setTimeout(() => {
-			resolve('123');
-		}, 2000);
-	});
+const fetchAllAnglers = async () => {
+	const response = await fetch(
+		`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/users`
+	);
+	const data = await response.json();
+	if (!response.ok) {
+		throw new Error(data.error || 'Something went wrong.');
+	}
+
+	return data.users;
 };
 
 export default async function HomePage() {
-	const data = await fakeDataFetch();
-	console.log(data);
+	const anglers = await fetchAllAnglers();
+
 	return (
 		<>
 			<header className='mb-2'>
@@ -21,7 +25,12 @@ export default async function HomePage() {
 			<p className='text-xs bg-warningYellow w-fit p-2 text-black rounded-md mb-4'>
 				The result will be different every day
 			</p>
-			<section>
+			<section className='p-2'>
+				<h3 className='text-xl mb-6 text-center'>All Anglers</h3>
+				<AnglersList anglers={anglers} />
+			</section>
+
+			{/* <section>
 				<h2 className='text-2xl font-bold text-center tracking-wider'>
 					From your country
 				</h2>
@@ -66,7 +75,7 @@ export default async function HomePage() {
 
 					<FishList />
 				</section>
-			</section>
+			</section> */}
 		</>
 	);
 }

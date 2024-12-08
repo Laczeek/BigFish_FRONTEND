@@ -51,7 +51,6 @@ export default function AuthPage() {
 		if (action === 'signup') {
 			const result = await dispatch(signup(inputsState));
 			if (result.meta.requestStatus === 'rejected') return;
-			router.push('/home');
 		} else {
 			const result = await dispatch(
 				login({
@@ -60,8 +59,8 @@ export default function AuthPage() {
 				})
 			);
 			if (result.meta.requestStatus === 'rejected') return;
-			router.push('/home');
 		}
+		router.push('/home');
 	};
 
 	return (

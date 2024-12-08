@@ -28,7 +28,9 @@ export default function ModalsContainer() {
 			{modalType === 'FISH_DETAILS' && (
 				<FishDetailsModal modalProps={modalProps} />
 			)}
-			{modalType === 'ADD_FISH' && <AddFishModal />}
+			{modalType === 'ADD_FISH' && (
+				<AddFishModal />
+			)}
 			{modalType === 'SEARCH_ANGLERS' && <SearchModal />}
 			{modalType === 'FISH_IMAGE_PREVIEW' && (
 				<FishImagePreviewModal modalProps={modalProps} />

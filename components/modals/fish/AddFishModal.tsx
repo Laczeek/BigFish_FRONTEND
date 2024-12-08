@@ -1,4 +1,6 @@
 'use client';
+import { FormEvent } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Modal from '../Modal';
 import FormInput from '../../form-related/FormInput';
@@ -6,31 +8,83 @@ import FormImage from '../../form-related/FormImage';
 import FormSelect from '../../form-related/FormSelect';
 import useForm from '@/hooks/useForm';
 import CustomButton from '../../layout-related/CustomButton';
+import useRequest from '@/hooks/useRequest';
+import { AppDispatch } from '@/store/store';
+import { modalActions } from '@/store/modal-slice';
+import { setAlertWithTimeout } from '@/store/alert-slice';
+import { authActions } from '@/store/auth-slice';
 
 interface IInputsState {
 	name: string;
-	measurementType: string;
-	measurement: number;
+	measurementUnit: string;
+	measurementValue: number | string;
 	description: string;
 	image: null | File;
 	whenCaught: string;
+	address: string;
 }
 
 export default function AddFishModal() {
 	const { inputsState, onInputChangeHandler } = useForm<IInputsState>({
 		name: '',
-		measurementType: '',
-		measurement: 0,
+		measurementUnit: 'not defined',
+		measurementValue: '',
 		description: '',
 		image: null,
 		whenCaught: '',
+		address: '',
 	});
 
+	const dispatch: AppDispatch = useDispatch();
 
-	const isButtonDisabled =
-		Object.keys(inputsState).filter(
-			(key) => !Boolean(inputsState[key as keyof typeof inputsState])
-		).length !== 0;
+	const { isLoading, errorsObject, sendRequest } = useRequest();
+
+	const isButtonDisabled = Object.keys(inputsState).find((key) => {
+		if (key === 'description') return false;
+		if(key === 'measurementUnit') {
+			return inputsState[key as keyof typeof inputsState] === 'not defined'
+		}
+		return Boolean(inputsState[key as keyof typeof inputsState]) === false;
+	});
+
+	const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+
+		const measurementType =
+			inputsState.measurementUnit === 'kg' ||
+			inputsState.measurementUnit === 'lb'
+				? 'weight'
+				: 'length';
+
+		const formData = new FormData();
+		formData.set('name', inputsState.name);
+		formData.set('measurementUnit', inputsState.measurementUnit);
+		formData.set('measurementType', measurementType);
+		formData.set('measurementValue', inputsState.measurementValue + '');
+		formData.set('description', inputsState.description);
+		formData.set('whenCaught', inputsState.whenCaught);
+		formData.set('address', inputsState.address);
+		formData.set('image', inputsState.image!);
+
+		try {
+			const data = await sendRequest('/fish', {
+				method: 'POST',
+				body: formData,
+			});
+			dispatch(
+				setAlertWithTimeout({
+					type: 'success',
+					message: `${data.fish.name} was added.`,
+				})
+			);
+			dispatch(authActions.incrementFishAmount());
+			dispatch(modalActions.hideModal());
+		} catch (err: unknown) {
+			if (err instanceof Error) {
+				console.error(err.message);
+			}
+		}
+	};
 
 	return (
 		<Modal
@@ -41,7 +95,10 @@ export default function AddFishModal() {
 				</h2>
 			}
 		>
-			<form className='max-w-[600px] mx-auto bg-light-bgSecondary dark:bg-dark-bgSecondary p-4 rounded-lg shadow shadow-light-border dark:shadow-dark-border max-h-[70vh] overflow-y-auto'>
+			<form
+				className='max-w-[600px] mx-auto bg-light-bgSecondary dark:bg-dark-bgSecondary p-4 rounded-lg shadow shadow-light-border dark:shadow-dark-border max-h-[70vh] overflow-y-auto'
+				onSubmit={submitHandler}
+			>
 				<FormInput
 					label='Fish name'
 					type='text'
@@ -49,6 +106,7 @@ export default function AddFishModal() {
 					placeholder='Enter the name of a fish'
 					onChange={onInputChangeHandler}
 					value={inputsState.name}
+					error={errorsObject.name}
 				/>
 
 				<FormInput
@@ -58,15 +116,15 @@ export default function AddFishModal() {
 					placeholder='Enter when fish was caught'
 					onChange={onInputChangeHandler}
 					value={inputsState.whenCaught}
-					max={new Date().toISOString().split('T')[0]}
-					min={'2024-03-01'}
+					error={errorsObject.whenCaught}
 				/>
 
 				<FormSelect
 					label='Type of measurement'
-					id='measurementType'
+					id='measurementUnit'
 					onChange={onInputChangeHandler}
-					value={inputsState.measurementType}
+					value={inputsState.measurementUnit}
+					error={errorsObject['measurement.unit']}
 				>
 					<optgroup label='Weight'>
 						<option value='kg'>kg</option>
@@ -81,19 +139,33 @@ export default function AddFishModal() {
 				<FormInput
 					label='Measurement'
 					type='number'
-					id='measurement'
+					id='measurementValue'
 					placeholder='Etner the fish measurement'
 					onChange={onInputChangeHandler}
-					value={inputsState.measurement}
+					value={inputsState.measurementValue}
+					error={errorsObject['measurement.value']}
 				/>
+
+				<FormInput
+					label='Address'
+					type='text'
+					id='address'
+					placeholder='Enter the address'
+					onChange={onInputChangeHandler}
+					value={inputsState.address}
+					error={errorsObject.address}
+				/>
+
 				<FormInput
 					label='Description'
 					type='textarea'
 					id='description'
-					placeholder='Enter description'
+					placeholder='Enter the description'
 					onChange={onInputChangeHandler}
 					value={inputsState.description}
+					error={errorsObject.description}
 				/>
+
 				<FormImage
 					label='Image'
 					initialImgURL={null}
@@ -105,7 +177,8 @@ export default function AddFishModal() {
 					styleType='primary'
 					type='submit'
 					additionalClasses='block ml-auto'
-					disabled={isButtonDisabled}
+					isDisabled={Boolean(isButtonDisabled)}
+					isLoading={isLoading}
 				>
 					Add Fish
 				</CustomButton>

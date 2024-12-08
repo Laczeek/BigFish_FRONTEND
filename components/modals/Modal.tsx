@@ -42,7 +42,7 @@ export default function Modal({ label, header, children }: IModalProps) {
 			aria-modal='true'
 			role='dialog'
 		>
-			<div aria-label={label} className='max-w-[800px] h-full mx-auto'>
+			<div aria-label={label} className='max-w-[1200px] h-full mx-auto'>
 				<header>{header}</header>
 				{children}
 				<footer className='absolute bottom-10 right-10'>

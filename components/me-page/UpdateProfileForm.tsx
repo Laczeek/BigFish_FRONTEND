@@ -7,36 +7,60 @@ import FormInput from '../form-related/FormInput';
 import FormSelect from '../form-related/FormSelect';
 import FormImage from '../form-related/FormImage';
 import CustomButton from '../layout-related/CustomButton';
-import { modalActions } from '@/store/modal-slice';
 import { AppDispatch } from '@/store/store';
+import { setAlertWithTimeout } from '@/store/alert-slice';
+import { IUser } from '@/interfaces/user';
+import useRequest from '@/hooks/useRequest';
+import { authActions } from '@/store/auth-slice';
+
+interface IUpdateProfileFormProps {
+	angler: IUser
+}
 
 interface IInputsState {
 	nickname: string;
-	favFishingMethod: string;
+	favMethod: string;
 	description: string;
 	image: null | File;
 }
 
-export default function UpdateProfileForm() {
+export default function UpdateProfileForm({angler}: IUpdateProfileFormProps) {
 	const { inputsState, onInputChangeHandler } = useForm<IInputsState>({
-		nickname: 'Patrick',
-		favFishingMethod: 'not specified',
-		description: 'This is my not valid description.',
+		nickname: angler.nickname,
+		favMethod: angler.favMethod,
+		description: angler.description,
 		image: null,
 	});
+	const {sendRequest, isLoading, errorsObject} = useRequest();
+
+	const isBtnDisabled = Object.keys(inputsState).find(key => {
+		if(key === 'image') {
+			return inputsState.image !== null;
+		} else {
+			return inputsState[key as keyof typeof inputsState] !== angler[key as keyof typeof angler]
+		}
+	});
+
 	const dispatch: AppDispatch = useDispatch();
 
-	const initialImgURL =
-		'https://hips.hearstapps.com/hmg-prod/images/how-to-tell-if-someone-likes-you-65b7cbdc8aa23.jpg?crop=1.00xw:0.624xh;0,0.257xh&resize=1120:*';
-
-	const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+	const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		dispatch(
-			modalActions.showModal({
-				modalType: 'UPDATE_PROFILE',
-				modalProps: {},
-			})
-		);
+
+		const formData = new FormData();
+		formData.set('nickname', inputsState.nickname);
+		formData.set('favMethod', inputsState.favMethod);
+		formData.set('description', inputsState.description);
+		formData.set('image', inputsState.image!);
+
+		try {
+			const data = await sendRequest('/users/me', {method: 'PATCH', body: formData});
+			dispatch(authActions.updateUser(data.user));
+			dispatch(setAlertWithTimeout({type: 'success', message:'Your data has been updated.'}))
+		} catch (err: unknown) {
+			if(err instanceof Error) {
+				console.error(err.message);
+			}
+		}
 	};
 
 	return (
@@ -44,7 +68,7 @@ export default function UpdateProfileForm() {
 			<FormImage
 				label='Image'
 				onChange={onInputChangeHandler}
-				initialImgURL={initialImgURL}
+				initialImgURL={angler.avatar.url}
 				value={inputsState.image}
 			/>
 			<FormInput
@@ -54,13 +78,15 @@ export default function UpdateProfileForm() {
 				type='text'
 				onChange={onInputChangeHandler}
 				value={inputsState.nickname}
+				error={errorsObject.nickname}
 			/>
 
 			<FormSelect
-				id='favFishingMethod'
+				id='favMethod'
 				label='Favorite fishing method'
 				onChange={onInputChangeHandler}
-				value={inputsState.favFishingMethod}
+				value={inputsState.favMethod}
+				error={errorsObject.favMethod}
 			>
 				<option value='spinning'>Spinning</option>
 				<option value='bottom fishing'>Bottom Fishing</option>
@@ -79,12 +105,15 @@ export default function UpdateProfileForm() {
 				type='textarea'
 				onChange={onInputChangeHandler}
 				value={inputsState.description}
+				error={errorsObject.description}
 			/>
 
 			<CustomButton
 				styleType='primary'
 				type='submit'
 				additionalClasses='mx-auto block mt-2'
+				isLoading={isLoading}
+				isDisabled={!Boolean(isBtnDisabled)}
 			>
 				Save
 			</CustomButton>

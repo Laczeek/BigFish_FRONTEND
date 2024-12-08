@@ -1,5 +1,5 @@
 export interface IUser {
-    _id:string;
+	_id: string;
 	nickname: string;
 	email: string;
 	description: string;
@@ -14,16 +14,19 @@ export interface IUser {
 		| 'trolling'
 		| 'fly fishing'
 		| 'ice fishing';
-        avatar: {
-            url: string;
-            public_id: string;
-        },
-        country: string;
-        role: 'admin' | 'moderator' | 'user',
-        fishAmount: number;
-        myHooks: string[];
-        hooksAmount: number;
-        competition?: string;
-        competitionWins: number;
-        createdAt: string;
+	avatar: {
+		url: string;
+		public_id: string;
+	};
+	country: {
+		name: string;
+		coordinates: [number, number];
+	};
+	role: 'admin' | 'moderator' | 'user';
+	fishAmount: number;
+	myHooks: string[];
+	hooksAmount: number;
+	competition?: string;
+	competitionWins: number;
+	createdAt: string;
 }

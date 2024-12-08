@@ -6,33 +6,40 @@ import { FaFishFins } from 'react-icons/fa6';
 import { TbFishHook } from 'react-icons/tb';
 import { FaTrophy } from 'react-icons/fa';
 import { FaHeart } from 'react-icons/fa';
+import { IUser } from '@/interfaces/user';
 
-export default function AnglerItem() {
+interface IAnglerItemProps {
+	angler: IUser;
+}
+
+export default function AnglerItem({ angler }: IAnglerItemProps) {
 	return (
-		<Link href={'/angler/johny'}>
+		<Link href={`/angler/${angler._id}`}>
 			<motion.article
 				className='rounded-lg overflow-hidden shadow shadow-light-border dark:shadow-dark-border'
 				whileHover={{ scale: 1.03 }}
 				transition={{ type: 'spring', stiffness: 400, damping: 10 }}
 			>
 				<img
-					src='https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D'
+					src={angler.avatar.url}
 					alt='Image of someone'
 					width={300}
 					height={300}
 					className='w-full h-[230px] object-cover'
 				/>
 				<div className='bg-light-bgSecondary dark:bg-dark-bgSecondary p-2 text-center'>
-					<h4 className='font-bold mt-2 text-lg'>John Shwarz</h4>
+					<h4 className='font-bold mt-2 text-lg'>
+						{angler.nickname}
+					</h4>
 					<p className='text-light-textSecondary dark:text-dark-textSecondary my-2'>
 						<FaHeart
 							className='inline-block mr-2 text-lg text-red '
 							aria-label='Favorite fishing method'
 						/>
-						Spinning
+						{angler.favMethod}
 					</p>
 					<p className='text-light-textSecondary dark:text-dark-textSecondary'>
-						Poland
+						{angler.country}
 					</p>
 
 					<div className='flex justify-evenly items-center mt-4 text-light-textSecondary dark:text-dark-textSecondary'>
@@ -41,21 +48,21 @@ export default function AnglerItem() {
 								className='inline-block text-lg text-light-accentSecondary dark:text-dark-accentSecondary mr-2'
 								aria-label='Number of fish caught'
 							/>
-							10
+							{angler.fishAmount}
 						</p>
 						<p>
 							<FaTrophy
 								className='inline-block text-lg text-light-accentSecondary dark:text-dark-accentSecondary mr-2'
 								aria-label='Number of competition wins'
 							/>
-							2
+							{angler.competitionWins}
 						</p>
 						<p>
 							<TbFishHook
 								className='inline-block text-lg text-light-accentSecondary dark:text-dark-accentSecondary mr-2'
 								aria-label='Number of observations'
 							/>
-							362
+							{angler.hooksAmount}
 						</p>
 					</div>
 				</div>

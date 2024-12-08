@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 import { IUser } from '@/interfaces/user';
 import { setAlertWithTimeout } from './alert-slice';
@@ -43,45 +43,11 @@ const initialState: IAuthState = {
 	isLoading: false,
 };
 
-export const observeUser = createAsyncThunk<
-	{ myHooks: string[] | [] },
-	string,
-	{ rejectValue: null }
->(
-	'auth/observeUser',
-	async (userId: string, { getState, rejectWithValue, dispatch }) => {
-		const { auth } = getState() as { auth: IAuthState };
-
-		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/users/observe/${userId}`,
-			{
-				method: 'GET',
-				headers: {
-					Authorization: `Bearer ${auth.credentials.accessToken}`,
-				},
-			}
-		);
-
-		const data = await response.json();
-
-		if (!response.ok) {
-			if (data.error) {
-				dispatch(
-					setAlertWithTimeout({ type: 'error', message: data.error })
-				);
-			}
-			return rejectWithValue(null);
-		}
-
-		return data;
-	}
-);
-
 export const restoreSession = createAsyncThunk<
 	IUserCredentials,
 	void,
 	{ rejectValue: null }
->('auth/restoreSession', async (_, { rejectWithValue, dispatch }) => {
+>('auth/restoreSession', async (_, { rejectWithValue }) => {
 	try {
 		const response = await fetch(
 			`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/refresh-token`,
@@ -89,35 +55,14 @@ export const restoreSession = createAsyncThunk<
 		);
 
 		const data = await response.json();
-	
-		if (!response.ok) {
-			// await fetch(
-			// 	`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/logout`,
-			// 	{
-			// 		credentials: 'include',
-			// 	}
-			// );
 
-			if (data.error) {
-				dispatch(
-					setAlertWithTimeout({ type: 'error', message: data.error })
-				);
-			}
+		if (!response.ok) {
 			return rejectWithValue(null);
 		}
 
 		return data;
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	} catch (err: unknown) {
-		if (err instanceof Error) {
-			console.error(err.message);
-		}
-		dispatch(
-			setAlertWithTimeout({
-				type: 'error',
-				message: 'An unexpected error occurred.',
-			})
-		);
-
 		return rejectWithValue(null);
 	}
 });
@@ -166,13 +111,6 @@ export const signup = createAsyncThunk<
 			if (err instanceof Error) {
 				console.error(err.message);
 			}
-
-			dispatch(
-				setAlertWithTimeout({
-					type: 'error',
-					message: 'An unexpected error occurred.',
-				})
-			);
 
 			return rejectWithValue({ errors: null });
 		}
@@ -223,12 +161,6 @@ export const login = createAsyncThunk<
 			if (err instanceof Error) {
 				console.error(err.message);
 			}
-			dispatch(
-				setAlertWithTimeout({
-					type: 'error',
-					message: 'An unexpected error occurred.',
-				})
-			);
 
 			return rejectWithValue({ errors: null });
 		}
@@ -241,6 +173,24 @@ const authSlice = createSlice({
 	reducers: {
 		logout: () => {
 			return initialState;
+		},
+		updateMyHooks: (state, action: PayloadAction<string[]>) => {
+			if (state.credentials.user) {
+				state.credentials.user.myHooks = action.payload;
+			}
+		},
+		updateUser: (state, action: PayloadAction<IUser>) => {
+			state.credentials.user = action.payload;
+		},
+		incrementFishAmount: (state) => {
+			if (state.credentials.user) {
+				state.credentials.user.fishAmount += 1;
+			}
+		},
+		decrementFishAmount: (state) => {
+			if (state.credentials.user) {
+				state.credentials.user.fishAmount -= 1;
+			}
 		},
 	},
 	extraReducers(builder) {
@@ -273,7 +223,6 @@ const authSlice = createSlice({
 			})
 			.addCase(restoreSession.pending, (state) => {
 				state.isLoading = true;
-				state.errors = null;
 			})
 			.addCase(restoreSession.fulfilled, (state, action) => {
 				state.isLoading = false;
@@ -281,19 +230,6 @@ const authSlice = createSlice({
 				state.credentials.user = action.payload.user;
 			})
 			.addCase(restoreSession.rejected, (state) => {
-				state.isLoading = false;
-			})
-			.addCase(observeUser.pending, (state) => {
-				state.isLoading = true;
-			})
-			.addCase(observeUser.fulfilled, (state, action) => {
-				state.isLoading = false;
-				if (state.credentials.user) {
-					state.credentials.user.myHooks =
-						action.payload.myHooks || [];
-				}
-			})
-			.addCase(observeUser.rejected, (state) => {
 				state.isLoading = false;
 			});
 	},

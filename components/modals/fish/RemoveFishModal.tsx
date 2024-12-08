@@ -1,16 +1,43 @@
 'use client';
+import { useDispatch } from 'react-redux';
 
 import CustomButton from '@/components/layout-related/CustomButton';
 import Modal from '../Modal';
+import useRequest from '@/hooks/useRequest';
+import { AppDispatch } from '@/store/store';
+import { setAlertWithTimeout } from '@/store/alert-slice';
+import { modalActions } from '@/store/modal-slice';
+import { authActions } from '@/store/auth-slice';
 
 interface IRemoveFishModalProps {
 	modalProps: {
-        fishId: string;
-    }
+		fishId: string;
+	};
 }
 
 export default function RemoveFishModal({ modalProps }: IRemoveFishModalProps) {
-    console.log(modalProps.fishId);
+	const { isLoading, sendRequest } = useRequest();
+
+	const dispatch: AppDispatch = useDispatch();
+
+	const removeFishHandler = async () => {
+		try {
+			const data = await sendRequest(`/fish/${modalProps.fishId}`, {
+				method: 'DELETE',
+			});
+
+			dispatch(
+				setAlertWithTimeout({ type: 'success', message: data.msg })
+			);
+			dispatch(authActions.decrementFishAmount());
+			dispatch(modalActions.hideModal());
+		} catch (err) {
+			if (err instanceof Error) {
+				console.error(err.message);
+			}
+		}
+	};
+
 	return (
 		<Modal
 			label='Remove the chosen fish'
@@ -25,6 +52,8 @@ export default function RemoveFishModal({ modalProps }: IRemoveFishModalProps) {
 					styleType='primary'
 					additionalClasses='bg-red dark:bg-red dark:text-white block mx-auto'
 					type='button'
+					isLoading={isLoading}
+					onClick={removeFishHandler}
 				>
 					Remove the fish from my profile
 				</CustomButton>

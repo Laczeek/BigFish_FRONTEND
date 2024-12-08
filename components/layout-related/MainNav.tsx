@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Image from 'next/image';
 import { FiUser, FiLogIn, FiLogOut } from 'react-icons/fi';
 import { TbUserSearch } from 'react-icons/tb';
-import { GiLuckyFisherman } from 'react-icons/gi';
 import { TbFishHook } from 'react-icons/tb';
 
 import { modalActions } from '@/store/modal-slice';
@@ -16,6 +15,7 @@ import logoImage from '@/public/images/logo.jpeg';
 import ThemeSwitch from '../theme/ThemeSwitch';
 import { RootState } from '@/store/store';
 import { authActions, restoreSession } from '@/store/auth-slice';
+import { GiLuckyFisherman } from 'react-icons/gi';
 
 export default function MainNav() {
 	const { credentials } = useSelector((state: RootState) => state.auth);
@@ -23,16 +23,19 @@ export default function MainNav() {
 	const pathname = usePathname();
 	const dispatch: AppDispatch = useDispatch();
 
-	const showAddFishModal = () => {
-		dispatch(
-			modalActions.showModal({ modalType: 'ADD_FISH', modalProps: {} })
-		);
-	};
-
 	const showSearchModal = () => {
 		dispatch(
 			modalActions.showModal({
 				modalType: 'SEARCH_ANGLERS',
+				modalProps: {},
+			})
+		);
+	};
+
+	const showAddFishModal = () => {
+		dispatch(
+			modalActions.showModal({
+				modalType: 'ADD_FISH',
 				modalProps: {},
 			})
 		);
@@ -47,15 +50,8 @@ export default function MainNav() {
 	};
 
 	useEffect(() => {
-		const restoreSessionHandler = async () => {
-			const result = await dispatch(restoreSession());
-			if (result.meta.requestStatus === 'rejected') {
-				return router.push('/auth?action=login');
-			}
-		};
-
 		if (!credentials.accessToken && !['/auth', '/'].includes(pathname)) {
-			restoreSessionHandler();
+			dispatch(restoreSession());
 		}
 	}, []);
 
@@ -79,7 +75,7 @@ export default function MainNav() {
 							</Link>
 						</li>
 					)}
-					{!credentials.accessToken && pathname !== '/auth' && (
+					{!credentials.accessToken && pathname === '/' && (
 						<li>
 							<Link
 								href='/auth?action=login'
@@ -121,10 +117,10 @@ export default function MainNav() {
 				</button>
 			)}
 
-			{credentials.accessToken && (
+			{credentials.accessToken && pathname === '/angler/me' && (
 				<button
 					className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
-					aria-label='Add fish'
+					aria-label='Show add fish modal'
 					onClick={showAddFishModal}
 				>
 					<GiLuckyFisherman />
