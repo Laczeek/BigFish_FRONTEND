@@ -11,7 +11,7 @@ export default function ErrorPage({ error }: { error: Error }) {
 				<p className='text-8xl mb-4 tracking-wider text-light-accentPrimary dark:text-dark-accentPrimary'>
 					Oops!
 				</p>
-				<h2 className='text-4xl trackng-widest'>
+				<h2 className='text-2xl trackng-widest'>
 					{error.message || 'Something went wrong.'}
 				</h2>
 			</div>

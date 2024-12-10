@@ -9,6 +9,7 @@ import { AppDispatch } from '@/store/store';
 import CustomButton from '../layout-related/CustomButton';
 import { IFish } from '@/interfaces/fish';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 interface IGalleryItemProps {
 	fish: IFish;
@@ -16,6 +17,8 @@ interface IGalleryItemProps {
 
 export default function GalleryItem({ fish }: IGalleryItemProps) {
 	const dispatch: AppDispatch = useDispatch();
+	const pathname = usePathname();
+	console.log('RENDERED KURWISZ');
 
 	const removeFishHandler = (event: MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
@@ -44,6 +47,7 @@ export default function GalleryItem({ fish }: IGalleryItemProps) {
 			className='relative cursor-pointer rounded-lg overflow-hidden h-[180px]'
 			whileHover={{ scale: 1.025 }}
 			transition={{ type: 'spring' }}
+			key={fish._id}
 		>
 			<Image
 				src={fish.image.url}
@@ -52,15 +56,16 @@ export default function GalleryItem({ fish }: IGalleryItemProps) {
 				height={300}
 				className=' w-full h-full object-cover'
 			/>
-
-			<CustomButton
-				styleType='primary'
-				type='button'
-				additionalClasses='absolute top-0 right-0'
-				onClick={removeFishHandler}
-			>
-				<FaTrashAlt />
-			</CustomButton>
+			{pathname === '/angler/me' && (
+				<CustomButton
+					styleType='primary'
+					type='button'
+					additionalClasses='absolute top-0 right-0'
+					onClick={removeFishHandler}
+				>
+					<FaTrashAlt />
+				</CustomButton>
+			)}
 		</motion.div>
 	);
 }

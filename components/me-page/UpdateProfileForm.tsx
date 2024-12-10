@@ -10,11 +10,11 @@ import CustomButton from '../layout-related/CustomButton';
 import { AppDispatch } from '@/store/store';
 import { setAlertWithTimeout } from '@/store/alert-slice';
 import { IUser } from '@/interfaces/user';
-import useRequest from '@/hooks/useRequest';
+import useAuthRequest from '@/hooks/useAuthRequest';
 import { authActions } from '@/store/auth-slice';
 
 interface IUpdateProfileFormProps {
-	angler: IUser
+	angler: IUser;
 }
 
 interface IInputsState {
@@ -24,20 +24,23 @@ interface IInputsState {
 	image: null | File;
 }
 
-export default function UpdateProfileForm({angler}: IUpdateProfileFormProps) {
+export default function UpdateProfileForm({ angler }: IUpdateProfileFormProps) {
 	const { inputsState, onInputChangeHandler } = useForm<IInputsState>({
 		nickname: angler.nickname,
 		favMethod: angler.favMethod,
 		description: angler.description,
 		image: null,
 	});
-	const {sendRequest, isLoading, errorsObject} = useRequest();
+	const { sendAuthRequest, isLoading, errorsObject } = useAuthRequest();
 
-	const isBtnDisabled = Object.keys(inputsState).find(key => {
-		if(key === 'image') {
+	const isBtnDisabled = Object.keys(inputsState).find((key) => {
+		if (key === 'image') {
 			return inputsState.image !== null;
 		} else {
-			return inputsState[key as keyof typeof inputsState] !== angler[key as keyof typeof angler]
+			return (
+				inputsState[key as keyof typeof inputsState] !==
+				angler[key as keyof typeof angler]
+			);
 		}
 	});
 
@@ -53,11 +56,19 @@ export default function UpdateProfileForm({angler}: IUpdateProfileFormProps) {
 		formData.set('image', inputsState.image!);
 
 		try {
-			const data = await sendRequest('/users/me', {method: 'PATCH', body: formData});
+			const data = await sendAuthRequest('/users/me', {
+				method: 'PATCH',
+				body: formData,
+			});
 			dispatch(authActions.updateUser(data.user));
-			dispatch(setAlertWithTimeout({type: 'success', message:'Your data has been updated.'}))
+			dispatch(
+				setAlertWithTimeout({
+					type: 'success',
+					message: 'Your data has been updated.',
+				})
+			);
 		} catch (err: unknown) {
-			if(err instanceof Error) {
+			if (err instanceof Error) {
 				console.error(err.message);
 			}
 		}

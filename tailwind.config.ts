@@ -19,13 +19,13 @@ const config: Config = {
 
 			light: {
 				bgPrimary: '#FFFFFF',
-				bgSecondary: '#FFFFFF',
+				bgSecondary: '#F7F7F7',
 				accentPrimary: '#6200EE',
 				accentSecondary: '#03DAC6',
 				textPrimary: '#212121',
 				textSecondary: '#666666',
 				border: '#BABABA',
-				shimmer: '#E0E0E0'
+				shimmer: '#E0E0E0',
 			},
 			dark: {
 				bgPrimary: '#121212',
@@ -35,7 +35,7 @@ const config: Config = {
 				textPrimary: '#E1E1E1',
 				textSecondary: '#A3A3A3',
 				border: '#000000',
-				shimmer: '#3A3A3A'
+				shimmer: '#3A3A3A',
 			},
 		},
 	},

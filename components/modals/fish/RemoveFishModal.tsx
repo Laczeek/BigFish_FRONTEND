@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import CustomButton from '@/components/layout-related/CustomButton';
 import Modal from '../Modal';
-import useRequest from '@/hooks/useRequest';
+import useAuthRequest from '@/hooks/useAuthRequest';
 import { AppDispatch } from '@/store/store';
 import { setAlertWithTimeout } from '@/store/alert-slice';
 import { modalActions } from '@/store/modal-slice';
@@ -16,13 +16,13 @@ interface IRemoveFishModalProps {
 }
 
 export default function RemoveFishModal({ modalProps }: IRemoveFishModalProps) {
-	const { isLoading, sendRequest } = useRequest();
+	const { isLoading, sendAuthRequest } = useAuthRequest();
 
 	const dispatch: AppDispatch = useDispatch();
 
 	const removeFishHandler = async () => {
 		try {
-			const data = await sendRequest(`/fish/${modalProps.fishId}`, {
+			const data = await sendAuthRequest(`/fish/${modalProps.fishId}`, {
 				method: 'DELETE',
 			});
 

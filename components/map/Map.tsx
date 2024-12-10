@@ -43,11 +43,11 @@ const Map = memo(function Map({ long, lat, fish }: IMapProps) {
 				url={`https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}.png?apiKey=${process.env.NEXT_PUBLIC_GEOAPIFY_KEY}`}
 				attribution='Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a> | <a href="https://openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> contributors'
 			/>
-			{fish.map((el) => (
+			{fish.map((el, index) => (
 				<Marker
 					key={el._id}
 					position={[
-						el.location.coordinates[1],
+						el.location.coordinates[1] + index * 0.0001,
 						el.location.coordinates[0],
 					]}
 					icon={customIcon}

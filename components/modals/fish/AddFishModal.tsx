@@ -8,7 +8,7 @@ import FormImage from '../../form-related/FormImage';
 import FormSelect from '../../form-related/FormSelect';
 import useForm from '@/hooks/useForm';
 import CustomButton from '../../layout-related/CustomButton';
-import useRequest from '@/hooks/useRequest';
+import useAuthRequest from '@/hooks/useAuthRequest';
 import { AppDispatch } from '@/store/store';
 import { modalActions } from '@/store/modal-slice';
 import { setAlertWithTimeout } from '@/store/alert-slice';
@@ -37,12 +37,14 @@ export default function AddFishModal() {
 
 	const dispatch: AppDispatch = useDispatch();
 
-	const { isLoading, errorsObject, sendRequest } = useRequest();
+	const { isLoading, errorsObject, sendAuthRequest } = useAuthRequest();
 
 	const isButtonDisabled = Object.keys(inputsState).find((key) => {
 		if (key === 'description') return false;
-		if(key === 'measurementUnit') {
-			return inputsState[key as keyof typeof inputsState] === 'not defined'
+		if (key === 'measurementUnit') {
+			return (
+				inputsState[key as keyof typeof inputsState] === 'not defined'
+			);
 		}
 		return Boolean(inputsState[key as keyof typeof inputsState]) === false;
 	});
@@ -67,7 +69,7 @@ export default function AddFishModal() {
 		formData.set('image', inputsState.image!);
 
 		try {
-			const data = await sendRequest('/fish', {
+			const data = await sendAuthRequest('/fish', {
 				method: 'POST',
 				body: formData,
 			});

@@ -6,7 +6,7 @@ import { TbFishHook, TbFishHookOff } from 'react-icons/tb';
 import CustomButton from '../layout-related/CustomButton';
 import GoBackButton from '../layout-related/GoBackButton';
 import { AppDispatch, RootState } from '@/store/store';
-import useRequest from '@/hooks/useRequest';
+import useAuthRequest from '@/hooks/useAuthRequest';
 import { authActions } from '@/store/auth-slice';
 
 interface IAnglerHeadingProps {
@@ -18,17 +18,15 @@ export default function AnglerHeading({
 	nickname,
 	anglerId,
 }: IAnglerHeadingProps) {
-	const { credentials } = useSelector(
-		(state: RootState) => state.auth
-	);
-	const { sendRequest, isLoading } = useRequest();
+	const { credentials } = useSelector((state: RootState) => state.auth);
+	const { sendAuthRequest, isLoading } = useAuthRequest();
 	const dispatch: AppDispatch = useDispatch();
 
 	const isHooked = credentials.user?.myHooks.find((uid) => uid === anglerId);
 
 	const observeUserHandler = async () => {
 		try {
-			const data = await sendRequest(`/users/observe/${anglerId}`, {
+			const data = await sendAuthRequest(`/users/observe/${anglerId}`, {
 				method: 'GET',
 			});
 
@@ -46,7 +44,7 @@ export default function AnglerHeading({
 			<h1 className='text-xl md:text-2xl lg:text-3xl font-bold'>
 				{nickname} Profile
 			</h1>
-			{ credentials.user?._id !== anglerId ? (
+			{credentials.user?._id !== anglerId ? (
 				<CustomButton
 					styleType='primary'
 					onClick={observeUserHandler}
