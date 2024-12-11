@@ -1,53 +1,44 @@
-import { useDispatch } from 'react-redux';
 import { MdPersonSearch } from 'react-icons/md';
 import { TbSwords } from 'react-icons/tb';
+import { useDispatch } from 'react-redux';
 
-import CustomLink from '@/components/layout-related/CustomLink';
 import CustomButton from '@/components/layout-related/CustomButton';
-import { setAlertWithTimeout } from '@/store/alert-slice';
+import { ISearchUser } from './SearchModal';
+import Image from 'next/image';
 import { AppDispatch } from '@/store/store';
+import { modalActions } from '@/store/modal-slice';
+import { useRouter } from 'next/navigation';
 
-// import Image from 'next/image';
-// TODO - change img to Image component in future
 interface SearchItemProps {
-	nickname: string;
-	slug: string;
-	imageURL: string;
+	user: ISearchUser;
 }
 
-export default function SearchItem({
-	nickname,
-	slug,
-	imageURL,
-}: SearchItemProps) {
+export default function SearchItem({ user }: SearchItemProps) {
 	const dispatch: AppDispatch = useDispatch();
+	const router = useRouter();
+
+	const navigateToUser = () => {
+		router.push(`/angler/${user._id}`);
+		dispatch(modalActions.hideModal());
+	};
 
 	return (
-		<div className='p-2 flex items-center gap-x-6 bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg shadow-md shadow-light-border dark:shadow-dark-border'>
-			<img
-				src={imageURL}
-				width={60}
-				height={60}
-				alt={`${nickname} avatar image.`}
-				className='border-2 rounded-full border-light-accentPrimary  dark:border-dark-accentPrimary w-[60px] h-[60px] object-cover'
-			/>
-			<p className='text-2xl grow'>{nickname}</p>
+		<div className='p-2 flex items-center gap-x-2 bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg shadow-md shadow-light-border dark:shadow-dark-border'>
+			<div className='grow text-center'>
+				<Image
+					src={user.avatar.url}
+					width={50}
+					height={50}
+					alt={`${user.nickname} avatar image.`}
+					className='rounded-full object-cover mx-auto'
+				/>
+				<p className='text-lg'>{user.nickname}</p>
+			</div>
 			<div className='flex flex-col gap-y-2'>
-				<CustomLink href={`/angler/${slug}`} styleType='secondary'>
+				<CustomButton styleType='secondary' onClick={navigateToUser}>
 					<MdPersonSearch />
-				</CustomLink>
-				<CustomButton
-					styleType='secondary'
-					onClick={() =>
-						dispatch(
-							setAlertWithTimeout({
-								type: 'success',
-								message:
-									'Wtf is going on bro! What a error sheeeeees!',
-							})
-						)
-					}
-				>
+				</CustomButton>
+				<CustomButton styleType='secondary'>
 					<TbSwords />
 				</CustomButton>
 			</div>

@@ -1,49 +1,59 @@
 'use client';
 
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 
 import Modal from '../Modal';
 import SearchItem from './SearchItem';
+import useRequest from '@/hooks/useRequest';
+import debounce from '@/helpers/debounce';
+import SmLoadingSpinner from '@/components/skeletons/SmLoadingSpinner';
 
-const DUMMY_USERS = [
-	{
-		_id: 'id-1',
-		nickname: 'Patryk',
-		slug: 'patryk',
-		imageURL:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH87TKQrWcl19xly2VNs0CjBzy8eaKNM-ZpA&s',
-	},
-	{
-		_id: 'id-2',
-		nickname: 'Jolien',
-		slug: 'jolien',
-		imageURL:
-			'https://thestory.is/pl/media/kryteria_akceptacji_user_story.jpg',
-	},
-];
-
-interface ISearchModalProps {
+export interface ISearchUser {
+	nickname: string;
+	avatar: {
+		url: string;
+	};
+	_id: string;
+	competition: string;
 }
 
 export default function SearchModal() {
 	const [searchValue, setSearchValue] = useState('');
-	const [users, setUsers] = useState<typeof DUMMY_USERS | []>([]);
+	const [users, setUsers] = useState<ISearchUser[] | []>([]);
+	const { sendRequest, isLoading } = useRequest();
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const debouncedFetchUsers = useCallback(
+		debounce(async (nickname: string) => {
+			if (!nickname) {
+				setUsers([]);
+				return;
+			}
+			try {
+				const data = await sendRequest(
+					`/users/search?nickname=${nickname}`,
+					{
+						method: 'GET',
+					}
+				);
+
+				setUsers(data.users);
+			} catch (err) {
+				if (err instanceof Error) {
+					console.error(err.message);
+				}
+			}
+		}, 300),
+		[]
+	);
 
 	const onInputChangeHandler = (
 		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
-		setSearchValue(event.target.value);
+		const { value } = event.target;
+		setSearchValue(value);
+		debouncedFetchUsers(value);
 	};
-
-	useEffect(() => {
-		if (searchValue === '') return;
-
-		const findedUsers = DUMMY_USERS.filter((user) =>
-			user.nickname.toLowerCase().includes(searchValue.toLowerCase())
-		);
-
-		setUsers(findedUsers);
-	}, [searchValue]);
 
 	return (
 		<Modal
@@ -59,14 +69,19 @@ export default function SearchModal() {
 				/>
 			}
 		>
-			{searchValue && (
-				<ul className='mx-auto max-w-[400px] mt-10'>
+			{!isLoading && users.length > 0 && (
+				<ul className='flex flex-col gap-y-2 mx-auto max-w-[300px] mt-6'>
 					{users.map((user) => (
 						<li key={user._id}>
-							<SearchItem {...user} />
+							<SearchItem user={user} />
 						</li>
 					))}
 				</ul>
+			)}
+			{isLoading && (
+				<div className='mt-16 text-center'>
+					<SmLoadingSpinner />
+				</div>
 			)}
 		</Modal>
 	);
