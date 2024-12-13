@@ -18,8 +18,6 @@ interface IAnglerItemProps {
 export default function AnglerItem({ angler }: IAnglerItemProps) {
 	const flag = countryCodeToFlag(angler.country.name);
 
-	console.log('IM RENDERED KURWA JEGO MAC');
-
 	return (
 		<Link href={`/angler/${angler._id}`}>
 			<motion.article

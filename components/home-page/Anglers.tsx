@@ -35,7 +35,6 @@ export default function Anglers() {
 	};
 
 	useEffect(() => {
-		console.log('USE EFFECT CALLBACK CALLED!');
 		const fetchAnglersData = async () => {
 			try {
 				const data = await sendRequest(

@@ -38,9 +38,11 @@ export default function SearchItem({ user }: SearchItemProps) {
 				<CustomButton styleType='secondary' onClick={navigateToUser}>
 					<MdPersonSearch />
 				</CustomButton>
-				<CustomButton styleType='secondary'>
-					<TbSwords />
-				</CustomButton>
+				{!user.competition && (
+					<CustomButton styleType='secondary'>
+						<TbSwords />
+					</CustomButton>
+				)}
 			</div>
 		</div>
 	);

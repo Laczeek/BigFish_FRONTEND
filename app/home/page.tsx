@@ -1,4 +1,5 @@
 import Anglers from '@/components/home-page/Anglers';
+import Activity from '@/components/home-page/Activity';
 
 export default async function HomePage() {
 	return (
@@ -11,6 +12,13 @@ export default async function HomePage() {
 					Browse anglers
 				</h2>
 				<Anglers />
+			</section>
+
+			<section className='mt-4'>
+				<h2 className='text-xl mb-2 text-center font-bold'>
+					Today&apos;s activity
+				</h2>
+				<Activity />
 			</section>
 		</>
 	);
