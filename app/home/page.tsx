@@ -14,7 +14,7 @@ export default async function HomePage() {
 				<Anglers />
 			</section>
 
-			<section className='mt-4'>
+			<section className='mt-6'>
 				<h2 className='text-xl mb-2 text-center font-bold'>
 					Today&apos;s activity
 				</h2>

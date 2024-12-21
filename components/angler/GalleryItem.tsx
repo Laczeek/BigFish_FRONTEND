@@ -1,15 +1,15 @@
 'use client';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FaTrashAlt } from 'react-icons/fa';
 import { MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
+import { usePathname } from 'next/navigation';
 
 import { modalActions } from '@/store/modal-slice';
 import { AppDispatch } from '@/store/store';
 import CustomButton from '../layout-related/CustomButton';
 import { IFish } from '@/interfaces/fish';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 
 interface IGalleryItemProps {
 	fish: IFish;
@@ -18,8 +18,7 @@ interface IGalleryItemProps {
 export default function GalleryItem({ fish }: IGalleryItemProps) {
 	const dispatch: AppDispatch = useDispatch();
 	const pathname = usePathname();
-	console.log('RENDERED KURWISZ');
-
+	
 	const removeFishHandler = (event: MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
 		dispatch(

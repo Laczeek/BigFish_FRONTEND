@@ -182,6 +182,16 @@ const authSlice = createSlice({
 		updateUser: (state, action: PayloadAction<IUser>) => {
 			state.credentials.user = action.payload;
 		},
+		updateCompetitionId: (state, action: PayloadAction<string | undefined>) => {
+			if (state.credentials.user) {
+				state.credentials.user.competition = action.payload;
+			}
+		},
+		updateCompetitionWins: (state, action: PayloadAction<number>) => {
+			if (state.credentials.user) {
+				state.credentials.user.competitionWins = action.payload;
+			}
+		},
 		incrementFishAmount: (state) => {
 			if (state.credentials.user) {
 				state.credentials.user.fishAmount += 1;

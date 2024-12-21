@@ -19,7 +19,7 @@ interface IFishDetailsModalProps {
 			value: number;
 		};
 		description: string;
-		whenCaught: Date;
+		whenCaught: string;
 		location: {
 			type: 'Point';
 			address: string;

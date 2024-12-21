@@ -1,8 +1,9 @@
-import countryCodeToFlag from '@/helpers/countryCodeToFlag';
-import { IUser } from '@/interfaces/user';
 import { FaTrophy } from 'react-icons/fa';
 import { FaFishFins } from 'react-icons/fa6';
 import { TbFishHook } from 'react-icons/tb';
+
+import { IUser } from '@/interfaces/user';
+import countryCodeToFlag from '@/helpers/countryCodeToFlag';
 
 interface IProfileDetailsProps {
 	angler: IUser;

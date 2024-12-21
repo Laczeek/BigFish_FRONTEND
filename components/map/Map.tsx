@@ -28,8 +28,6 @@ const Map = memo(function Map({ long, lat, fish }: IMapProps) {
 			})
 		);
 	};
-
-	console.log('MAP RENDERED!');
 	return (
 		<MapContainer
 			zoom={6}

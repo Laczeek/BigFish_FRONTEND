@@ -2,12 +2,14 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { TbFishHook, TbFishHookOff } from 'react-icons/tb';
+import { MdOutlineReport } from 'react-icons/md';
 
 import CustomButton from '../layout-related/CustomButton';
 import GoBackButton from '../layout-related/GoBackButton';
 import { AppDispatch, RootState } from '@/store/store';
 import useAuthRequest from '@/hooks/useAuthRequest';
 import { authActions } from '@/store/auth-slice';
+import { modalActions } from '@/store/modal-slice';
 
 interface IAnglerHeadingProps {
 	nickname: string;
@@ -38,25 +40,45 @@ export default function AnglerHeading({
 		}
 	};
 
+	const showReportModal = () => {
+		dispatch(
+			modalActions.showModal({
+				modalType: 'REPORT_USER',
+				modalProps: { nickname: nickname, userId: anglerId },
+			})
+		);
+	};
+
 	return (
 		<header className='flex justify-between gap-x-4 items-center'>
 			<GoBackButton />
-			<h1 className='text-xl md:text-2xl lg:text-3xl font-bold'>
-				{nickname} Profile
+			<h1 className='grow text-xl md:text-2xl lg:text-3xl font-bold'>
+				{nickname}
 			</h1>
 			{credentials.user?._id !== anglerId ? (
-				<CustomButton
-					styleType='primary'
-					onClick={observeUserHandler}
-					isLoading={isLoading}
-				>
-					{isHooked && !isLoading && (
-						<TbFishHookOff className='text-lg' />
-					)}
-					{!isHooked && !isLoading && (
-						<TbFishHook className='text-lg' />
-					)}
-				</CustomButton>
+				<div className='flex items-center gap-x-4'>
+					<CustomButton
+						styleType='primary'
+						onClick={observeUserHandler}
+						isLoading={isLoading}
+					>
+						{isHooked && !isLoading && (
+							<TbFishHookOff className='text-lg' />
+						)}
+						{!isHooked && !isLoading && (
+							<TbFishHook className='text-lg' />
+						)}
+					</CustomButton>
+
+					<CustomButton
+						type='button'
+						styleType='primary'
+						additionalClasses='bg-red dark:bg-red text-white dark:text-white'
+						onClick={showReportModal}
+					>
+						<MdOutlineReport className='text-lg' />
+					</CustomButton>
+				</div>
 			) : (
 				<span></span>
 			)}

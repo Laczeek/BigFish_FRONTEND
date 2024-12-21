@@ -6,12 +6,15 @@ import Modal from '../Modal';
 import SearchItem from './SearchItem';
 import useRequest from '@/hooks/useRequest';
 import debounce from '@/helpers/debounce';
-import SmLoadingSpinner from '@/components/skeletons/SmLoadingSpinner';
+import SmLoadingSpinner from '@/components/loading/SmLoadingSpinner';
 
 export interface ISearchUser {
 	nickname: string;
 	avatar: {
 		url: string;
+	};
+	country: {
+		name: string;
 	};
 	_id: string;
 	competition: string;
@@ -21,11 +24,10 @@ export default function SearchModal() {
 	const [searchValue, setSearchValue] = useState('');
 	const [users, setUsers] = useState<ISearchUser[] | []>([]);
 	const { sendRequest, isLoading } = useRequest();
-
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const debouncedFetchUsers = useCallback(
 		debounce(async (nickname: string) => {
-			if (!nickname) {
+			if (!nickname.trim()) {
 				setUsers([]);
 				return;
 			}

@@ -7,9 +7,11 @@ interface IModalState {
 		| 'ADD_FISH'
 		| 'FISH_DETAILS'
 		| 'REMOVE_FISH'
-		| 'UPDATE_PROFILE'
 		| 'SEARCH_ANGLERS'
 		| 'FISH_IMAGE_PREVIEW'
+		| 'QUIT_COMPETITION'
+		| 'DELETE_COMPETITION'
+		| 'REPORT_USER'
 		| null;
 	modalProps: any;
 }
@@ -19,9 +21,12 @@ interface IPayload {
 		| 'ADD_FISH'
 		| 'FISH_DETAILS'
 		| 'REMOVE_FISH'
-		| 'UPDATE_PROFILE'
 		| 'SEARCH_ANGLERS'
-		| 'FISH_IMAGE_PREVIEW';
+		| 'FISH_IMAGE_PREVIEW'
+		| 'QUIT_COMPETITION'
+		| 'DELETE_COMPETITION'
+		| 'REPORT_USER';
+
 	modalProps: any;
 }
 

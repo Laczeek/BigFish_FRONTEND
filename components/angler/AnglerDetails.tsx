@@ -1,42 +1,41 @@
 'use client';
 import { motion } from 'framer-motion';
+import { FaFishFins } from 'react-icons/fa6';
+import { TbFishHook } from 'react-icons/tb';
+import { FaHeart, FaTrophy } from 'react-icons/fa';
 
 import countryCodeToFlag from '@/helpers/countryCodeToFlag';
 import { IUser } from '@/interfaces/user';
-import { FaHeart, FaTrophy } from 'react-icons/fa';
-import { FaFishFins } from 'react-icons/fa6';
-import { TbFishHook } from 'react-icons/tb';
+import Image from 'next/image';
 
 interface IAnglerDetailsProps {
 	angler: IUser;
 }
 
-export default function AnglerDetails({
-	angler
-}: IAnglerDetailsProps) {
-	const flag = countryCodeToFlag(angler.country.name)
+export default function AnglerDetails({ angler }: IAnglerDetailsProps) {
+	const flag = countryCodeToFlag(angler.country.name);
 
 	return (
 		<section className='mt-4'>
 			<h2 className='hidden'>Angler Details</h2>
-			<div className=' h-[250px] w-[250px] md:h-[300px] md:w-[300px] mx-auto overflow-hidden rounded-full p-4'>
-				<motion.img
+			<motion.div
+				className=' h-[250px] w-[250px] md:h-[300px] md:w-[300px] mx-auto rounded-full overflow-hidden border-2 border-black dark:border-white'
+				animate={{ scale: 1.05 }}
+				transition={{
+					duration: 2,
+					repeat: Infinity,
+					type: 'spring',
+					repeatType: 'reverse',
+				}}
+			>
+				<Image
 					src={angler.avatar.url}
 					width={300}
 					height={300}
-					alt='Angler image'
-					className=' w-full h-full object-cover rounded-full'
-					initial={{ scale: 1 }}
-					animate={{ scale: 1.2 }}
-					exit={{ scale: 1 }}
-					transition={{
-						duration: 3,
-						repeat: Infinity,
-						type: 'spring',
-						repeatType: 'reverse',
-					}}
+					alt={`${angler.nickname} avatar image.`}
+					className=' w-full h-full object-cover '
 				/>
-			</div>
+			</motion.div>
 
 			<div className='text-center mt-4 '>
 				<p className='text-2xl mb-2'>{flag}</p>
@@ -75,7 +74,9 @@ export default function AnglerDetails({
 					</p>
 				</div>
 
-				<pre className='mt-6 max-w-[600px] mx-auto'>{angler.description}</pre>
+				<pre className='mt-6 max-w-[600px] mx-auto break-words text-wrap'>
+					{angler.description}
+				</pre>
 			</div>
 		</section>
 	);

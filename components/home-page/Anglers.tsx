@@ -5,32 +5,28 @@ import { IUser } from '@/interfaces/user';
 import FilterForm from './FilterForm';
 import useRequest from '@/hooks/useRequest';
 import PaginationBar from '../layout-related/PaginationBar';
-import SmLoadingSpinner from '../skeletons/SmLoadingSpinner';
+import SmLoadingSpinner from '../loading/SmLoadingSpinner';
 import AnglersList from './AnglersList';
 
-export interface IAnglersData {
-	totalCount: number;
-	users: IUser[] | [];
-	length: number;
-}
-
-const limit = 10;
+const limit = 8;
 
 export default function Anglers() {
 	const [currentPage, setCurrentPage] = useState(1);
-	const [anglersData, setAnglersData] = useState<IAnglersData | null>(null);
+	const [totalCount, setTotalCount] = useState(0);
+	const [anglers, setAnglers] = useState<IUser[] | []>([]);
 	const [query, setQuery] = useState('');
-	const [isPending, setIsPending] = useState(true);
+	const [isPageTransition, setIsPageTransition] = useState(false);
+	const [isInitialRender, setIsInitialRender] = useState(true);
 
 	const { sendRequest, isLoading } = useRequest();
 	const skip = (currentPage - 1) * limit;
 
 	const showNextPage = () => {
-		setIsPending(true);
+		setIsPageTransition(true);
 		setCurrentPage((prevPage) => (prevPage += 1));
 	};
 	const showPrevPage = () => {
-		setIsPending(true);
+		setIsPageTransition(true);
 		setCurrentPage((prevPage) => (prevPage -= 1));
 	};
 
@@ -42,13 +38,15 @@ export default function Anglers() {
 					{ method: 'GET' }
 				);
 
-				setAnglersData(data);
+				setIsInitialRender(false);
+				setAnglers(data.users);
+				setTotalCount(data.totalCount);
 			} catch (err) {
 				if (err instanceof Error) {
 					console.error(err.message);
 				}
 			} finally {
-				setIsPending(false);
+				setIsPageTransition(false);
 			}
 		};
 		fetchAnglersData();
@@ -56,11 +54,10 @@ export default function Anglers() {
 	}, [currentPage, query]);
 
 	const changeQuery = (query: string) => {
-		setIsPending(true);
 		setCurrentPage(1);
-		setQuery((prevQuery) => {
-			if (prevQuery === query) {
-				setIsPending(false);
+		setQuery((prevState) => {
+			if (prevState !== query) {
+				setIsPageTransition(true);
 			}
 			return query;
 		});
@@ -70,22 +67,36 @@ export default function Anglers() {
 		<>
 			<FilterForm changeQuery={changeQuery} />
 
-			{isLoading || isPending ? (
-				<div className='text-center mt-4 h-[510px] flex justify-center items-center bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg'>
-					<SmLoadingSpinner />
-				</div>
-			) : (
-				<AnglersList anglers={anglersData?.users || []} />
-			)}
-
-			{anglersData && anglersData.totalCount > limit && (
-				<PaginationBar
-					currentPage={currentPage}
-					maxPages={Math.ceil(anglersData.totalCount / limit)}
-					showNext={showNextPage}
-					showPrev={showPrevPage}
-				/>
-			)}
+			<div className='mt-4 h-[510px] bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg overflow-hidden'>
+				{(isLoading || isPageTransition) && (
+					<div className='h-full flex justify-center items-center'>
+						<SmLoadingSpinner />
+					</div>
+				)}
+				{!isLoading && !isPageTransition && anglers.length > 0 && (
+					<AnglersList anglers={anglers} />
+				)}
+				{!isLoading &&
+					!isPageTransition &&
+					!isInitialRender &&
+					anglers.length === 0 && (
+						<div className='flex justify-center items-center h-full'>
+							<p className='bg-warningYellow p-2 mt-4 rounded-lg w-fit mx-auto text-black'>
+								No results found.
+							</p>
+						</div>
+					)}
+			</div>
+			<div className='h-[32px]'>
+				{totalCount > limit && (
+					<PaginationBar
+						currentPage={currentPage}
+						maxPages={Math.ceil(totalCount / limit)}
+						showNext={showNextPage}
+						showPrev={showPrevPage}
+					/>
+				)}
+			</div>
 		</>
 	);
 }

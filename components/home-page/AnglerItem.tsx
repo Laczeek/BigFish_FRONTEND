@@ -17,7 +17,6 @@ interface IAnglerItemProps {
 
 export default function AnglerItem({ angler }: IAnglerItemProps) {
 	const flag = countryCodeToFlag(angler.country.name);
-
 	return (
 		<Link href={`/angler/${angler._id}`}>
 			<motion.article
@@ -30,9 +29,9 @@ export default function AnglerItem({ angler }: IAnglerItemProps) {
 					width={100}
 					height={100}
 					alt={`${angler.nickname} image.`}
-					className='w-[100px] h-[100px] rounded-full object-cover self-center'
+					className='w-[100px] h-[100px] rounded-full object-cover hidden sm:block'
 				/>
-				<div className=' w-full text-center'>
+				<div className=' grow text-center'>
 					<h4 className='font-bold text-md'>{angler.nickname}</h4>
 					<p className='text-light-textSecondary dark:text-dark-textSecondary my-2'>
 						<FaHeart
@@ -45,7 +44,7 @@ export default function AnglerItem({ angler }: IAnglerItemProps) {
 						{flag}
 					</p>
 
-					<div className='flex justify-evenly items-center mt-2 text-light-textSecondary dark:text-dark-textSecondary'>
+					<div className='flex justify-evenly items-center gap-x-1 mt-2 text-light-textSecondary dark:text-dark-textSecondary'>
 						<p>
 							<FaFishFins
 								className='inline-block text-lg text-light-accentSecondary dark:text-dark-accentSecondary mr-2'

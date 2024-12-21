@@ -30,14 +30,13 @@ export default async function AnglerPage({
 }) {
 	const { id } = await params;
 	const angler = await fetchAnglerData(id);
-	console.log(angler);
 
 	return (
 		<>
 			<AnglerHeading anglerId={angler._id} nickname={angler.nickname} />
 			<AnglerDetails angler={angler} />
 
-			<section className='mt-8'>
+			<section className='relative mt-8'>
 				<h2 className='text-xl mb-4 text-center font-bold'>Fishes</h2>
 				<UserFishes angler={angler} />
 			</section>

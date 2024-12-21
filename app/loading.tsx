@@ -1,4 +1,4 @@
-import LoadingSpinner from '@/components/skeletons/LoadingSpinner';
+import LoadingSpinner from '@/components/loading/LoadingSpinner';
 
 export default function HomeLoadingPage() {
 	return (

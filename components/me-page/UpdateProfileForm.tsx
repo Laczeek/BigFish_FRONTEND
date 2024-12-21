@@ -33,6 +33,8 @@ export default function UpdateProfileForm({ angler }: IUpdateProfileFormProps) {
 	});
 	const { sendAuthRequest, isLoading, errorsObject } = useAuthRequest();
 
+	const dispatch: AppDispatch = useDispatch();
+
 	const isBtnDisabled = Object.keys(inputsState).find((key) => {
 		if (key === 'image') {
 			return inputsState.image !== null;
@@ -43,9 +45,7 @@ export default function UpdateProfileForm({ angler }: IUpdateProfileFormProps) {
 			);
 		}
 	});
-
-	const dispatch: AppDispatch = useDispatch();
-
+	
 	const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
@@ -81,6 +81,7 @@ export default function UpdateProfileForm({ angler }: IUpdateProfileFormProps) {
 				onChange={onInputChangeHandler}
 				initialImgURL={angler.avatar.url}
 				value={inputsState.image}
+				error={errorsObject.image}
 			/>
 			<FormInput
 				label='Nickname'

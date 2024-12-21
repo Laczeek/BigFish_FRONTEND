@@ -173,6 +173,7 @@ export default function AddFishModal() {
 					initialImgURL={null}
 					onChange={onInputChangeHandler}
 					value={inputsState.image}
+					error={errorsObject.image}
 				/>
 
 				<CustomButton

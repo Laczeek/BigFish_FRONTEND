@@ -7,7 +7,7 @@ import ProfileDetails from '@/components/me-page/ProfileDetails';
 import UserFishes from '@/components/angler/UserFishes';
 import GoBackButton from '@/components/layout-related/GoBackButton';
 import { RootState } from '@/store/store';
-import LoadingSpinner from '@/components/skeletons/LoadingSpinner';
+import LoadingSpinner from '@/components/loading/LoadingSpinner';
 
 export default function MePage() {
 	const { credentials } = useSelector((state: RootState) => state.auth);

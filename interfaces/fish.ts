@@ -12,7 +12,7 @@ export interface IFish {
         public_id: string;
     };
 	user: string;
-	whenCaught: Date;
+	whenCaught: string;
 	location: {
 		type: 'Point';
         address: string;

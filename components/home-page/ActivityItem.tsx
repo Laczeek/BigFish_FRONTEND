@@ -9,19 +9,22 @@ interface IActivityItemProps {
 
 export default function ActivityItem({ fish }: IActivityItemProps) {
 	return (
-		<article className='border-2 border-light-border dark:border-dark-border rounded-lg overflow-hidden'>
-			<Link href={`/angler/${fish.user._id}`}>
-				<header className='p-2 flex items-center gap-x-4 bg-light-bgSecondary dark:bg-dark-bgSecondary'>
-					<Image
-						src={fish.user.avatar.url}
-						width={50}
-						height={50}
-						alt={`${fish.user.nickname} avatar image.`}
-						className='w-[50px] h-[50px] rounded-full'
-					/>
-					<h3 className='text-lg font-bold'>{fish.user.nickname}</h3>
-				</header>
-			</Link>
+		<article className='border border-black dark:border-white rounded-lg overflow-hidden'>
+			<header className='p-2 flex items-center gap-x-4 '>
+				<Image
+					src={fish.user.avatar.url}
+					width={50}
+					height={50}
+					alt={`${fish.user.nickname} avatar image.`}
+					className='w-[45px] h-[45px] rounded-full object-cover'
+				/>
+				<Link
+					href={`/angler/${fish.user._id}`}
+					className='hover:text-light-accentSecondary dark:hover:text-dark-accentSecondary'
+				>
+					<h3 className='font-bold'>{fish.user.nickname}</h3>
+				</Link>
+			</header>
 
 			<Image
 				src={fish.image.url}

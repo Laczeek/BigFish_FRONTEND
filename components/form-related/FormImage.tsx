@@ -12,12 +12,14 @@ interface IFormImageProps {
 	label: string;
 	value: File | null;
 	onChange: (fieldName: string, value: File | null) => void;
+	error?: string;
 }
 
 export default function FormImage({
 	label,
 	initialImgURL,
 	value,
+	error,
 	onChange,
 }: IFormImageProps) {
 	const [previewURL, setPreviewURL] = useState(initialImgURL);
@@ -98,6 +100,7 @@ export default function FormImage({
 					</CustomButton>
 				)}
 			</div>
+			<p className='text-sm ml-2 mt-1 text-red text-center'>{error}</p>
 		</div>
 	);
 }

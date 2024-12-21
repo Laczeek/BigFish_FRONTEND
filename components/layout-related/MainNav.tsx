@@ -6,8 +6,9 @@ import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import Image from 'next/image';
 import { FiUser, FiLogIn, FiLogOut } from 'react-icons/fi';
+import { LuSwords } from 'react-icons/lu';
 import { TbUserSearch } from 'react-icons/tb';
-import { TbFishHook } from 'react-icons/tb';
+
 
 import { modalActions } from '@/store/modal-slice';
 import { AppDispatch } from '@/store/store';
@@ -53,6 +54,7 @@ export default function MainNav() {
 		if (!credentials.accessToken && !['/auth', '/'].includes(pathname)) {
 			dispatch(restoreSession());
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -95,13 +97,15 @@ export default function MainNav() {
 							</Link>
 						</li>
 					)}
+					
+
 					{credentials.accessToken && (
 						<li>
 							<Link
-								href='/hooks'
+								href='/competition'
 								className='block p-4 rounded-2xl hover:bg-light-bgSecondary hover:text-black dark:hover:bg-dark-accentPrimary transition-colors duration-200'
 							>
-								<TbFishHook />
+								<LuSwords />
 							</Link>
 						</li>
 					)}

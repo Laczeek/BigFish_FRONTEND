@@ -1,4 +1,4 @@
-import {  useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -70,7 +70,7 @@ export default function useAuthRequest() {
 				const data = await response.json();
 				if (data.errors) {
 					setErrors(data.errors);
-					throw new Error('Validation failed.');
+					throw new Error('Validation failed');
 				}
 
 				throw new Error(data.error || 'Something went wrong.');
