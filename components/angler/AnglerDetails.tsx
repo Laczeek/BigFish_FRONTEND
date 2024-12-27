@@ -34,6 +34,7 @@ export default function AnglerDetails({ angler }: IAnglerDetailsProps) {
 					height={300}
 					alt={`${angler.nickname} avatar image.`}
 					className=' w-full h-full object-cover '
+					priority
 				/>
 			</motion.div>
 
