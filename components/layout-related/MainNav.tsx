@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { FiUser, FiLogIn, FiLogOut } from 'react-icons/fi';
 import { LuSwords } from 'react-icons/lu';
 import { TbUserSearch } from 'react-icons/tb';
-
+import { GiLuckyFisherman } from 'react-icons/gi';
 
 import { modalActions } from '@/store/modal-slice';
 import { AppDispatch } from '@/store/store';
@@ -16,10 +16,11 @@ import logoImage from '@/public/images/logo.jpeg';
 import ThemeSwitch from '../theme/ThemeSwitch';
 import { RootState } from '@/store/store';
 import { authActions, restoreSession } from '@/store/auth-slice';
-import { GiLuckyFisherman } from 'react-icons/gi';
+import useRequest from '@/hooks/useRequest';
 
 export default function MainNav() {
 	const { credentials } = useSelector((state: RootState) => state.auth);
+	const { sendRequest } = useRequest();
 	const router = useRouter();
 	const pathname = usePathname();
 	const dispatch: AppDispatch = useDispatch();
@@ -43,9 +44,16 @@ export default function MainNav() {
 	};
 
 	const logoutUser = async () => {
-		await fetch(`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/auth/logout`, {
-			credentials: 'include',
-		});
+		try {
+			await sendRequest('/auth/logout', {
+				method: 'GET',
+				credentials: 'include',
+			});
+		} catch (err) {
+			if (err instanceof Error) {
+				console.error(err.message);
+			}
+		}
 		dispatch(authActions.logout());
 		router.push('/auth?action=login');
 	};
@@ -97,7 +105,6 @@ export default function MainNav() {
 							</Link>
 						</li>
 					)}
-					
 
 					{credentials.accessToken && (
 						<li>

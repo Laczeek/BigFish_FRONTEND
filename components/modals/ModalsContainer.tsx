@@ -11,6 +11,7 @@ import FishImagePreviewModal from './fish/FishImagePreviewModal';
 import QuitCompetitionModal from './competition/QuitCompetitionModal';
 import DeleteCompetitionModal from './competition/DeleteCompetitionModal';
 import ReportModal from './angler/ReportModal';
+import DeleteAccountModal from './angler/DeleteAccountModal';
 
 export default function ModalsContainer() {
 	const { isOpen, modalType, modalProps } = useSelector(
@@ -36,6 +37,9 @@ export default function ModalsContainer() {
 			{modalType === 'DELETE_COMPETITION' && <DeleteCompetitionModal />}
 			{modalType === 'REPORT_USER' && (
 				<ReportModal modalProps={modalProps} />
+			)}
+			{modalType === 'DELETE_ACCOUNT' && (
+				<DeleteAccountModal modalProps={modalProps} />
 			)}
 		</>
 	);

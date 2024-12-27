@@ -12,6 +12,7 @@ interface IModalState {
 		| 'QUIT_COMPETITION'
 		| 'DELETE_COMPETITION'
 		| 'REPORT_USER'
+		| 'DELETE_ACCOUNT'
 		| null;
 	modalProps: any;
 }
@@ -25,7 +26,8 @@ interface IPayload {
 		| 'FISH_IMAGE_PREVIEW'
 		| 'QUIT_COMPETITION'
 		| 'DELETE_COMPETITION'
-		| 'REPORT_USER';
+		| 'REPORT_USER'
+		| 'DELETE_ACCOUNT';
 
 	modalProps: any;
 }

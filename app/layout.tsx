@@ -31,7 +31,7 @@ export default function RootLayout({
 					<Alert />
 					<MainNav />
 					<div className='grow'>
-						<main className='container mx-auto px-2  py-4 h-[calc(100%-48px)]'>
+						<main className='container mx-auto px-2  py-4 min-h-[calc(100%-48px)]'>
 							{children}
 						</main>
 						<Footer />

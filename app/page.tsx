@@ -1,40 +1,53 @@
 import Image from 'next/image';
 
-import Features from '@/components/landing-page/Features';
-import artImage from '@/public/images/bigfishart.jpg';
+import backgroundImage from '@/public/images/background_image.jpg';
+import artImage from '@/public/images/art_image.jpg';
 import CustomLink from '@/components/layout-related/CustomLink';
+import FeaturesList from '@/components/landing-page/FeaturesList';
 
 export default function LandingPage() {
 	return (
 		<>
-			<header className='flex flex-col md:flex-row justify-center items-center'>
-				<div className='w-full h-[400px] lg:h-[600px]  md:w-2/3 lg:w-1/2'>
-					<Image
-						src={artImage}
-						alt='An angler on a beautiful lake illuminated by a huge moon.'
-						width={500}
-						height={800}
-						className='w-full h-full object-cover rounded-lg'
-						priority
-					/>
-				</div>
-
-				<div className='py-10 px-20 rounded-lg relative bottom-14 md:bottom-0 md:-left-40  text-center bg-light-bgSecondary dark:bg-dark-bgSecondary   border-b-4 border-r-4 border-light-border dark:border-dark-border'>
-					<h1 className='text-4xl lg:text-5xl font-bold tracking-wider'>
+			<header className='relative rounded-lg overflow-hidden  h-[35vh] md:h-[500px] flex justify-center items-center bg-black bg-opacity-50'>
+				<Image
+					src={backgroundImage}
+					alt='An angler on a beautiful lake illuminated by a huge moon.'
+					className='absolute w-full h-full object-cover object-bottom -z-10'
+					priority
+					fill
+				/>
+				<div className='text-center p-2'>
+					<h1 className='text-white text-5xl xl:text-6xl font-extrabold mb-4 tracking-wider'>
 						Big Fish
 					</h1>
-					<p className='text-lg lg:text-xl my-4 text-light-textSecondary dark:text-dark-textSecondary'>
-						Perfect web portal for anglers!
+					<p className='max-w-[600px] text-white italic text-lg'>
+						The best fishing portal in the world.
 					</p>
-					<CustomLink href='/auth?action=signup' styleType='primary'>
-						Create Account
-					</CustomLink>
 				</div>
 			</header>
 
-			<Features />
+			<section className='mt-8 text-center'>
+				<h2 className='text-3xl  mb-1'>Explore the Features</h2>
+				<p className='text-light-textSecondary dark:text-dark-textSecondary'>
+					Discover everything we offer to enhance your fishing
+					experience
+				</p>
 
-			<div className='flex flex-col items-center gap-y-10  md:flex-row md:justify-between md:items-start text-center max-w-[1000px] mx-auto my-14 p-6'>
+				<FeaturesList />
+			</section>
+
+			<div className='mt-8 h-[280px] overflow-hidden rounded-lg'>
+				<Image
+					src={artImage}
+					alt='Two anglers having a good time.'
+					height={500}
+					width={1200}
+					priority
+					className='object-cover h-full w-full'
+				/>
+			</div>
+
+			<div className='flex flex-col items-center gap-y-10  md:flex-row md:justify-between md:items-start text-center max-w-[1000px] mx-auto mt-8 mb-6 p-6'>
 				<section>
 					<h2 className='text-3xl '>Join Our Community Today!</h2>
 					<p className='text-light-textSecondary dark:text-dark-textSecondary my-4'>

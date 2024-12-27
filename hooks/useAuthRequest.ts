@@ -19,6 +19,7 @@ export interface IRequestOptions {
 	};
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	body?: any;
+	credentials? : 'include'
 }
 
 export default function useAuthRequest() {
