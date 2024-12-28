@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
 
 	const refreshToken = request.cookies.get('refreshToken')?.value;
 	console.log(refreshToken);
-	console.log(request.cookies.get('refreshToken'));
+	console.log(request.cookies.getAll());
 
 	const isPublicPage = ['/auth', '/'].includes(request.nextUrl.pathname);
 
