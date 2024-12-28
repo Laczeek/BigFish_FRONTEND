@@ -1,4 +1,4 @@
-![Logo](./public/images/logo.jpeg){height=300}
+![Logo](./public/images/logo.jpeg)
 
 # Big Fishes
 
@@ -8,12 +8,12 @@ Portal for lovers of fishing, competition and for those who want to develop thei
 
 ## Screenshots
 
-![The image shows how the search for anglers looks like](./screenshots/browse.png){style="max-height:300px; width:auto;"}
-![The image shows fishes galerry](./screenshots/galerry.png){style="max-height:300px; width:auto;"}
+![The image shows how the search for anglers looks like](./screenshots/browse.png)
+![The image shows fishes galerry](./screenshots/galerry.png)
 
-![The image shows profile customization form](./screenshots/profile.png){style="max-height:600px; width:auto;"}  
-![The image shows competition table](./screenshots/competition.png){style="max-height:300px; width:auto;"}
-![The image shows map](./screenshots/map.png){style="max-height:300px; width:auto;"}
+![The image shows profile customization form](./screenshots/profile.png)
+![The image shows competition table](./screenshots/competition.png)
+![The image shows map](./screenshots/map.png)
 
 ## Built With
 
