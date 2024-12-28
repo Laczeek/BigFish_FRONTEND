@@ -18,7 +18,7 @@ export default function LandingPage() {
 				/>
 				<div className='text-center p-2'>
 					<h1 className='text-white text-5xl xl:text-6xl font-extrabold mb-4 tracking-wider'>
-						Big Fish
+						Big Fishes
 					</h1>
 					<p className='max-w-[600px] text-white italic text-lg'>
 						The best fishing portal in the world.

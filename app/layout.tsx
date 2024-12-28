@@ -14,7 +14,7 @@ const bitter = Bitter({
 });
 
 export const metadata: Metadata = {
-	title: 'Big Fish',
+	title: 'Big Fishes',
 	description:
 		'The ideal portal for lovers of fishing, competition and for those who want to develop their passion. ',
 };
