@@ -29,20 +29,51 @@ export default function CompetitionPage() {
 
 			{!credentials.user.competition && (
 				<>
-					<section className='mt-4'>
-						<h2 className='text-xl mb-2 text-center font-bold'>
-							How competition works?
+					<section className='mt-6 p-6 bg-light-background dark:bg-dark-background rounded-lg shadow-md'>
+						<h2 className='text-xl mb-4 text-center font-bold'>
+							How Competition Works?
 						</h2>
-						<p className='text-center text-light-textSecondary dark:text-dark-textSecondary'>
-							The competition consists of calculating the average
-							sum of fish caught within a certain time period.
-							<br /> All you have to do is add the fish to your
-							profile. <br /> The fish counts towards the score
-							only if the unit of measurement agrees with the unit
-							of competition. <br />
-							Create a rivalry, invite your friends and start it
-							when everyone accepts the invitation.
-						</p>
+						<div className='space-y-4 text-light-textSecondary dark:text-dark-textSecondary'>
+							<div className='flex items-start gap-2'>
+								<span className='text-primary font-bold'>
+									1.
+								</span>
+								<p>
+									The competition consists of calculating the
+									average sum of fish caught within a certain
+									time period.
+								</p>
+							</div>
+							<div className='flex items-start gap-2'>
+								<span className='text-primary font-bold'>
+									2.
+								</span>
+								<p>
+									All you have to do is add the fish to your
+									profile.
+								</p>
+							</div>
+							<div className='flex items-start gap-2'>
+								<span className='text-primary font-bold'>
+									3.
+								</span>
+								<p>
+									The fish counts towards the score only if
+									the unit of measurement agrees with the unit
+									of competition.
+								</p>
+							</div>
+							<div className='flex items-start gap-2'>
+								<span className='text-primary font-bold'>
+									4.
+								</span>
+								<p>
+									Create a rivalry, invite your friends, and
+									start the competition once everyone accepts
+									the invitation.
+								</p>
+							</div>
+						</div>
 					</section>
 
 					<section className='mt-8'>
