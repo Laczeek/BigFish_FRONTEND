@@ -1,0 +1,43 @@
+# Big Fishes 
+Portal for lovers of fishing, competition and for those who want to develop their passion.
+> Check out the live site: [Big Fishes](https://bigfishes.org)
+---
+
+## Screenshots
+- ![The image shows how the search for anglers looks like](https://ibb.co/3Tf9h40)
+- ![The image shows fishes galerry](https://ibb.co/4sWRLsF)
+- ![The image shows profile customization form](https://ibb.co/2c5SqH8)
+- ![The image shows map](https://ibb.co/NmJZ6h7)
+- ![The image shows competition table](https://ibb.co/xHpx1DK)
+
+---
+
+## Built With
+- [Next.js](https://nextjs.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [Leaflet](https://leafletjs.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Next Themes](https://github.com/pacocoursey/next-themes)
+- [Framer Motion](https://motion.dev/)
+
+---
+
+## To do
+- Add email sender and password reminder option
+- Add real-time chat for anglers
+
+---
+
+## Contact
+- Email: [patryk.popiela01@gmail.com](mailto:patryk.popiela01@gmail.com)
+- GitHub: [Laczeek](https://github.com/Laczeek)
+
+---
+
+## Backend
+[Check out the backend repository](https://github.com/Laczeek/BigFish_BACKEND)
+
+--- 
+
+### Hosted on [Render](https://render.com/)
