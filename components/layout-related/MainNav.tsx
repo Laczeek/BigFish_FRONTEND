@@ -85,6 +85,20 @@ export default function MainNav() {
 							</Link>
 						</li>
 					)}
+					{!credentials.accessToken &&
+						pathname.startsWith('/auth') && (
+							<li>
+								<Link href='/'>
+									<Image
+										src={logoImage}
+										width={45}
+										height={45}
+										alt='Big fish logo.'
+										className='rounded-full w-[40px] h-[40px] mx-auto'
+									/>
+								</Link>
+							</li>
+						)}
 					{!credentials.accessToken && pathname === '/' && (
 						<li>
 							<Link
