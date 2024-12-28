@@ -34,8 +34,8 @@ export default function CompetitionPage() {
 							How Competition Works?
 						</h2>
 						<div className='space-y-4 text-center text-light-textSecondary dark:text-dark-textSecondary'>
-							<div className='flex items-start gap-2'>
-								<span className='text-primary font-bold'>
+							<div className='flex flex-col items-center gap-2'>
+								<span className='text-light-textPrimary dark:text-dark-textPrimary font-bold text-lg'>
 									1.
 								</span>
 								<p>
@@ -44,8 +44,8 @@ export default function CompetitionPage() {
 									time period.
 								</p>
 							</div>
-							<div className='flex items-start gap-2'>
-								<span className='text-primary font-bold'>
+							<div className='flex flex-col items-center gap-2'>
+								<span className='text-light-textPrimary dark:text-dark-textPrimary font-bold text-lg'>
 									2.
 								</span>
 								<p>
@@ -53,8 +53,8 @@ export default function CompetitionPage() {
 									profile.
 								</p>
 							</div>
-							<div className='flex items-start gap-2'>
-								<span className='text-primary font-bold'>
+							<div className='flex flex-col items-center gap-2'>
+								<span className='text-light-textPrimary dark:text-dark-textPrimary font-bold text-lg'>
 									3.
 								</span>
 								<p>
@@ -63,8 +63,8 @@ export default function CompetitionPage() {
 									of competition.
 								</p>
 							</div>
-							<div className='flex items-start gap-2'>
-								<span className='text-primary font-bold'>
+							<div className='flex flex-col items-center gap-2'>
+								<span className='text-light-textPrimary dark:text-dark-textPrimary font-bold text-lg'>
 									4.
 								</span>
 								<p>
