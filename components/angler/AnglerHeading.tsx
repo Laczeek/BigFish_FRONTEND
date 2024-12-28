@@ -52,7 +52,7 @@ export default function AnglerHeading({
 	return (
 		<header className='flex justify-between gap-x-4 items-center'>
 			<GoBackButton />
-			<h1 className='grow text-xl md:text-2xl lg:text-3xl font-bold'>
+			<h1 className='grow md:text-xl lg:text-2xl xl:text-3xl font-bold'>
 				{nickname}
 			</h1>
 			{credentials.user?._id !== anglerId ? (
@@ -63,10 +63,10 @@ export default function AnglerHeading({
 						isLoading={isLoading}
 					>
 						{isHooked && !isLoading && (
-							<TbFishHookOff className='text-lg' />
+							<TbFishHookOff className='md:text-lg' />
 						)}
 						{!isHooked && !isLoading && (
-							<TbFishHook className='text-lg' />
+							<TbFishHook className='md:text-lg' />
 						)}
 					</CustomButton>
 
@@ -76,7 +76,7 @@ export default function AnglerHeading({
 						additionalClasses='bg-red dark:bg-red text-white dark:text-white'
 						onClick={showReportModal}
 					>
-						<MdOutlineReport className='text-lg' />
+						<MdOutlineReport className='md:text-lg' />
 					</CustomButton>
 				</div>
 			) : (
