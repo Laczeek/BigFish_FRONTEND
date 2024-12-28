@@ -22,8 +22,8 @@ export default function SearchItem({ user }: SearchItemProps) {
 	const router = useRouter();
 
 	const navigateToUser = () => {
-		router.push(`/angler/${user._id}`);
 		dispatch(modalActions.hideModal());
+		router.push(`/angler/${user._id}`);
 	};
 
 	const inviteUserToCompetition = async () => {

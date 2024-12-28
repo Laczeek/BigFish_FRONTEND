@@ -75,7 +75,7 @@ export default function AnglerDetails({ angler }: IAnglerDetailsProps) {
 					</p>
 				</div>
 
-				<pre className='mt-6 max-w-[600px] mx-auto break-words text-wrap'>
+				<pre className='mt-6 w-full max-w-[600px] mx-auto break-words text-wrap whitespace-normal'>
 					{angler.description}
 				</pre>
 			</div>
