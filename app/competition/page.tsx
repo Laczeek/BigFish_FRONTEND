@@ -29,12 +29,12 @@ export default function CompetitionPage() {
 
 			{!credentials.user.competition && (
 				<>
-					<section className='mt-6 p-6 bg-light-background dark:bg-dark-background rounded-lg shadow-md'>
+					<section className='mt-4 p-6 bg-light-background dark:bg-dark-background rounded-lg shadow-md'>
 						<h2 className='text-xl mb-4 text-center font-bold'>
 							How Competition Works?
 						</h2>
 						<div className='space-y-4 text-light-textSecondary dark:text-dark-textSecondary'>
-							<div className='flex items-start gap-2'>
+							<div className='flex items-center gap-2'>
 								<span className='text-primary font-bold'>
 									1.
 								</span>
@@ -44,7 +44,7 @@ export default function CompetitionPage() {
 									time period.
 								</p>
 							</div>
-							<div className='flex items-start gap-2'>
+							<div className='flex items-center gap-2'>
 								<span className='text-primary font-bold'>
 									2.
 								</span>
@@ -53,7 +53,7 @@ export default function CompetitionPage() {
 									profile.
 								</p>
 							</div>
-							<div className='flex items-start gap-2'>
+							<div className='flex items-center gap-2'>
 								<span className='text-primary font-bold'>
 									3.
 								</span>
@@ -63,7 +63,7 @@ export default function CompetitionPage() {
 									of competition.
 								</p>
 							</div>
-							<div className='flex items-start gap-2'>
+							<div className='flex items-center gap-2'>
 								<span className='text-primary font-bold'>
 									4.
 								</span>
