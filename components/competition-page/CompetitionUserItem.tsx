@@ -22,6 +22,10 @@ export default function CompetitionUserItem({
 	const { isLoading, sendAuthRequest } = useAuthRequest();
 	const flag = countryCodeToFlag(user.country.name);
 	const dispatch: AppDispatch = useDispatch();
+	const avatarURL =
+		process.env.NODE_ENV === 'production'
+			? user.avatar.url
+			: user.avatar.url.replace('https', 'http');
 
 	const removeUserFromCompetition = async () => {
 		try {
@@ -45,7 +49,7 @@ export default function CompetitionUserItem({
 		<div className='flex items-center justify-between'>
 			<div className='flex items-center gap-x-2'>
 				<Image
-					src={user.avatar.url}
+					src={avatarURL}
 					width={40}
 					height={40}
 					alt={`${user.nickname} avatar image.`}

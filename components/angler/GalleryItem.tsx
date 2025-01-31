@@ -18,7 +18,12 @@ interface IGalleryItemProps {
 export default function GalleryItem({ fish }: IGalleryItemProps) {
 	const dispatch: AppDispatch = useDispatch();
 	const pathname = usePathname();
-	
+
+	const imageURL =
+		process.env.NODE_ENV === 'production'
+			? fish.image.url
+			: fish.image.url.replace('https', 'http');
+
 	const removeFishHandler = (event: MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
 		dispatch(
@@ -49,7 +54,7 @@ export default function GalleryItem({ fish }: IGalleryItemProps) {
 			key={fish._id}
 		>
 			<Image
-				src={fish.image.url}
+				src={imageURL}
 				alt={`Image of ${fish.name}.`}
 				width={300}
 				height={300}

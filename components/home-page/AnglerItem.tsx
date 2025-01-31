@@ -17,6 +17,10 @@ interface IAnglerItemProps {
 
 export default function AnglerItem({ angler }: IAnglerItemProps) {
 	const flag = countryCodeToFlag(angler.country.name);
+	const avatarURL =
+		process.env.NODE_ENV === 'production'
+			? angler.avatar.url
+			: angler.avatar.url.replace('https', 'http');
 	return (
 		<Link href={`/angler/${angler._id}`}>
 			<motion.article
@@ -25,7 +29,7 @@ export default function AnglerItem({ angler }: IAnglerItemProps) {
 				transition={{ type: 'spring', stiffness: 400, damping: 10 }}
 			>
 				<Image
-					src={angler.avatar.url}
+					src={avatarURL}
 					width={100}
 					height={100}
 					alt={`${angler.nickname} image.`}

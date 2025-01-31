@@ -8,11 +8,15 @@ interface IActivityItemProps {
 }
 
 export default function ActivityItem({ fish }: IActivityItemProps) {
+	const imageURL =
+		process.env.NODE_ENV === 'production'
+			? fish.image.url
+			: fish.image.url.replace('https', 'http');
 	return (
 		<article className='border border-black dark:border-white rounded-lg overflow-hidden'>
 			<header className='p-2 flex items-center gap-x-4 '>
 				<Image
-					src={fish.user.avatar.url}
+					src={imageURL}
 					width={50}
 					height={50}
 					alt={`${fish.user.nickname} avatar image.`}

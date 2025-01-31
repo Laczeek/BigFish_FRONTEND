@@ -32,6 +32,10 @@ interface IFishDetailsModalProps {
 export default function FishDetailsModal({
 	modalProps,
 }: IFishDetailsModalProps) {
+	const imageURL =
+		process.env.NODE_ENV === 'production'
+			? modalProps.image.url
+			: modalProps.image.url.replace('https', 'http');
 	return (
 		<Modal
 			label='Fish details'
@@ -39,7 +43,7 @@ export default function FishDetailsModal({
 		>
 			<div className='px-4 py-8 shadow  shadow-light-border dark:shadow-dark-border bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg overflow-y-auto max-h-[75vh]'>
 				<Image
-					src={modalProps.image.url}
+					src={imageURL}
 					alt='Image of fish'
 					width={800}
 					height={500}

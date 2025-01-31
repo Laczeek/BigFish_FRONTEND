@@ -45,7 +45,12 @@ export default function UpdateProfileForm({ angler }: IUpdateProfileFormProps) {
 			);
 		}
 	});
-	
+
+	const avatarURL =
+		process.env.NODE_ENV === 'production'
+			? angler.avatar.url
+			: angler.avatar.url.replace('https', 'http');
+
 	const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
@@ -79,7 +84,7 @@ export default function UpdateProfileForm({ angler }: IUpdateProfileFormProps) {
 			<FormImage
 				label='Image'
 				onChange={onInputChangeHandler}
-				initialImgURL={angler.avatar.url}
+				initialImgURL={avatarURL}
 				value={inputsState.image}
 				error={errorsObject.image}
 			/>

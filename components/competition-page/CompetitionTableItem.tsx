@@ -23,6 +23,10 @@ export default function CompetitionItem({
 	const { isLoading, sendAuthRequest } = useAuthRequest();
 	const flag = countryCodeToFlag(user.country.name);
 	const dispatch: AppDispatch = useDispatch();
+	const avatarURL =
+		process.env.NODE_ENV === 'production'
+			? user.avatar.url
+			: user.avatar.url.replace('https', 'http');
 
 	const removeUserFromCompetition = async () => {
 		try {
@@ -45,7 +49,7 @@ export default function CompetitionItem({
 		<tr className='border-b border-black dark:border-white '>
 			<td className='hidden sm:table-cell pl-2'>
 				<Image
-					src={user.avatar.url}
+					src={avatarURL}
 					alt={`${user.nickname} avatar image.`}
 					width={50}
 					height={50}

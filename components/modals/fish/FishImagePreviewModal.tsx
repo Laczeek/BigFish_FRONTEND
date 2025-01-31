@@ -9,6 +9,11 @@ interface IFishImagePreviewModalProps {
 export default function FishImagePreviewModal({
 	modalProps,
 }: IFishImagePreviewModalProps) {
+	const imageURL =
+		process.env.NODE_ENV === 'production'
+			? modalProps.image
+			: modalProps.image.replace('https', 'http');
+
 	return (
 		<Modal
 			label='Fish image preview'
@@ -18,7 +23,7 @@ export default function FishImagePreviewModal({
 		>
 			<div>
 				<img
-					src={modalProps.image}
+					src={imageURL}
 					alt='Some alt'
 					width={150}
 					height={150}

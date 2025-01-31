@@ -20,6 +20,10 @@ export default function SearchItem({ user }: SearchItemProps) {
 	const { sendAuthRequest, isLoading } = useAuthRequest();
 	const dispatch: AppDispatch = useDispatch();
 	const router = useRouter();
+	const avatarURL =
+		process.env.NODE_ENV === 'production'
+			? user.avatar.url
+			: user.avatar.url.replace('https', 'http');
 
 	const navigateToUser = () => {
 		dispatch(modalActions.hideModal());
@@ -34,7 +38,7 @@ export default function SearchItem({ user }: SearchItemProps) {
 					method: 'POST',
 				}
 			);
-			dispatch(competitionActions.addInvitedUser(user))
+			dispatch(competitionActions.addInvitedUser(user));
 			dispatch(
 				setAlertWithTimeout({ type: 'success', message: data.msg })
 			);
@@ -49,7 +53,7 @@ export default function SearchItem({ user }: SearchItemProps) {
 		<div className='p-2 flex items-center gap-x-2 bg-light-bgSecondary dark:bg-dark-bgSecondary rounded-lg shadow-md shadow-light-border dark:shadow-dark-border'>
 			<div className='grow text-center'>
 				<Image
-					src={user.avatar.url}
+					src={avatarURL}
 					width={50}
 					height={50}
 					alt={`${user.nickname} avatar image.`}

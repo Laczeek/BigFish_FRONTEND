@@ -15,6 +15,11 @@ interface IAnglerDetailsProps {
 export default function AnglerDetails({ angler }: IAnglerDetailsProps) {
 	const flag = countryCodeToFlag(angler.country.name);
 
+	const avatarURL =
+		process.env.NODE_ENV === 'production'
+			? angler.avatar.url
+			: angler.avatar.url.replace('https', 'http');
+
 	return (
 		<section className='mt-4'>
 			<h2 className='hidden'>Angler Details</h2>
@@ -29,7 +34,7 @@ export default function AnglerDetails({ angler }: IAnglerDetailsProps) {
 				}}
 			>
 				<Image
-					src={angler.avatar.url}
+					src={avatarURL}
 					width={300}
 					height={300}
 					alt={`${angler.nickname} avatar image.`}
