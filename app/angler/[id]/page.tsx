@@ -3,7 +3,10 @@ import AnglerDetails from '@/components/angler/AnglerDetails';
 import UserFishes from '@/components/angler/UserFishes';
 
 const fetchAnglerData = async (anglerId: string) => {
-	const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_PREFIX || '/api';
+	let BACKEND_URL = 'http://localhost:8000/api';
+	if(process.env.NODE_ENV === 'development'){
+		BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_PREFIX!;
+	}
 	
 	const response = await fetch(`${BACKEND_URL}/users/${anglerId}`);
 	const data = await response.json();
