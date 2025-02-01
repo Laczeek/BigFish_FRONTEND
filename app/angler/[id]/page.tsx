@@ -3,9 +3,9 @@ import AnglerDetails from '@/components/angler/AnglerDetails';
 import UserFishes from '@/components/angler/UserFishes';
 
 const fetchAnglerData = async (anglerId: string) => {
-	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_PREFIX}/users/${anglerId}`
-	);
+	const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_PREFIX || '/api';
+	
+	const response = await fetch(`${BACKEND_URL}/users/${anglerId}`);
 	const data = await response.json();
 	if (!response.ok) {
 		if (data.error) {
